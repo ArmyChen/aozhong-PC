@@ -1,0 +1,65 @@
+﻿@model WebSite_YS.Models.Partial.UInInsurePass
+
+@using (Ajax.BeginForm("PartialUInInsurePass", "UserCenter", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ManagerMain",
+            OnSuccess = "messageShow"
+        }, new { autocomplete = "off", id = "F_InInsureForm" }))
+        {
+<div class="cm-right">
+    <div class="cm-title-back"><img src="../../images/cm-title-baoxian.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        <div class="cm-kong"></div>
+        <div class="cm-row">
+            <div class="cm-name"><font color="#FF0000">*</font>原密码:</div>
+            <div class="cm-shuru"><input class="cm-input" name="current_password" id="current_password" type="password" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>新密码:</div>
+            <div class="cm-shuru"><input class="cm-input" name="new_password" type="password" id="newPassword" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>确认新密码:</div>
+            <div class="cm-shuru"><input class="cm-input" name="new_password2" type="password" id="newPassword2" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"></div>
+            <div class="cm-shuru"><input type="button" class="cm-button" value="确认修改" onclick="return CheckPass(this)" /></div>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="../../images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+        }
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script type="text/javascript">
+    function messageShow() {
+        alert("@Model.EerrorMessage");
+    }
+    function CheckPass(button) {
+        var opass = $("#current_password").val();
+        var npass = $("#newPassword");
+        var npass2 = $("#newPassword2");
+        if (opass.length < 6) {
+            alert("请输入原密码。");
+            return false;
+        }
+        if (npass.val().length < 6) {
+            alert("登陆密码不能少于6位。");
+            return false;
+        }
+        else {
+            if (npass.val() != npass2.val()) {
+                alert("两次输入的密码不一致！");
+                return false;
+            }
+            else
+                $(button).trigger("submit");
+        }
+    }
+</script>

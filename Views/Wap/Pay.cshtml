@@ -1,0 +1,493 @@
+﻿@{
+    ViewBag.Title = "手机网银充值";
+    Layout = null;
+    IList<string> jftAlipayMoneyLimits = ViewBag.jftAlipayLimit as IList<string>;
+
+}
+<!--#include file="qianyifu/conn.asp"-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>充值</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <link rel="stylesheet" type="text/css" href="/Content/wap/lanrenzhijia.css">
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#content div").hide(); // Initially hide all content
+            $("#tabs li:first").attr("id", "current"); // Activate first tab
+            $("#content div:first").fadeIn(); // Show first tab content
+
+            $('#tabs a').click(function (e) {
+                e.preventDefault();
+                $("#content div").hide(); //Hide all content
+                $("#tabs li").attr("id", ""); //Reset id's
+                $(this).parent().attr("id", "current"); // Activate this
+                $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+            });
+
+            // ChechJE();
+        });
+        function ChechAlipay(perfix) {           
+            $("#" + perfix + "form").submit();
+        }
+        function ChechJunFuTong(perfix) {
+            var jftAmount = $("#" + perfix + "_amount_input").val();
+
+            //判断正整数
+            var reg = /^[1-9]\d{0,6}$/;
+            var result = reg.test(jftAmount);
+            if (!result) {
+                $("#" + perfix + "_errors").text("充值金额精确到元，例如 10,不要超过99999");
+                return false;
+            }
+            $("#" + perfix + "form").submit();
+        }
+    </script>
+<script language="javascript">
+function checkForm()
+{
+	if(form.username.value=="")
+	{
+		alert("请输入账号！");
+		return false;
+	}
+	if(form.username2.value=="")
+	{
+		alert("请确认账号！");
+		return false;
+	}
+	if(form.username.value !=form.username2.value)
+	{
+		alert("两次输入账号不一致！");
+		return false;
+	}
+	
+	var val=$('input:radio[name="paytype"]:checked').val();
+	if(val==null){
+		alert("请选择支付方式");
+		return false;
+	}     
+			
+	return true;
+}
+</script>
+    <script type="text/javascript">
+        function MM_swapImgRestore() { //v3.0
+            var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+        }
+        function MM_preloadImages() { //v3.0
+            var d = document; if (d.images) {
+                if (!d.MM_p) d.MM_p = new Array();
+                var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                    if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+            }
+        }
+
+        function MM_findObj(n, d) { //v4.01
+            var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+                d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+            }
+            if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+            for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+            if (!x && d.getElementById) x = d.getElementById(n); return x;
+        }
+
+        function MM_swapImage() { //v3.0
+            var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2) ; i += 3)
+                if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+        }
+    </script>
+</head>
+<body style="margin: 0 auto 0 auto;" onload="MM_preloadImages('/images/wap/fh1.png', '/images/wap/gz01.png', '/images/wap/pm01.png', '/images/wap/tj01.png')">
+
+    <ul id="tabs">
+        <!--<li><a href="#" title="tab1" id="JB">网银</a></li>-->
+        <li><a href="#" title="tab2" id="ZFB">支付宝充值</a></li>
+        <li><a href="#" title="tab3" id="WX">微信充值</a></li>
+	<li><a href="#" title="tab5" id="DK">点卡充值</a></li>
+	<li><a href="#" title="tab4" id="ZD">充值指导</a></li>
+    </ul>
+  <div id="content">
+         <!--<div id="tab1">
+            @using (Html.BeginForm("PartialBanktransferQianyifu", "Wap", FormMethod.Post, new { id = "qyfbankform" }))
+            {
+                <table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="40%" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" align="right">充值金额：</td>
+                        <td><input name="qyf_amount_input" id="qyfzfb_amount_input type="text" class="kd">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;" id="qyfzfb_errors">@ViewData["error"]</span></td>
+                    </tr>
+					<tr height="10"></tr>
+							<tr>
+								<td width="40%" height="25" align="left"><input name="bankid" type="radio" value="ICBC-NET" checked="checked">
+									<span class="STYLE2">中国工商银行</span></td>
+								<td width="25%" height="25" align="left"><input type="radio" name="bankid" value="CCB-NET">
+									建设银行</td>
+								<td width="35%" height="25" align="left"><input type="radio" name="bankid" value="BOC-NET">
+									中国银行</td>
+							</tr>
+							<tr>
+							  <td height="25" align="left"><input type="radio" name="bankid" value="CMBCHINA-NET">
+								招商银行</td>
+							  <td height="25" align="left"><input type="radio" name="bankid" value="ECITIC-NET">
+								中信银行</td>
+							  <td height="25" align="left"><input type="radio" name="bankid" value="CIB-NET">
+								兴业银行</td>
+							  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="CEB-NET">
+									光大银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="ABC-NET">
+									农业银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="POST-NET">
+									邮政银行</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="SDB-NET">
+									深圳发展银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="GDB-NET">
+									广东发展银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="SPDB-NET">
+									上海浦东发展银行</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="CMBC-NET">
+									民生银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="BOCO-NET">
+									交通银行</td>
+								  <td height="25" align="left"><input name="bankid" type="radio" value="NJCB-NET">
+									南京银行</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="PINGANBANK">
+									平安银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="CBHB-NET">
+									渤海银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="HKBEA-NET">
+									东亚银行</td>
+								</tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="NBCB-NET">
+									宁波银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="SHB-NET">
+									上海银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="CZ-NET">
+									浙商银行</td>
+								</tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="HZBANK-NET">
+									杭州银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="NCBBANK-NET">
+									南洋银行</td>
+								  <td height="25" align="left"><input type="radio" name="bankid" value="SCCB-NET">
+									河北银行</td>
+								</tr>
+                </table>
+                <input type="hidden" name="qyf_accounts_input" value="@ViewData["account"]" />
+                <input type="hidden" value="@ViewData["uid"]" name="qyf_puserid" />
+
+                <span class="cz5"><a href="#" onclick="ChechAlipay('qyfbank');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                <span class="cz6">
+                    充值规则：<br />
+                    <a style="color:#F00">1. 请确保您的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。</a><br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+
+            }
+        </div>-->
+      <!--  <div id="tab2">
+           
+		<span class="cz6">
+                    充值规则：<br />
+                    <a style="color:#F00">1.支付宝充值转账至支付宝账户 15004078575 （杨军）请备注游戏账号！ 如有遇到问题，请联系客服中心！</a><br />
+                    <a style="color:#F00">注：支付宝充值奖励百分之五（需单比100以上）</a><br/>
+                    <a style="color:#F00">注：本支付宝帐号不添加任何好友。</a><br/>
+                    2. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+        </div>-->
+		<div id="tab2">
+            @using (Html.BeginForm("PartialBanktransferQianyifu", "Wap", FormMethod.Post, new { id = "qyfzfbform" }))
+            {
+                <table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="40%" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" align="right">充值金额：</td>
+                        <td><input name="qyf_amount_input" id="qyfzfb_amount_input type="number" style="height:25px">最小金额20元
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;" id="qyfzfb_errors">@ViewData["error"]</span></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="qyf_accounts_input" value="@ViewData["account"]" />
+                <input type="hidden" value="@ViewData["uid"]" name="qyf_puserid" />
+                <input type="hidden" value="zhifubao" name="bankid" />
+
+                <span class="cz5"><a href="#" onclick="ChechAlipay('qyfzfb');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                <span class="cz6">
+                <a style="color:#F00">温馨提示:单比充值50以上可获得2%-5%的充值奖励,如有玩家不会截图扫码充值请添加QQ客服:164043566进行充值<br />
+                    充值规则：<br />
+                    <a style="color:#F00">1. 充值提交后截屏，然后登录支付宝扫描相册二维码付款即可 。</a><br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+
+            }
+        </div>
+         
+        <div id="tab3">
+            @using (Html.BeginForm("PartialBanktransferQianyifu", "Wap", FormMethod.Post, new { id = "qyfwxform" }))
+            {
+                <table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="40%" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" align="right">充值金额：</td>
+                        <td><input name="qyf_amount_input" id="qyfzfb_amount_input type="number" style="height:25px">最小金额20元
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;" id="qyfzfb_errors">@ViewData["error"]</span></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="qyf_accounts_input" value="@ViewData["account"]" />
+                <input type="hidden" value="@ViewData["uid"]" name="qyf_puserid" />
+                <input type="hidden" value="weixin" name="bankid" />
+
+                <span class="cz5"><a href="#" onclick="ChechAlipay('qyfwx');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                <span class="cz6">
+                    充值规则：<br />
+                    <a style="color:#F00">1. 充值提交后截屏，然后登录微信扫描相册二维码付款即可 。</a><br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+
+            }
+        </div>
+         
+	 <div id="tab4">
+                <span class="cz6">
+                    <a style="color:#F00">
+			 微信充值指导：<br />
+			 1. 选择微信充值，输入充值金额点击充值提交后请用手机截屏二维码然后登录微信，点击扫一扫，右上角（从相册选取二维码）即可完成支付。<br /> 
+			先选择微信，获取二维码在截图，然后打开微信进行操作<br />
+			<img  src="/images/wap/1.png"/><br /><br />
+			<img  src="/images/wap/2.png"/><br /><br />
+			支付宝充值指导：<br />
+			先选择支付宝充值，获取二维码在截图，然后打开支付宝进行操作<br />
+			<img  src="/images/wap/3.png"/><br /><br />
+			<img  src="/images/wap/4.png"/><br /><br />
+			<img  src="/images/wap/5.png"/><br /><br />
+		    </a>
+                </span>
+          
+        </div>   
+	<div id="tab5">
+   	<form name="form" id="form" onSubmit="return checkForm()" action="../../qianyifu/post.asp" method="post">	
+		<table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="30%" align="right">用户名：</td>
+                        <td width="25%">@ViewData["account"]</td>
+			<input type="hidden" name="username" value="@ViewData["account"]" />
+			<input type="hidden" name="username2" value="@ViewData["account"]" />
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">充值金额：</td>
+                        <td><input name="money" id="money" type="tel" class="kd">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;" id="qyfzfb_errors">@ViewData["error"]</span></td>
+                    </tr>
+					<tr height="10"></tr>
+							<tr>
+								<td width="30%" height="25" align="left"><input name="paytype" type="radio" value="cm" checked="checked">
+									<span class="STYLE2">移动神州行</span></td>
+								<td height="25" align="left"><input type="radio" name="paytype" value="cmb">
+									移动神州行(大面值)</td>
+							</tr>
+							<tr>
+							<td height="25" align="left"><input type="radio" name="paytype" value="cd">
+									神州行地方卡</td>
+							  <td height="25" align="left"><input type="radio" name="paytype" value="cc">
+								联通充值卡</td>
+							  
+							  </tr>
+							<tr>
+							<td height="25" align="left"><input type="radio" name="paytype" value="ccb">
+								联通充值卡(大面值)</td>
+							  <td height="25" align="left"><input type="radio" name="paytype" value="dx">
+								电信充值卡</td>
+							</tr>
+							<tr>
+							<td height="25" align="left"><input type="radio" name="paytype" value="dxb">
+									电信充值卡(大面值)</td>
+							<!--<td height="25" align="left"><input type="radio" name="paytype" value="zt">
+									征途一卡通</td>-->
+							</tr>
+								<!--<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="sd">
+									盛大一卡通</td>
+								  <td height="25" align="left"><input name="paytype" type="radio" value="sft">
+									盛付通卡</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="qq">
+									QQ卡</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="wy">
+									网易一卡通</td>
+								  
+								</tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="jw">
+									骏网一卡通</td>
+								<td height="25" align="left"><input type="radio" name="paytype" value="sh">
+									搜狐一卡通</td>	  
+								</tr>-->
+								
+								<tr>
+								<td height="25" align="left">
+									<label class="ap-pay-form-lable" for="cardNo" >卡号：</label><input class="ap-pay-form-input" id="cardNo" name="cardNo" type="text" placeholder="请填写卡号"></td>
+								</tr>
+								<tr>
+								<td height="25" align="left">
+									<label class="ap-pay-form-lable" for="cardPwd">卡密：</label><input class="ap-pay-form-input" id="cardPwd" name="cardPwd" type="text" placeholder="请填写卡密"></td>
+								</tr>
+								<tr>
+								<td height="25" align="left">	
+									<button type="submit" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-check"></i> 提 交</button></td>
+								</tr>
+					</table>
+				</form>			
+        </div>        
+	@*<div id="tab5">
+            @using (Html.BeginForm("PartialBanktransferQianyifu", "Wap", FormMethod.Post, new { id = "qyfwxform" }))
+            {
+		               <table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="40%" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" align="right">充值金额：</td>
+                        <td><input name="qyf_amount_input" id="qyfzfb_amount_input type="text" class="kd">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;" id="qyfzfb_errors">@ViewData["error"]</span></td>
+                    </tr>
+					<tr height="10"></tr>
+							<tr>
+								<td width="40%" height="25" align="left"><input name="paytype" type="radio" value="cm" checked="checked">
+									<span class="STYLE2">移动神州行</span></td>
+								<td width="25%" height="25" align="left"><input type="radio" name="paytype" value="cmb">
+									移动神州行(大面值)</td>
+								<td width="35%" height="25" align="left"><input type="radio" name="paytype" value="cd">
+									神州行地方卡</td>
+							</tr>
+							<tr>
+							  <td height="25" align="left"><input type="radio" name="paytype" value="cc">
+								联通充值卡</td>
+							  <td height="25" align="left"><input type="radio" name="paytype" value="ccb">
+								联通充值卡(大面值)</td>
+							  <td height="25" align="left"><input type="radio" name="paytype" value="dx">
+								电信充值卡</td>
+							  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="dxb">
+									电信充值卡(大面值)</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="th">
+									天宏一卡通</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="tx">
+									天下一卡通(通用卡)</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="txzx">
+									天下一卡通(专项卡)</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="wm">
+									完美一卡通</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="jy">
+									久游一卡通</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="zt">
+									征途一卡通</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="sd">
+									盛大一卡通</td>
+								  <td height="25" align="left"><input name="paytype" type="radio" value="sft">
+									盛付通卡</td>
+								  </tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="qq">
+									QQ卡</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="wy">
+									网易一卡通</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="sh">
+									搜狐一卡通</td>
+								</tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="jw">
+									骏网一卡通</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="SHB-NET">
+									上海银行</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="CZ-NET">
+									浙商银行</td>
+								</tr>
+								<tr>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="HZBANK-NET">
+									杭州银行</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="NCBBANK-NET">
+									南洋银行</td>
+								  <td height="25" align="left"><input type="radio" name="paytype" value="SCCB-NET">
+									河北银行</td>
+								</tr>
+                </table>
+						<hr/>
+						<label class="ap-pay-form-lable" for="cardNo" >卡号：</label><input class="ap-pay-form-input" id="cardNo" name="cardNo" type="text" placeholder="请填写卡号"><br/>
+						<label class="ap-pay-form-lable" for="cardPwd">卡密：</label><input class="ap-pay-form-input" id="cardPwd" name="cardPwd" type="text" placeholder="请填写卡密"><br/>
+						<hr/>
+                <span class="cz5"><a href="#" onclick="ChechAlipay('qyfbank');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                <span class="cz6">
+                    充值规则：<br />
+                    <a style="color:#F00">1. 请确保您的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。</a><br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+
+				
+						
+					</div>
+					<div class="clear"></div>
+					<div class="tc m2">
+						<button type="submit" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-check"></i> 提 交</button>
+					</div>
+					<hr/>
+				</form>							
+		<span class="cz6">
+                    充值规则：<br />
+                    <a style="color:#F00">1. 充值提交后截屏，然后登录微信扫描相册二维码付款即可 。</a><br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+
+            }
+        </div>      *@       
+    </div>
+</body>
+</html>

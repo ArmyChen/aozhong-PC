@@ -1,0 +1,419 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>棋牌</title>
+    <meta name="description" content="棋牌" />
+    <meta name="keywords" content="棋牌">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="stylesheet" href="/wapv1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/wapv1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/wapv1/css/monokai_sublime.min.css">
+    <link href="/wapv1/css/magnific-popup.min.css" rel="stylesheet">
+    <link href="/wapv1/js/table/bootstrap-table.css" rel="stylesheet">
+    <link href="/wapv1/js/date/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/wapv1/css/screen.css" />
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="home-template">
+
+    <!-- start navigation -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <ul class="nav nav-pills">
+                    <li><a href="/Wap/Center_Index">修改登录密码</a></li>
+                    <li><a href="/Wap/Center_ModifyBankPassword">修改保险柜密码</a></li>
+                    <li class="active"><a href="/Wap/Center_GameRecord">游戏记录</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>    <!-- end navigation -->
+    <!--start main-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 main-content">
+                <div class="cellpanel">
+                    <div class="panel-title"><h4>游戏记录</h4></div>
+                    <div class="col-md-12"><input id="btnRefreshLs" name="Rep" type="button" value="刷新" onclick="pRefreshLs()" style=" vertical-align:middle;" />　请先选择时间段，仅刷新总局数，总时间，总流水，不刷新新游戏记录！</div>
+                    <div class="col-md-12">总局数:　<span id="GameInfos" style="color:red;"></span>　局,　总时间:　<span id="PlayTimeCount" style="color:red;"></span>　,　总流水:　<span id="GameScore" style="color:red;"></span>　金币　,输:<span id="GameScoreLost" style="color:red;"></span>金币,　赢:<span id="GameScoreWin" style="color:red;"></span>金币</div>
+
+                    <form class="form-inline" role="form">
+                        <div class="form-group"><label>查询：</label><input type="text" value='@DateTime.Now.ToString("yyyy-MM-dd")' readonly class="form-control" id="sTime"><label>至</label><input type="text" value='@DateTime.Now.ToString("yyyy-MM-dd HH:mm")' readonly class="form-control" id="eTime"></div>
+                        <div class="clearfix"></div>
+                        <div class="form-group"><label>游戏类型：</label><select id="slServerId" class="form-control" onchange="GetRoomOption(this)"></select><select id="slRoomId" class="form-control"></select>&nbsp;&nbsp;<button type="button" class="btn btn-primary" id="btnSearch">查询</button></div>
+
+                    </form>
+                    <table id="table"></table>
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body" style="text-align:center;" id="alertText">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">
+                        关闭
+                    </button>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+
+    <!--end main-->
+
+
+    <script src="/wapv1/js/jquery.min.js"></script>
+    <script src="/wapv1/js/bootstrap.min.js"></script>
+    <script src="/wapv1/js/table/bootstrap-table.js"></script>
+    <script src="/wapv1/js/table/locale/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="/wapv1/js/date/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/wapv1/js/date/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="/wapv1/js/jquery.fitvids.min.js"></script>
+    <script src="/wapv1/js/highlight.min.js"></script>
+    <script src="/wapv1/js/jquery.magnific-popup.min.js"></script>
+    <script src="/wapv1/js/main.js"></script>
+
+    <script type="text/javascript">
+        var FData = function (dataMap) {
+            if (dataMap === "" || dataMap === null) return "";
+            var date = "";
+            $.each(dataMap, function (k, v) {
+                date += k + "=" + v + "&";
+            });
+            return date.substring(0, date.length - 1);
+        }
+
+        $.extend({
+            SendData: function (action, pdata, bSend, succe, ptype) {
+                $.ajax({
+                    type: ptype || "POST",
+                    dataType: "json",
+                    data: FData(pdata),
+                    url: "/AjaxService/" + action,
+                    beforeSend: function () {
+                        bSend && bSend();
+                    },
+                    success: function (msg) {
+                        succe(msg);
+                    }
+                });
+            },
+            SendDataSync: function (action, pdata, succe, ptype) {
+                $.ajax({
+                    type: ptype || "POST",
+                    dataType: "json",
+                    data: FData(pdata),
+                    url: "/AjaxService/" + action,
+                    async: false,
+                    beforeSend: function () {
+                    },
+                    success: function (msg) {
+                        succe(msg);
+                    }
+                });
+            },
+            isUndefined: function (object) {
+                return typeof object === 'undefined';
+            }
+        });
+        $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
+
+
+        $(document).ready(function () {
+            $("#sTime").datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
+            $("#eTime").datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
+            $('#table').bootstrapTable({
+                method: 'post',
+                url: "/AjaxService/GetUserGameRecordList",
+                height: 500,
+                striped: true,
+                dataType: "json",
+                pagination: true,
+                singleSelect: false,
+                contentType: "application/x-www-form-urlencoded",
+                pageSize: 20,
+                pageNumber: 1,
+                search: false, //不显示 搜索框
+                showColumns: false, //不显示下拉框（选择显示的列）
+                sidePagination: "server", //服务端请求
+                queryParams: queryParams,
+                //minimunCountColumns: 2,
+                responseHandler: responseHandler,
+                columns: [
+                {
+                    field: 'EnterScoreStr',
+
+                    title: '携带金币',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ,
+                {
+                    field: 'GameScoreStr',
+
+                    title: '获得金币',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ,
+                {
+                    field: 'RevenueStr',
+
+                    title: '抽取税收',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ,
+                {
+                    field: 'KindName',
+
+                    title: '游戏类型',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ,
+                {
+                    field: 'ServerName',
+
+                    title: '房间ID',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ,
+                {
+                    field: 'PlayTimeCountStr',
+
+                    title: '游戏时间',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ,
+                {
+                    field: 'LeaveTimeDate',
+
+                    title: '记录时间',
+
+
+                    align: 'center',
+
+                    valign: 'middle',
+
+                    sortable: false
+
+                }
+                ]
+            });
+            GetKindOption();
+            GetLiuShui();
+            $("#btnSearch").click(function () {
+                if(checkDate()){
+                    $('#table').bootstrapTable('refresh', { query: { currPage:1 } });
+                }
+            });
+
+            $("#btnRefreshLs").click(function () {
+                GetLiuShui();
+            });
+            
+        });
+        function responseHandler(res) {
+            return {
+                "rows": res.DataList,
+                "total": res.Counts
+            };
+            //if (res.IsOk) {
+            //    var result = b64.decode(res.ResultValue);
+
+            //    var resultStr = $.parseJSON(result);
+            //    return {
+            //        "rows": res.Items,
+            //        "total": resultStr.TotalItems
+            //    };
+
+            //} else {
+            //    return {
+            //        "rows": [],
+            //        "total": 0
+            //    };
+            //}
+
+        }
+
+        //传递的参数
+
+        function queryParams(params) {
+            console.log(params);
+
+            var curpage = parseInt(params.offset / params.limit) + 1;
+            return {
+                pageSize: params.limit,
+                currPage: curpage,
+                sTime: $("#sTime").val(),
+                eTime: $("#eTime").val(),
+                gameid: $("#slServerId").val(),
+                roomid: $("#slRoomId").val()
+
+            };
+
+        }
+        function GetKindOption(optList) {
+            $.SendDataSync("UGRList", {}, function (data) {
+                var optHTML = new String();
+                $.each(data, function (i, o) {
+                    optHTML += "<option value='" + o.RecordID + "'>" + o.ServerName + "</option>";
+                });
+                if (optList) {
+                    for (var i = 0; i < optList.length; i++) {
+                        var t = new String();
+                        if (optList[i].t)
+                            t = "<option value='-1'>全部游戏类型</option>";
+                        $("#" + optList[i].id).append(t + optHTML);
+                    }
+                } else
+                    $("#slServerId").append("<option value='-1'>全部游戏类型</option>" + optHTML);
+                $("#slRoomId").append("<option value='-1'>全部房间</option>");
+            });
+        }
+        function GetRoomOption(kind, optList) {
+            $.SendDataSync("UGRList2", { kindId: kind.value }, function (data) {
+                var optHTML = new String();
+                $.each(data, function (i, o) {
+                    optHTML += "<option value='" + o.RecordID + "'>" + o.ServerName + "</option>";
+                });
+                if (optList) {
+                    for (var i = 0; i < optList.length; i++) {
+                        var t = new String();
+                        if (optList[i].t)
+                            t = "<option value='-1'>全部房间</option>";
+                        $("#" + optList[i].id).append(t + optHTML);
+                    }
+                } else
+                    $("#slRoomId").empty();
+                $("#slRoomId").append("<option value='-1'>全部房间</option>" + optHTML);
+            });
+        }
+        function checkDate()
+        {
+            var nowTime = new Date(@DateTime.Now.Year,@DateTime.Now.Month,@DateTime.Now.Day);
+            var stime = $("#sTime").val();
+            var etime = $("#eTime").val();
+            var arrStime = stime.split(" ")[0].split("-");
+            var starttime = new Date(arrStime[0], arrStime[1], arrStime[2]);
+            var arrEtime = etime.split(" ")[0].split("-");
+            var endtime = new Date(arrEtime[0], arrEtime[1], arrEtime[2]);
+            var days=Math.abs(((starttime-endtime)/86400000));
+            if (days > 3) {
+                $("#alertText").text("只能查看近3天的流水情况");
+                $('#myModal').modal({
+                    keyboard: false
+                })
+                return false;
+            }
+            var days2=Math.abs(((starttime-nowTime)/86400000));
+            if (days2 > 3) {
+                $("#alertText").text("只能查看近3天的流水情况");
+                $('#myModal').modal({
+                    keyboard: false
+                })
+                return false;
+            }
+            var days3=Math.abs(((nowTime-endtime)/86400000));
+            if (days3 > 3) {
+                $("#alertText").text("只能查看近3天的流水情况");
+                $('#myModal').modal({
+                    keyboard: false
+                })
+                return false;
+            }
+            return true;
+
+
+        }
+        function GetLiuShui(){
+            $.SendDataSync("GetNunCount", { stime: $("#sTime").val(),
+                etime: $("#eTime").val(),
+                gameid: $("#slServerId").val(),
+                roomid: $("#slRoomId").val() }, function (data) {
+                $("#GameInfos").text(data[2]);
+                $("#PlayTimeCount").text(data[0]);
+                $("#GameScore").text(data[1]);
+                $("#GameScoreLost").text(data[4]);
+                $("#GameScoreWin").text(data[3]);
+            });
+
+        }
+    </script>
+</body>
+</html>

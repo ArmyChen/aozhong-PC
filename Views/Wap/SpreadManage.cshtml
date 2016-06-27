@@ -1,0 +1,229 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>推广管理</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="~/images/wap/css/css.css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script src="~/Scripts/qr.js"></script>
+    @Scripts.Render("~/Scripts/pageination")
+    <script type="text/javascript">
+        var qr_coder = null;
+        $(document).ready(function () {
+
+            var text;
+            $.SendDataSync("qr_container1", {}, function (data) {
+                text = data;
+                $("#qr_container1Text").text(text);
+            });
+
+
+            qr_coder = new QRCoder($('#qr_container'));
+            $('#qr_container').html("generating");
+            var watch_start = new Date();
+            qr_coder.setMode(1);
+            qr_coder.draw(text, $("[name='qr_capacity']:checked").val(), '', function (data) {
+                var watch_end = new Date();
+                console.log("cost:" + (watch_end - watch_start) + "ms");
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <!--top-star-->
+    <div class="top-box">
+        <div class="logo"><img src="~/images/wap/images/logo.png" width="100%"></div>
+    </div>
+    <!--top-end-->
+    <div class="tiguang-1"><img src="~/images/wap/images/ad_pop_03.png" width="100%"></div>
+    <div class="tiguang-1"><img src="~/images/wap/images/ad_pop_04.png" width="100%"></div>
+
+
+    <div class="back">
+        <div style="margin:auto; position:relative; margin-left: 50%; left: -250px; width:500px;">
+            <div style="display:none; width:200px; height: 200px;">
+                <input id="qr_capacity_l" name="qr_capacity" type="radio" value="L" /> <label for="qr_capacity_l">70%</label>
+                <input id="qr_capacity_m" name="qr_capacity" type="radio" value="M" /> <label for="qr_capacity_m">150%</label>
+                <input id="qr_capacity_q" name="qr_capacity" type="radio" value="Q" /> <label for="qr_capacity_q">250%</label>
+                <input id="qr_capacity_h" name="qr_capacity" type="radio" value="H" checked /> <label for="qr_capacity_h">300%</label>
+            </div>
+        </div>
+        <div id="qr_container" style="margin:auto; position:relative;width:300px; height: 300px; margin-top:1%;"></div>
+        <br />
+        <div style="width:100%; text-align:center;"><label id="qr_container1Text"></label></div>
+
+        <div class="jinbi-box">代理金币数：<label id="GetAgentScoreText"></label>元</div>
+        <div class="jinbi-box">直属代理抽水比例：<label id="RevencePercentText"></label>%</div>
+        <div class="jinbi-box"> 间接代理抽水比例：<label id="RevenceDownText"></label>%</div>
+
+        <div class="jinbi-box"> 今日概况:</div>
+        <div class="jinbi-box"> 今日登陆的直属下线玩家数:<label id="GetAgentLastDateNumText">0</label>人</div>
+        <div class="jinbi-box"> 新注册的直属下线数:<label id="GetAgentRegDateNumText">0</label>人</div>
+        <div style="width:100%; text-align:center;">今日最新抽水记录列表</div>
+
+        <div id=right7>
+            <table id="reportGrid_table" width="95%" border="1" cellspacing="0" cellpadding="0" style="margin:0px auto;">
+                <thead>
+
+                    <tr align="center">
+                        <td width="100" bgcolor="#f5cac6" style="text-align:center;">编号</td>
+                        <td width="100" height="40" bgcolor="#f5cac6" style="text-align:center;">下线玩家</td>
+                        <td width="100" height="40" bgcolor="#f5cac6" style="text-align:center;">本局总抽水额</td>
+                        <td width="112" bgcolor="#f5cac6" style="text-align:center;">我的实际抽水额</td>
+                        <td width="116" bgcolor="#f5cac6" style="text-align:center;">操作日期</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td style="text-align:center" id="pager" height="40" bgcolor="#f5cac6" colspan="7"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        //检测
+        function TestingFun() {
+            $.SendDataSync("Testing", {}, function (data) {
+                $("#TestingFunText").text(data);
+                if (data == "可以升级") {
+                    $("#Upgrade").show();
+                }
+            });
+        }
+        //升级
+        function UpgradeFun() {
+            $.SendDataSync("Upgrade", {}, function (data) {
+                $("#TestingFunText").text();
+                alert("升级成功");
+                $("#Upgrade").hide();
+            });
+        }
+
+        //直属下线总人
+        function AgentNum() {
+            GetUserCenterPartial("Immediate");
+        }
+        //今日登录的直属下线
+        function AgentLastDateNum() {
+            GetUserCenterPartial("AgentLastDateNum");
+        }
+        //新注册的直属下线
+        function AgentRegDateNum() {
+            GetUserCenterPartial("AgentRegDateNum");
+        }
+
+        function pData() {
+            //新注册的直属下线数
+            $.SendDataSync("GetAgentRegDateNum", {}, function (data) {
+                $("#GetAgentRegDateNumText").text(data);
+            });
+            //今日登录的直属下线玩家数
+            $.SendDataSync("GetAgentLastDateNum", {}, function (data) {
+                $("#GetAgentLastDateNumText").text(data);
+            });
+            //直属下线总人数
+            $.SendDataSync("GetAgentNum", {}, function (data) {
+                $("#GetAgentNumText").text(data);
+            });
+
+            //抽水比例
+            $.SendDataSync("AgentRevenceSetting_Yabo", {}, function (data) {
+                $("#RevencePercentText").text(data.RevencePercent);
+                $("#RevenceDownText").text(data.RevenceDown);
+            });
+
+            //直属下线抽水分成
+            $.SendDataSync("GetAgentScoreSum", {}, function (data) {
+                $("#GetAgentScoreSumText").text(data);
+            });
+
+            //代理金币数
+            $.SendDataSync("GetAgentScore", {}, function (data) {
+                $("#GetAgentScoreText").text(data);
+            });
+        }
+        function GetUserCenterPartial(action) {
+            var _action = action || QueryHash() || "UserInfo";
+            for (var i = 0; i < LinkArray.length; i++) {
+                var _link = LinkArray[i];
+                if (_link.visible) {
+                    if (_action == _link.action) {
+                        $("#left").find("li").eq(i).html("<a href='#' >" + _link.title + "</a>");
+                    }
+                    else
+                        $("#left").find("li").eq(i).html('<a href="#' + _link.action + '" onclick="GetUserCenterPartial(\'' + _link.action + '\')">' + _link.title + '</a>');
+                }
+            }
+            RequestHTML("Partial" + _action);
+        }
+        function RequestHTML(ActionResultName) {
+            var accounts = QueryString("regaccount");
+            var pdata = {};
+            if (accounts != "")
+                pdata.regaccount = accounts;
+
+            $.ajax({
+                type: "POST",
+                data: pdata,
+                url: "/UserCenter/" + ActionResultName,
+                beforeSend: function () {
+                    $("#right").html('<div id=right1>加载中...</div><div id=right2><img src="/images/right_x.png" /></div>');
+                },
+                success: function (showHTML) {
+                    if (showHTML == "0")
+                        location.href = "/UserCenter/login";
+                    else {
+                        $("#right").html(showHTML);
+                    }
+                },
+                error: function () {
+                    $("#right").html('<div id=right1>服务器错误，加载失败，请稍后再试。</div><div id=right2><img src="/images/right_x.png" /></div>');
+                }
+            });
+        }
+        (function () {
+            pData();
+        })();
+    </script>
+    <script type="text/javascript">
+        var _p = new page($("#pager"));
+        var sTimeObj = $("#reportGrid_filter_recharge_at_from").SetDefaultDate(-10);
+        var eTimeObj = $("#reportGrid_filter_recharge_at_to").SetDefaultDate();
+        function pData(isall) {
+            $.SendDataSync("GetAgentNewScoreChange", { currPage: _p.pageIndex(), pageSize: _p.pageSize(), sTime: isall ? "" : sTimeObj.val(), eTime: isall ? "" : eTimeObj.val(), pType: "" }, function (data) {
+                _p.Bind(data, pData, "reportGrid_table", isall);
+                if (data.Counts == 0) {
+                    $("#reportGrid_table").children("tbody").html('<tr align="center"><td style="text-align:center;height:40px" bgcolor="#f7e4e2" colspan="7">当前记录集为空。</td></tr>');
+                }
+                else {
+                    var dataHTML = new String();
+                    $.each(data.DataList, function (i, d) {
+                        dataHTML +=
+                            '<tr align="center"><td style="text-align:center;" width="100" bgcolor="#f7e4e2">' + d.ID +
+                            '</td> <td width="100" style="text-align:center;" height="40" bgcolor="#f7e4e2">' + d.Account +
+                            '</td> <td style="text-align:center;" width="100" height="40" bgcolor="#f7e4e2">' + d.CsCount +
+
+                            '</td><td style="text-align:center;" width="112" bgcolor="#f7e4e2">' + d.ChangeScore +
+
+                            '</td><td style="text-align:center;" width="112" bgcolor="#f7e4e2">' + d.PayTime +
+                            '</td></tr>';
+                    });
+                    $("#reportGrid_table").children("tbody").html(dataHTML);
+                }
+            });
+        }
+        (function () {
+            pData();
+        })();
+    </script>
+</body>
+</html>

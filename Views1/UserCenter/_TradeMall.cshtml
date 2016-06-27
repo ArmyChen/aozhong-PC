@@ -1,0 +1,166 @@
+﻿@model WebSite_YS.Models.Partial.TradeMall
+<!--login-right-开始-->
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/Exchange-application-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        <div class="tablediv">
+            <ul id="tabs">
+                <li><a href="#" title="tab1">银行卡兑换</a></li>
+            </ul>
+            <div id="content">
+                <div id="tab1">
+                    <h2>银行卡兑换>></h2>
+                    @using (Ajax.BeginForm("PartialTradeMall", "UserCenter", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ManagerMain",
+            OnSuccess = "ShowMessage"
+        }, new { id = "exchange-form" }))
+                    {
+                        <table width="500" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" height="40" align="left">保险柜余额： </td>
+                                <td align="left">@Model.InsureScore</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">金币： </td>
+                                <td align="left">@Model.Score&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">活动赠送金币： </td>
+                                <td align="left">@Model.RegisterScore&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">可兑换金币： </td>
+                                @{decimal cscore = @Model.Score - @Model.RegisterScore;}
+                                <td align="left">@(cscore < 0 ? 0 : cscore)&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">兑换金额： </td>
+                                <td align="left">
+                                    <input name="amount" id="sell_score" type="text" class="kd" />
+                                    至少 @Model.LeastScore 元。
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">登录密码： </td>
+                                <td align="left"><input name="login_pwd" id="loginPwd" type="password" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">保险柜密码： </td>
+                                <td align="left"><input name="account_pwd" id="accountPwd" type="password" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">银行账号： </td>
+                                <td align="left">@Model.BankInfo.BankNum&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">银行名称： </td>
+                                <td align="left">@Model.BankInfo.BankName&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">持卡人姓名： </td>
+                                <td align="left">@Model.BankInfo.BankAccount&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="left">开户网点： </td>
+                                <td align="left">@Model.BankInfo.BankAddress</td>
+                            </tr>
+                            <tr>
+                                <td height="40" colspan="2" style="text-align:center">
+                                    <input onclick="Trade_CheckNum(this)" id="exchange-form-submit" type="button" class="submit" tabindex="3" value="提交申请">
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="opentime" value="@Model.OpenTime" />
+                    }
+                    <span id="shuoming" style="background: #fafaec; display: block; width: 560px; height: 100%; line-height: 28px; padding-top: 6px; padding-left: 35px; color: #a4892a; border: #fcd344 1px solid; ">
+                        @Html.Raw(Model.PayOrTradeDescription[1])
+                    </span>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $("#content div").hide(); // Initially hide all content
+                        $("#tabs li:first").attr("id", "current"); // Activate first tab
+                        $("#content div:first").fadeIn(); // Show first tab content
+
+                        $('#tabs a').click(function (e) {
+                            e.preventDefault();
+                            $("#content div").hide(); //Hide all content
+                            $("#tabs li").attr("id", ""); //Reset id's
+                            $(this).parent().attr("id", "current"); // Activate this
+                            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+                        });
+
+                        $("#manual_transfer-mode").change(function(){
+                            if($(this).val() == "0")
+                                $("#manual_other-mode").show().val("");
+                            else
+                                $("#manual_other-mode").hide();
+                        });
+                    });
+                    function ShowMessage() {
+                        alert("@Model.EerrorMessage");
+                    }
+                    var dhStatus = 0;
+
+                    function Trade_CheckNum(button) {
+                        var sell_score1v = $("#sell_score").val();
+
+                        var re = /^[1-9]+[0-9]*$/;
+                        if (sell_score1v == "") {
+                            alert("兑换金额不能为空。");
+                            return;
+                        }
+                        else {
+                            if (isNaN(sell_score1v) || parseInt(sell_score1v) <= 0) {
+                                alert("请输入一个大于 0 的数字。")
+                                return;
+                            }
+                            if (!re.test(sell_score1v)) {
+                                alert("兑换金额应为正整数！");
+                                return false;
+                            }
+                            if (parseInt(sell_score1v)<@Model.LeastScore) {
+                                alert("兑换金额不能少于 @Model.LeastScore 金币！");
+                            return false;
+
+                        }
+                    }
+
+                    if ($("#loginPwd").val() == "") {
+                        alert("登陆密码不能为空。");
+                        return;
+                    }
+
+                    if ($("#accountPwd").val() == "") {
+                        alert("保险柜密码不能为空。");
+                        return;
+                    }
+                    if (dhStatus == 1) {
+                        alert('正在提交信息中，请稍后...');
+                        return;
+                    }
+                    else{
+                        dhStatus=1;
+                        $("#exchange-form").trigger("submit");
+                    }
+
+                    }
+
+                </script>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+</div>
+<!--login-right-结束-->
+}
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+

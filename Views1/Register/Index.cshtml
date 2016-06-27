@@ -1,0 +1,129 @@
+﻿@model WebSite_YS.Models.Partial.PartialModelBase
+@{
+    ViewBag.Title = "新用户注册";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        function F_SubmitForm() {
+            if (SubmitForm()) {
+                $("#registerForm").submit();
+            }
+        }
+        function F_ResetForm() {
+            $("#registerForm")[0].reset();
+
+        }
+
+    </script>
+}
+@Scripts.Render("~/Scripts/reg")
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/content/login.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/content/my.css" media="all" />
+    <style>
+        .cm-shuru{
+            width:400px;
+        }
+        .cm-input{
+            float:left;
+        }
+    </style>
+}
+
+
+<!--login-star-->
+<div class="login-center">
+    <div class="login-box">
+        <!--login-letf-开始-->
+        <div class="login-left">
+            <div class="login-fuwu"><img src="/images/Fast-navigation-title.png" /></div>
+            <div class="login-fuwu-back">
+                <div class="login-kong-1"></div>
+                <div class="login-ziliao"><a href="/DownLoad/dl">下载中心</a></div>
+                <div class="login-ziliao"><a href="/ActivityCenter">活动中心</a></div>
+                <div class="login-ziliao"><a href="/GameBulletin">游戏介绍</a></div>
+                <div class="login-ziliao"><a href="/Spread">招募代理</a></div>
+            </div>
+            <div class="login-left-bottom"><img src="/images/login-left-bottom.png" /></div>
+        </div>
+
+        <!--login-letf-结束-->
+        <div class="login-zongti">
+            <!--login-right-开始-->
+            <div class="cm-right">
+                <div class="cm-title-back"><img src="/images/registration-title.png" /></div>
+                <form id="registerForm" class="edit-form" method="post" action="/Register/Index">
+                    @if (!string.IsNullOrEmpty(Model.EerrorMessage))
+                    {
+                        <div class="u_error"> @Html.Raw(Model.EerrorMessage)</div>
+                    }
+                    <div class="registration-back">
+                        <div class="registration-kong"></div>
+                        <div class="registration-biaoti">
+                            <div class="registration-txt">注册账号</div>
+                        </div>
+                        <div class="cm-row">
+                            <div class="cm-name"><font color="#FF0000">*</font>会员账号:</div>
+                            <div class="cm-shuru"><input name="login_name" id="account" type="text" class="cm-input" maxlength="16" /></div>
+                        </div>
+                        <div class="cm-row-2">
+                            <div class="cm-name"><font color="#FF0000">*</font>登录密码:</div>
+                            <div class="cm-shuru"><input name="login_pwd" id="password" type="password" class="cm-input" /></div>
+                        </div>
+                        <div class="cm-row-2">
+                            <div class="cm-name"><font color="#FF0000">*</font>确认密码:</div>
+                            <div class="cm-shuru"><input name="login_pwd2" id="password1" type="password" class="cm-input" /></div>
+                        </div>
+                        <div class="registration-biaoti">
+                            <div class="registration-txt">会员资料</div>
+                        </div>
+                        <div class="cm-row-2">
+                            <div class="cm-name"><font color="#FF0000">*</font>真实姓名:</div>
+                            <div class="cm-shuru"><input name="true_name" id="truename" type="text" value="" class="cm-input" maxlength="10" /></div>
+                        </div>
+
+                        <div class="cm-row-2">
+                            <div class="cm-name"><font color="#FF0000">*</font>QQ:</div>
+                            <div class="cm-shuru"><input name="extra_qq" id="telQQ" type="text" class="cm-input" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" /><input type="hidden" value="" name="extra_email"><input type="hidden" value="" name="extra_mobile"></div>
+                        </div>
+                        <div class="cm-row-2">
+                            <div class="registration-name"><font color="#FF0000">*</font>验证码:</div>
+                            <div class="registration-shuru"><input name="verify_code" id="vcodetext" type="text" class="registration-input" maxlength="4" /></div>
+                            <div class="registration-yzm"><img id="verifycoderefresh" style="width:60px;height:26px;" onclick="$(this).attr('src', '/VerificationCode/VerifCodeImg?' + Math.random())" src="/VerificationCode/VerifCodeImg" /></div>
+                            <label class="registration-huan"><a href="javascript:void(0);" onclick="$('#verifycoderefresh').attr('src', '/VerificationCode/VerifCodeImg?' + Math.random())">看不清,换一个</a></label>
+                        </div>
+                        <!--协议开始-->
+                        <div class="registration-biaoti">
+                        </div>
+
+                        <div class="registration-xieyi"><input type="checkbox" checked />我已满18周岁，且已阅读并同意用户<a href="/Agreement" target="_blank"><font color="#FF0000">本站注册协议</font></a></div>
+                        <!--协议结束-->
+                        <div class="cm-row-2">
+                            <div class="cm-name"></div>
+                            <div class="registration-anniu"><input type="button" onclick="F_SubmitForm();" class="cm-button" value="立即注册" /></div>
+                            <div class="registration-anniu"><input type="button" class="cm-button" onclick="F_ResetForm();" value="清空重写" /></div>
+</div>
+                    </div>
+                </form>
+                <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+                <!--修改登录密码-结束-->
+            </div>
+            <!--login-right-结束-->
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+<!--login-end-->

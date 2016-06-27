@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+}
+@model WebSite_YS.Models.Partial.Pay
+<h2>请选择充值卡 >></h2>
+@using (Ajax.BeginForm("PartialCardPay", "UserCenter", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "ManagerMain"
+
+                }, new { id = "F_PayyibaoCard" }))
+{
+    <table width="550" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td height="30">
+                <input type="radio" name="channel_token" id="repaidcard-chinamobile" value="SZX" checked="checked">
+
+                <label for="repaidcard-chinamobile">移动充值卡</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-unicom" value="UNICOM">
+
+                <label for="repaidcard-unicom">联通充值卡</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-telecom" value="TELECOM">
+
+                <label for="repaidcard-telecom">电信充值卡</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-shengda" value="SNDACARD">
+
+                <label for="repaidcard-shengda">盛大一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-zhengtu" value="ZHENGTU">
+
+                <label for="repaidcard-zhengtu">征途一卡通</label>
+            </td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="radio" name="channel_token" id="repaidcard-qqcard" value="QQCARD">
+
+                <label for="repaidcard-qqcard">Q币充值卡</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-jiuyou" value="JIUYOU">
+
+                <label for="repaidcard-jiuyou">久游一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-netease" value="NETEASE">
+
+                <label for="repaidcard-netease">网易一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-sohu" value="SOHU">
+
+                <label for="repaidcard-sohu">搜狐一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-wanmei" value="WANMEI">
+
+                <label for="repaidcard-wanmei">完美一卡通</label>
+            </td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="radio" name="channel_token" id="repaidcard-zongyou" value="ZONGYOU">
+
+                <label for="repaidcard-zongyou">纵游一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-junnet" value="JUNNET">
+
+                <label for="repaidcard-junnet">骏网一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-tianxia" value="TIANXIA">
+
+                <label for="repaidcard-tianxia">天下一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-tianhong" value="TIANHONG">
+
+                <label for="repaidcard-tianhong">天宏一卡通</label>
+            </td>
+        </tr>
+    </table>
+    <table width="627" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+            <td align="left"><input name="card_username" id="card_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+        </tr>
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+            <td align="left"><input name="card_confirm_username" type="text" id="card_payaccount2" class="kd" value="@Model.PayAccount" />&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;充值金额： </td>
+            <td align="left">
+                <select name="card_recharge_select_amount" id="card_value">
+                    <option value="30">30 元</option>
+                    <option value="50">50 元</option>
+                    <option value="100">100 元</option>
+                    <option value="200">200 元</option>
+                    <option value="300">300 元</option>
+                    <option value="500">500 元</option>
+                </select>&nbsp;<span style=" font-size:14px; font-weight:bold; color:#F00;">（请再次核实充值卡面额，如果提交金额错误，将无法补回！）</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;卡号： </td>
+            <td align="left"><input name="card_cardnum" id="card_cardnum" type="text" class="kd" />&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;卡密码： </td>
+            <td align="left"><input name="card_cardpwd" id="card_cardpwd" type="text" class="kd" />&nbsp;</td>
+        </tr>
+        <tr>
+            <td height="40" colspan="2" align="center">
+                <input type="button" class="submit" tabindex="3" onclick="return CheckPayCardinfo(this)" value="确认充值">
+            </td>
+        </tr>
+    </table>
+}
+<span id="shuoming" style="background:#fafaec; display:block; width:480px; height:100%; border:#fcd344 1px solid; line-height:30px; padding-top:6px; padding-left:15px; padding-right:15px; color:#a4892a;">
+    @Html.Raw(Model.PayOrTradeDescription[3])
+</span>
+
+
+<table width="500" border="1" height="450" bordercolor="#000000" cellpadding="0" cellspacing="0" style="text-align:center; padding-left:20px; margin-top:20px;">
+    <tr>
+        <td align="center">充值卡</td>
+        <td>比例</td>
+    </tr>
+    <tr>
+        <td align="center">骏网一卡通</td>
+        <td>0.85</td>
+    </tr>
+    <tr>
+        <td>盛大一卡通</td>
+        <td>0.8</td>
+    </tr>
+    <tr>
+        <td>神州行充值卡</td>
+        <td>0.95</td>
+    </tr>
+    <tr>
+        <td>征途</td>
+        <td>0.85</td>
+    </tr>
+    <tr>
+        <td>QQ卡</td>
+        <td>0.8</td>
+    </tr>
+    <tr>
+        <td>联通充值卡</td>
+        <td>0.95</td>
+    </tr>
+    <tr>
+        <td>久游一卡通</td>
+        <td>0.8</td>
+    </tr>
+    <tr>
+        <td>网易一卡通</td>
+        <td>0.85</td>
+    </tr>
+    <tr>
+        <td>完美一卡通</td>
+        <td>0.85</td>
+    </tr>
+    <tr>
+        <td>搜狐一卡通</td>
+        <td>0.8</td>
+    </tr>
+    <tr>
+        <td>电信充值卡</td>
+        <td>0.95</td>
+    </tr>
+    <tr>
+        <td>纵游一卡通</td>
+        <td>0.8</td>
+    </tr>
+    <tr>
+        <td>天下一卡通</td>
+        <td>0.8</td>
+    </tr>
+    <tr>
+        <td>天宏一卡通</td>
+        <td>0.85</td>
+    </tr>
+</table>
+<script type="text/javascript">
+function CheckPayCardinfo(button)
+            {
+                var account = $("#card_payaccount");
+                var account2 = $("#card_payaccount2");
+                var cardnum = $("#card_cardnum");
+                var cardpwd = $("#card_cardpwd");
+
+                if(account.val() == "")
+                {
+                    alert("请填写充值用户名。");
+                    return false;
+                }
+                else
+                {
+                    if (account.val() != account2.val())
+                    {
+                        alert("两次输入的账号不一致！")
+                        return false;
+                    }
+                }
+                if(cardnum.val()=="")
+                {
+                    alert("请输入充值卡号");
+                    return false;
+                }
+                if(cardpwd.val()=="")
+                {
+                    alert("请输入充值卡密码");
+                    return false;
+                }
+                if($("#card_value").val() == "")
+                {
+                    alert("请选择充值金额");
+                    return false;
+                }
+
+                $(button).trigger("submit");
+            }
+</script>

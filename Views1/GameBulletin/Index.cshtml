@@ -1,0 +1,627 @@
+﻿@{
+    ViewBag.Title = "游戏介绍";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/guide.css" media="all" />
+    }
+@section scripts{
+    <script src="/Scripts/organictabs.jquery.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            $("#example-one").organicTabs();
+        });
+
+    </script>
+}
+<!--login-star-->
+<div class="login-center">
+    <div class="login-box">
+        <div class="game_main_box">
+            <div class="game_main">
+
+
+                <div id="page-wrap">
+
+                    <div id="example-one">
+
+                        <ul class="nav">
+                            <div class="guide-title"><img src="images/guide-title.png" /></div>
+                            <li class="nav-one"><a href="#featured" class="current">扎金花</a></li>
+                            <li class="nav-one"><a href="#core">斗地主</a></li>
+                            <li class="nav-one"><a href="#gswz">港式五张</a></li>
+                            <li class="nav-one"><a href="#dz">德州扑克</a></li>
+                            <li class="nav-one"><a href="#nn">牛牛</a></li>
+                            <li class="nav-one"><a href="#er">二人麻将</a></li>
+                            <li class="nav-one"><a href="#bjl">百家乐</a></li>
+                            <li class="nav-one last"><a href="#classics">金蟾捕鱼</a></li>
+                        </ul>
+                        <div class="list-wrap">
+
+                            <div class="list-wrap_n">
+                                <ul id="featured">
+                                    <!--<li class="tou_01"><img src="images/guide-zjh.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-01.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+
+
+                                        <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-introduction">
+                                            诈金花是中国广泛流传的一种民间游戏，具有独特的比牌规则。玩家以手中的三张牌比输赢，游戏过程中需要考验玩
+                                            家的胆略和智慧。
+                                        </p>
+                                        <p></p>
+                                        <p>
+                                        </p>
+
+
+                                        <p style="margin: 5px 0px; line-height: 18px; font-size:12px;font-family: " sans serif", tahoma, verdana, helvetica; word-wrap break-word;">
+                                            <div class="game-xiaobiao">1、游戏说明：</div>
+
+                                        <p class="Game-introduction"> 游戏人数可为2―5人,使用一副扑克牌,去掉大小王,共52张牌。游戏开始后，玩家先将底注投入,从庄家开始逆时针顺序每人发三张暗牌,第一次开局随机选择庄家。用户可以通过"看牌"或者猜测对方牌来进行"下注"、"跟注"或者"放弃",游戏中还可以选择任意玩家"比牌",最后剩下来的2个人，则可以随时开牌，或者玩家数大于2人以上，但是已经达到"封顶"时，则由系统开牌，并根据比较规则来判断胜负。</p>
+                                        </br>
+                                        <div class="game-xiaobiao">2、术语介绍：</div>
+                                        <p class="Game-shuyu">
+                                            庄家：上一轮赢的玩家是下一轮的庄家，第一局或者赢家离开的情况随机选一个玩家为庄家,庄家的下家先下注。
+                                            </br>
+
+                                            底金：游戏开始前每位玩家都要先投1倍底注作为筹码。(根据当前桌内玩家最少游戏币数来定，见后面每注计算。）
+                                            </br>
+                                            封顶：每局可以投注的筹码总和有上限，达到或超过上限则系统自动开牌。
+                                            </br>
+                                            看牌：查看自己三张牌的花色和点数，看牌后的投注为明注。
+                                            </br>
+                                            暗注：不看牌投注筹码。
+                                            </br>
+                                            明注：看牌后投注筹码，明注后投注的筹码翻倍。
+                                            </br>
+                                            跟注：投注和上一家一样数量的筹码。自己是明牌就跟明注；暗牌就跟暗注。
+                                            </br>
+                                            加注：在上家投注筹码的基础上再增加筹码。
+                                            </br>
+                                            比牌：所有人都下注后可以选择任一未放弃玩家进行比牌,其他玩家看不到两人的牌面,注意比牌要付出跟注一倍的游戏币，要在游戏币不足前及时比牌，否则判负。牌型大小相同，先比牌者判输。
+                                            </br>
+                                            别人比牌，自己没跟人家比，是不能看到别的人的牌。
+                                            </br>
+                                            开牌：当可以投注的玩家只剩下两个人时，可以随时选择开牌，选开牌的玩家要付出当前筹码的双倍筹码。如果牌型大小相同，则先开牌的玩家判输。
+                                            </br>
+                                            放弃：放弃当前的所有投注，判输。
+                                            </br>
+                                            自动开牌：手动强制性开牌，只剩下"开牌/比牌"和"放弃"这两个按钮。
+                                        </p>
+                                        </p>
+                                        <p style="margin: 5px 0px; line-height: 18px; font-family: " sans serif", tahoma, verdana, helvetica; word-wrap break-word;">
+                                            <div class="game-xiaobiao">3、牌型说明：</div>
+                                        <p class="Game-shuoming">
+                                            豹子：三张同样大小的牌。
+                                            </br>
+                                            顺金：花色相同的相连三张牌。
+                                            </br>
+                                            金花：三张花色相同的牌。
+                                            </br>
+                                            顺子：三张花色不全相同的相连三张牌。
+                                            </br>
+                                            对子：三张牌中有两张点数同样大小的牌。
+                                            </br>
+                                            特殊：花色不同的235牌 。
+                                            </br>
+                                            单张：除以上牌型的牌。
+                                            </br>
+                                        </p>
+                                        <div class="game-xiaobiao"> 4、牌型比较</div>
+
+                                        <div class="Game-paixing">豹子 >顺金 >金花 >顺子 >对子 >单张；</div>
+                                        <p class="Game-shuyu">
+
+                                            顺金、顺子按照顺序比点。AKQ >KQJ>...234>A2；
+                                            </br>
+                                            单牌大小比较：A>K>Q…..>2。
+                                            </br>
+                                            对子大小比较：先比对，对同等大再比单牌；
+                                            </br>
+                                            当豹子存在时，特殊牌型235 >豹子；
+                                            </br>
+                                            比牌牌型等大，先开为
+                                            负。
+                                        </p>
+                                        </p>
+                                        </p>
+
+                                    </li>
+                                </ul>
+                                <ul id="core" class="hide">
+                                    
+                                     <!--<li class="tou_01"><img src="images/ddz-t.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-02.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+
+
+                                        <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-introduction">
+                                        简介：该游戏由三人玩一副牌，地主为一方，其余两家为另一方，双方对战，先出完手中 牌的一方胜。 游戏规则（一副牌规则）：
+                                        </p>
+<div class="game-xiaobiao">1：发牌：</div>
+ <p class="Game-shuyu">一副牌 54 张，一人 17 张，留 3 张做底牌，在确定地主之前玩家不能看底牌。</p> 
+ <div class="game-xiaobiao">
+2：叫牌：
+</div>
+ <p class="Game-shuyu">
+叫牌按出牌的顺序轮流进行，每人只能叫一次。叫牌时可以叫 "1 分 " ， "2 分 " ， "3 分 " ， " 不叫 " 。 后叫牌者只能叫比前面玩家高的分或者不叫。叫牌结束后所叫分值最大的玩家为地主； 如果有玩家叫 "3 分 " 则立即结束叫牌，该玩家为地主；如果都不叫，则重新发牌，重新叫牌。
+</p>
+<div class="game-xiaobiao">
+3 ：第一个叫牌的玩家 ：
+</div>
+ <p class="Game-shuyu">
+第一轮叫牌的玩家由系统选定，以后每一轮首先叫牌的玩家跟第一轮相同。
+</p>
+<div class="game-xiaobiao">
+4 :出牌 
+</div>
+ <p class="Game-shuyu">
+将三张底牌交给地主，并亮出底牌让所有人都能看到。 地主首先出牌，然后按逆时针顺序 依次出牌，轮到用户跟牌时，用户可以选择 " 不出 " 或出比上一个玩家大的牌。某一玩家出完牌时结束本局。
+</p> 
+<div class="game-xiaobiao">
+5:牌型
+</div> 
+<p class="Game-shuyu">
+火箭：即双王（大王和小王），最大的牌。
+</p>
+<p class="Game-shuyu"> 
+炸弹：四张同数值牌（如四个 7 ）。
+</p>
+<p class="Game-shuyu">
+单牌：单个牌（如红桃 5 ）。
+</p>
+<p class="Game-shuyu">
+对牌：数值相同的两张牌（如梅花 4+ 方块 4 ）。
+<p class="Game-shuyu"> 
+三张牌：数值相同的三张牌（如三个 J ）。
+</p>
+<p class="Game-shuyu"> 
+三带一：数值相同的三张牌 + 一张单牌或一对牌。例如： 333+6 或 444+99。
+</p>
+<p class="Game-shuyu">
+单顺：五张或更多的连续单牌（如： 45678 或 78910JQK ）。不包括 2 点和双王。
+</p>
+<p class="Game-shuyu">
+双顺：三对或更多的连续对牌（如： 334455 、7788991010JJ ）。不包括 2 点和双王。
+</p>
+<p class="Game-shuyu"> 
+三顺：二个或更多的连续三张牌（如： 333444 、 555666777888 ）。不包括 2 点和双王 。
+</p>
+<p class="Game-shuyu"> 
+飞机带翅膀：三顺＋同数量的单牌（或同数量的对牌）。
+如： 444555+79 或 333444555+7799JJ 
+</p>
+<p class="Game-shuyu">
+四带二：四张牌＋两手牌。（注意：四带二不是炸弹）。
+如： 5555 ＋ 3 ＋ 8 或 4444 ＋ 55 ＋ 77 。
+</p> 
+ <div class="game-xiaobiao">6:牌型大小 </div>
+ <p class="Game-shuyu">
+火箭最大，可以打任意其他的牌。
+</p>
+<p class="Game-shuyu"> 
+炸弹比火箭小，比其他牌大。都是炸弹时按牌的分值比大小。
+<p class="Game-shuyu"> 
+除火箭和炸弹外，其他牌必须要牌型相同且总张数相同才能比大小。
+</p>
+<p class="Game-shuyu"> 
+单牌按分值比大小，依次是 大王 > 小王 >2>A>K>Q>J>10>9>8>7>6>5>4>3 ，不分花色。
+</p>
+<p class="Game-shuyu"> 
+对牌、三张牌都按分值比大小。
+</p>
+<p class="Game-shuyu">
+顺牌按最大的一张牌的分值来比大小。
+</p>
+<p class="Game-shuyu">
+飞机带翅膀和四带二按其中的三顺和四张部分来比，带的牌不影响大小。
+</p>
+ <div class="game-xiaobiao"> 
+7：胜负判定
+</div> 
+<p class="Game-shuyu">
+任意一家出完牌后结束游戏，若是地主先出完牌则地主胜，否则另外两家胜。
+</p>
+ <div class="game-xiaobiao"> 
+8:积分 
+</div>
+<p class="Game-shuyu">
+底分：叫牌的分数
+</p>
+<p class="Game-shuyu"> 
+倍数：初始为 1 ，每出一个炸弹或火箭翻一倍。（火箭和炸弹留在手上没出的不算） 
+一局结束后：</p>
+<p class="Game-shuyu">
+地主胜：地主得分为 2* 底分 * 倍数。 其余玩家各得： - 底分 * 倍数
+</p>
+<p class="Game-shuyu"> 
+地主败：地主得分为 -2* 底分 * 倍数。 其余玩家各得：底分 * 倍数
+</p>
+<p class="Game-shuyu"> 
+地主所有牌出完，其他两家一张都未出： 分数 * 2
+</p>
+<p class="Game-shuyu"> 
+其他两家中有一家先出完牌，地主只出过一手牌： 分数 * 2
+</p> 
+                                    <li></li>
+                                </ul>
+                                <ul id="gswz" class="hide">
+                                     <!--<li class="tou_01"><img src="images/gswz-t.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-03.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+
+
+                                        <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-introduction">
+                                    港式五张牌又名五张牌、同花顺。主要流于广东、香港、澳门。游戏简单、激烈。可支持二到四个玩家同时玩。
+                                    </p>
+                                     <div class="game-xiaobiao">
+1：游戏规则：
+</div>
+ <p class="Game-introduction"> 
+发牌之前玩家必须下一轮相同的数额，作为底，底的大小由系统自动决定。底下完之后开始发牌。最多发5轮牌，每轮各一张牌； 第1轮为底牌，玩家随时可以查看自己的底牌，但别人的底牌只有到决胜负时才可以翻看；从第2轮牌开始为明牌，明牌是所有玩家都能看见的牌。
+每发完一轮明牌，就开始新一轮的数额。以明牌牌面最大者为先，随后的玩家若想继续则必须跟（与前面玩家下的数额相同）或在前面玩家所数额基础之上再加数额； 第2轮数额（发牌之前的那一轮底为第1轮数额）可以下到全甩的1/4，全甩是游戏中的一种手段，所下的数额是让所有参与者（不包括已放弃者）都能跟进的最大数额， 第3轮可以下到全甩的1/2，之后的轮次就可以全甩了。
+</p>
+ <p class="Game-introduction"> 
+游戏进行中若玩家发现牌情不妙，可以选择放弃。放弃之后玩家不能收回已经下出去的数额。
+当5轮牌过后且人都跟进了，便翻开底牌一决胜负。这时，牌面最大的人可赢得桌面所有的数额。若游戏进行中只剩下一位玩家没有放弃，那么该玩家即为赢家，且他的底牌不翻开。
+五张牌游戏使用的是扑克牌中牌点为「8、9、10、J、Q、K、A 」的牌，共28张。牌面比较时，一般规则是先比较牌型，若牌型相同，则比较牌点，若牌点还相同则比较花色。
+</p> 
+ <div class="game-xiaobiao">
+2：牌型说明：
+</div>
+<p class="Game-introduction">
+牌型比较：同花顺＞铁支＞葫芦＞同花＞顺子＞三条＞二对＞对子＞散牌；
+</p>
+<p class="Game-introduction">
+牌点比较：Ａ＞Ｋ＞Ｑ＞Ｊ＞１０＞９＞８；
+</p>
+<p class="Game-introduction">
+花式比较：黑桃＞红心＞草花＞方片；
+</p>
+ <div class="game-xiaobiao">
+3：异常处理：
+</div>
+<p class="Game-introduction">
+若是某个玩家在规定时间内没有任何响应，系统将替他叫放弃；
+若游戏进行中玩家离局，将扣除该玩家本局所下数额，并计逃跑1次（玩家放弃后可自由离局）。
+</p>
+
+                                    </li>
+                                </ul>
+                                <ul id="dz" class="hide">
+                                   <!--<li class="tou_01"><img src="images/dzpk.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-04.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+                                    <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-shuyu">
+
+                                    德克萨斯扑克于20世纪初开始于德克萨斯洛布斯镇，英文全称为Texas Hold'em poker，中 文简称为德州扑克，是一种技巧性非常强、运气成分相对较少的扑克游戏， 易于上手但难于精通，游戏过程中需要充分的和其他玩家斗 智斗勇，只有知己知彼方能百战百胜。
+德州扑克是一种玩家对玩家的公共牌类游戏。一张台面上少则2人，多则可以容纳8人，而 一般是由2至8人参加。 德州扑克一共有52张扑克牌，没有大小王牌。每个玩家分两张牌作为"底牌"，五张由荷官陆续朝上发出的公共牌 。 在牌局开始的时候，每个玩家都会发得两张面朝下的底牌。在经过所有的押注圈以后，若仍不能分出胜负，游戏则会进入"摊牌"阶段 ， 也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
+</p>
+<div class="game-xiaobiao">
+1：名词解释：
+</div>
+ <p class="Game-shuyu">
+庄家（Button）：也称按钮。牌局结束后，按钮会按顺时针方向移动至下一位玩家。
+</p>
+ <p class="Game-shuyu">
+小盲(Small Blind)：SB，庄家的顺时针方向第一位玩家。两人时，就是庄家。
+</p>
+ <p class="Game-shuyu">
+大盲(Big Blind)：BB，庄家的顺时针方向的第二位玩家。两人时，就是庄家的下一位。
+</p>
+ <p class="Game-shuyu"> 
+主底池（Main Pot）：牌局中所有未弃牌的玩家都有机会赢得的底池。一般来说，一张牌 桌只有一个底池， 但是当某位玩家全下之后，该玩家所下注的底池称为主底池，牌桌上所有未弃牌的玩家（包括全下玩家）都可以争取 主底池内的彩金，其它玩家另外押下的筹码则归入额外底池。
+边池（Side Pot）：在有人全下的时候可能出现边池，极端情况下，当8个玩家拥有金币数 额全都不同，则产生7个边池，加底池一共8个彩池。
+</p>
+ <p class="Game-shuyu">
+行动（Action）：当轮到某个玩家时，玩家可以下注、跟注、加注、全下、弃牌、过牌。
+</p>
+ <p class="Game-shuyu"> 
+下注（Bet）：一轮投注圈中，第一次投注，投注金额不能低于大盲注。第一轮不能下注。
+</p>
+ <p class="Game-shuyu"> 
+跟注（Call）：玩家下注的金额与上一位下注或加注或全下的玩家相同。
+</p>
+ <p class="Game-shuyu">
+加注（Raise）：加注金额至少应等于前一位玩家的下注金额。一轮下注中，首次押下筹码 不算加注，只能算下注。对于加注的加注，加注金额不能低于上次加注金额和大盲的最大值。
+</p>
+ <p class="Game-shuyu">
+全下（All-In）：玩家将自己在牌桌上的所有筹码投入底池，无论下注、跟注、加注，只 要满足条件就是ALL-IN 让牌（Check）：牌局中轮到玩家行动时，如果前面的玩家皆未下注，可以选择不下注，让 下一位玩家行动。如果选择让牌，可以在同一圈下注中稍后再跟注或加注。
+</p>
+ <p class="Game-shuyu">
+弃牌（Fold）：当有玩家压下筹码时，如果不跟注，就得弃牌认输。
+</p>
+ <p class="Game-shuyu">
+底牌（Hole Cards）：自己才能看到的两张牌。
+</p>
+ <p class="Game-shuyu">
+公用牌（Board Cards）：牌面朝上放在牌桌中央的牌，可让牌局中所有未弃牌的玩家使用 ，与手中的底牌组成最佳牌组。有翻牌、转牌及河牌。
+</p>
+ <p class="Game-shuyu">
+翻牌（Flop）：前三张公用牌，这一轮下注则称为翻牌圈。
+</p>
+ <p class="Game-shuyu">
+转牌（Turn）：发下的第四张公用牌。
+</p>
+ <p class="Game-shuyu">
+河牌（River）：最后一张发下的公用牌。
+</p>
+<div class="game-xiaobiao">
+2：规则介绍：
+</div>
+<p class="Game-shuyu">
+牌数：去掉大小王牌数52张
+</p>
+<p class="Game-shuyu">
+让牌：首注方可不加注，让牌给下家加注。让牌意义是前面下注额为0自已也不下注让给下 家。（特殊性：在盲注时如有一家让牌就直接发牌，后面的玩家不需要再下注）
+</p>
+<p class="Game-shuyu">
+跟注：上家加注加同等数额。
+</p>
+<p class="Game-shuyu">
+加注： 加大注额，必需是本轮某家最大下注数额减去本轮自己已下注数额的值双倍以上。 (比如某一轮A家已下注了45,是当前下注最多,此时轮到B家下注,而B家在这轮已下注了20,所以B家若加注,则最低加五十(45-20)*2) 如在 盲注轮所有玩家下注数额相等或非盲注轮首注方的情况下,加注最低为大盲注同等数额。 特殊情况:在盲注轮中,玩家加注数额必须持平 大盲注的数额基础上再进行翻倍 。 比如A家下注了4单元,轮到小盲注B家(已经下注了1单元),若B家加注则最低额为5单元.如果A家下注 是2单元（大盲注），则B家加注最低额为3单元 （在没有发三张公张之前称为盲注轮）
+</p>
+<p class="Game-shuyu">
+放弃：放弃本局如之前有下注将输掉已下注金额。
+</p>
+<div class="game-xiaobiao">
+3：下注规则：
+</div>
+<p class="Game-shuyu">
+1、 D为每次下注首个下注家（以下简称为：首注方），如果首注方放弃由下家开始下注。
+</p>
+<p class="Game-shuyu"> 
+2、 D为小盲注，D下家为大盲注。大盲注注数是小盲注双倍。
+</p>
+<p class="Game-shuyu">
+3、 小盲注注额为本房间基础分，大小盲注由系统自动下注；大盲注下家如让牌不再需要 问后面玩家。
+</p>
+<p class="Game-shuyu">
+4、 大盲注下家可跟注或加注。
+</p>
+<p class="Game-shuyu">
+5、 下盲注时当其中一家按"让牌"下家不再有选择跟注或放弃直接进入发牌。
+</p>
+<p class="Game-shuyu">
+6、 加注时身上数额不足以上家下注的倍数时需把全部身上金额全部投入。
+</p>
+<p class="Game-shuyu">
+7、 每个玩家下注样同后结束盲注下注。
+</p>
+<p class="Game-shuyu">
+完成盲注后发两张牌到每个玩家手上开始下注，首注方先下注如让牌为下家下注。
+在下注时如果把梭哈的情况下，还有其它玩家继续下注已梭哈的人不再提示下注；这次下 注完成以后，按梭哈这玩家在盲注时和梭哈总额筹码放在梭哈者面前。
+完成下注后发三张公牌。
+</p>
+<p class="Game-shuyu">
+再下注，下注规则同上一至把公牌发完成再下注完成后开始比牌。
+</p>
+<div class="game-xiaobiao">
+4：比牌规则：
+</div>
+ <p class="Game-shuyu">
+皇家同花顺：最大的一手牌 A， K， Q， J，10，五张牌同一花色。
+</p>
+ <p class="Game-shuyu">
+同花顺 ：五张牌既是顺子又是同花(比如 8，9，10， J，Q 五张牌全是黑桃，或者 2，3 ， 4， 5，6五张牌全是方块.)
+</p>
+ <p class="Game-shuyu">
+四张：四张同样的牌(比如: 四张8或四张Q)
+</p>
+ <p class="Game-shuyu">
+葫芦：三张同号牌加一对同号牌(比如.: 3张10加一对6，三张K加一对5等)
+</p>
+ <p class="Game-shuyu">
+同花：五张牌同一花色但并不连牌(比如: 4, 5, 7, 10, K五张牌全是黑桃)
+</p>
+ <p class="Game-shuyu">
+顺子：五张牌相连但不同花(比如: 7 , 8 , 9 , 10 , J 五张牌但不是同一花色)。
+</p>
+ <p class="Game-shuyu">
+三张：五张牌里有三张同号牌另外两张为散牌(比如三张3加一张5一张Q或三张J加一张8一 张K)。
+</p>
+ <p class="Game-shuyu">
+两对：两对不同的牌加一张散牌(比如.一对Q，一对5加一张10 或者一对8一对9加一张A)。
+</p>
+ <p class="Game-shuyu"> 
+一对：一对牌加三张散牌(比如: 一对7加一张4，一张10，一张Q或者一对J加一张3，一张K ，一张8)。
+</p>
+ <p class="Game-shuyu">
+高牌：最大牌 单张。
+</p>
+ <p class="Game-shuyu">
+皇家同花顺>同花顺>四条>葫芦>同花>顺子>三条>两对>一对>高牌
+</p>
+ <p class="Game-shuyu">
+不是以上9种情况的，则比较手上最大的牌，若相同，则比较第二大的牌，其次类推。
+牌的面值由大到小排列如下：A，K，Q，J，10，9，8，7，6，5，4，3，2 A可以与2，3，4，5结合形成顺子A，2，3，4，5 这为最小的顺子
+在七张牌中找五张组合最大的牌型做对比，如果组合出来的牌型为一对以上牌型同时为公 牌则为和。
+双方下注退还，如果其中在比牌之前有玩家退出留下的注额由比牌者平分。</p>
+                                    </li>
+                                </ul>
+                                <ul id="nn" class="hide">
+                                    <!--<li class="tou_01"><img src="images/niuniu.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-05.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+                                     <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-shuyu">
+
+                                    "牛牛"是流行于浙南一带的游戏，玩家要是可以将 手中的五张牌，以三张一卡、两张一卡的形势排列成10的倍数，此种牌就被称为"牛牛"，属最大牌型 。
+
+                                    </p>
+                                    <div class="game-xiaobiao">
+1：牌型大小：
+</div>
+<p class="Game-shuyu">
+本牌型依次大小为： K、Q、J、10、9、8、7、6、5、4、3、2 、A。
+</p>
+ <div class="game-xiaobiao">
+2：出牌顺序：
+</div>
+<p class="Game-shuyu">
+每位玩家将牌型编排好之后可以出牌，庄家是最后一个亮牌的。
+</p>
+<div class="game-xiaobiao">
+3：牌型说明：
+</div>
+<p class="Game-shuyu">
+特殊牌型：J、Q、K都是当10点，然后A是当1点，其他的牌型当自身的点数。
+</p>
+<p class="Game-shuyu">
+牌型组合：牌局开始每个人手中都有五张牌，然后玩家需要将手中任意三张牌凑成10点或20点或30 点都可以，这样是被称之为牛。 接下来在将其余的两张的点数相加得出几点。去掉十位数，只留个位数来进行比较，如果接下来两张的 相加点数也正好是整数的话，那就是最大的牌型："牛牛"。
+<p class="Game-shuyu">
+ <div class="game-xiaobiao">
+4：牌型大小比较：
+</div>
+ <p class="Game-shuyu">
+当庄家与闲家同时出现相同点数时，系统自动将两家手中牌的最大那一张进行比较，谁大就由谁获 得胜利。如果出现牌也相同大的话，就按花色来进行比较，花色的比较与梭哈的花色比较类同。
+</p> 
+<div class="game-xiaobiao">
+5：获胜条件：
+</div> 
+<p class="Game-shuyu">
+游戏为四个人玩，一方为庄家，另三方为闲家，开始后由闲家向桌面掷筹码，掷完筹码后系统开始 发牌，最后比较大小，闲家的牌点数大于庄家则算胜利。 先决条件是：牛牛大于任何牌点数，牛9（前三张的组合成整数称之为"牛" ）大于牛8。有牛的牌大于无牛的牌，玩家手中任意的三张牌组合不成一个整数， 则被称之为无牛牌，无牛牌的比较就按牌中最大的那 张进行比较。注意：启牌的牌必须要三张牌组合成牛才可以，不可以由两张或者四张组合而成， 如果三张组合不成牛的话，那这牌就属 于无牛牌。
+</p> 
+<div class="game-xiaobiao">
+6：记分：
+</div>
+<p class="Game-shuyu">
+牛7以下--1倍
+</p>
+<p class="Game-shuyu">
+牛7--2倍、牛8--3倍、牛9--4倍
+</p>
+<p class="Game-shuyu">
+牛牛--5倍 
+</p>
+<p class="Game-shuyu">
+7：最大下注：取A与B这两者中的最小值
+</p>
+<p class="Game-shuyu"> 
+A：（庄家身上金币/(玩家人数-1)/最大倍数5）
+</p>
+<p class="Game-shuyu"> 
+B：（闲家A身上金币/最大倍数5）
+</p>
+<p class="Game-shuyu">
+下注的四个筹码： 最大下注/2 最大下注/4 最大下注/6 最大下注/8 </p>
+<p class="Game-shuyu">
+庄家与闲家之间的记分方式是固定。庄家赢钱的数量与闲家输钱的数量是成正比，比如：闲家押筹 码为100两，如果此时庄家摸到牛牛此种大牌， 闲家刚才所压的100两需要翻五倍给庄家。所以两者之间存在的输赢筹码数量是一个固定 量。
+</p>
+                                 </li>
+                                </ul>
+                                <ul id="er" class="hide">
+                                    <!--<li class="tou_01"><img src="images/ermj.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-06.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+
+
+                                        <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-introduction">
+                                    二人麻将有万子和字牌，节奏快，更刺激，轻轻松松胡牌，尽享竞技棋牌乐趣。最好玩的 麻将！规则简单，容易上手，是玩家娱乐、学习、社交、提高麻将技术的必备游戏。
+二人麻将人气火爆，麻将中的首选，指间的对决。类比诈金花的刺激，赶超斗地主的爽快 ，不乏德州扑克的竞技。
+</p>
+<div class="game-xiaobiao">
+游戏特色：
+</div>
+<p class="Game-shuyu">
+1.界面美观，画面真实，操作流畅，联网麻将首选。
+</p>
+<p class="Game-shuyu">
+2.操作简单，容易上手。
+</p>
+<p class="Game-shuyu">
+3.快速配桌，在线互动。
+</p>
+<p class="Game-shuyu">
+4.出牌智能，手动托管均可。听牌胡牌操作简单。
+</p>
+<p class="Game-shuyu">
+5.推倒胡玩法，更平衡，更公平。胡牌更快。
+</p>
+<p class="Game-shuyu">
+6.缺幺、门清，都可胡牌。让游戏节奏更快，更刺激。
+</p>
+
+                                    </li>
+                                </ul>
+                                <ul id="bjl" class="hide">
+                                    <!--<li class="tou_01"><img src="images/bjl-t.png" /></li>-->
+                                    <li class="tou-img"><img src="images/guide-tou-07.png" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+
+
+                                        <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-introduction">
+                                    百家乐是备受青睐的扑克游戏。中世纪它起源于意大利，深受贵族们的喜爱。时至今日， 也是世界上许多爱好者非常钟情的游戏！
+游戏分为庄、庄天王、庄对子、闲、闲天王、闲对子、平、同点平8门，这里的庄、庄天王 、庄对子、闲、闲天王、闲对子，并没有具体的含义， 只是代表游戏的双方。玩家根据自己的想法可任意选择庄、庄天王、庄对子、闲 、闲天王、闲对子、平、同点平任意一门下注。
+</p>
+                                    </li>
+                                </ul>
+                                <ul id="classics" class="hide">
+                                     <!--<li class="tou_01"><img src="images/jcby-t.png" /></li>-->
+                                    <li class="tou-img"><img src="images/jcby.jpg" width="665" height="280" /></li>
+                                    <li class="tou-txt">
+
+
+                                        <div class="sub-title">
+                                            游戏介绍：
+                                        </div>
+                                        <p class="Game-introduction">
+                                    金蟾捕鱼是一款休闲类游戏，通过鼠标进行简单操作，发射子弹击杀屏幕中来回游动的鱼从而获得 游戏奖励。 不同的鱼，捕捉难度不同，捕获后获得的奖励值也不同。熟悉不同鱼类的游动速度，才是获得成功的关键。
+                                    </p> 
+                                    <div class="game-xiaobiao">
+游戏规则：
+</div>
+<p class="Game-shuyu"> 
+2．发射器可按鼠标右键进行增强威力。
+</p>
+<p class="Game-shuyu"> 
+3．在渔币不足的情况下，无法发射子弹。
+</p>
+<p class="Game-shuyu"> 
+4．点击退出按钮进行游戏结算。
+</p>
+<p class="Game-shuyu">
+5.w锁定BOSS，S锁定红鱼，Z开炮加速。
+</p> 
+                                    </li>
+                                </ul>
+</div>
+                            </div>
+                        </div> <!-- END List Wrap -->
+                    </div> <!-- END Organic Tabs (Example One) -->
+                    <!-- END Organic Tabs (Example One) -->
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--login-end-->

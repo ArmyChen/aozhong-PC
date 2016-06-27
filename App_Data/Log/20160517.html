@@ -1,0 +1,15 @@
+<HR COLOR=red>
+异常时间：2016-05-17 14:07:14,869 [89] <BR>
+异常级别：ERROR  <BR>异常详细信息：
+ActivityCenterController-Index <BR>
+ <HR Size=1>System.Data.SqlClient.SqlException (0x80131904): Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParserStateObject.ReadSniError(TdsParserStateObject stateObj, UInt32 error)
+   at System.Data.SqlClient.TdsParserStateObject.ReadSni(DbAsyncResult asyncResult, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParserStateObject.ReadNetworkPacket()
+   at System.Data.SqlClient.TdsParserStateObject.ReadByteArray(Byte[] buff, Int32 offset, Int32 len)
+   at System.Data.SqlClient.TdsParser.SkipValue(SqlMetaDataPriv md, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.SkipRow(_SqlMetaDataSet columns, Int32 startCol, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ReadInternal(Boolean setTimeout)
+   at WebSite_YS.Controllers.ActivityCenterController.Index()

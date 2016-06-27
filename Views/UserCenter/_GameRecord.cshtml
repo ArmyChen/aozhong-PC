@@ -1,0 +1,98 @@
+﻿@Scripts.Render("~/Scripts/jscal2")
+@Scripts.Render("~/Scripts/pageination")
+<div class="down_right_top">
+    <div class="down_right_weizhi">当前所在位置>>游戏记录</div>
+</div>
+<!---center开始-->
+<div class="down_center_box">
+    <div class="tablediv">
+        <table width="100%" border="0" id="reportGrid_table" class="tablewithborder" cellspacing ="1" cellpadding="0">
+            <thead>
+                <tr>
+                    <td height="40" colspan="6" bgcolor="#f2efa9" style="text-align:center">
+                        <table width="550" border="0" align="center" style="text-align:center;">
+                            <tr>
+                                <td>牌局</td>
+                                <td><input id="reportGrid_filter_deal" type="text" value="" class="width80" /></td>
+                                <td>结束时间 从：</td>
+                                <td><input id="reportGrid_filter_recharge_at_from" type="text" value="" class="width80" /></td>
+                                <td><img id="reportGrid_filter_recharge_at_from_trigger" width="14" height="14" src="/images/grid-cal.gif"></td>
+                                <td>至：</td>
+                                <td><input id="reportGrid_filter_recharge_at_to" type="text" value="" class="width80" /></td>
+                                <td><img id="reportGrid_filter_recharge_at_to_trigger" width="14" height="14" src="/images/grid-cal.gif"></td>
+                                <td><input tabindex="3" class="submit" type="button" onclick="pData()" value="搜索"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+             <tr>
+            <td style="text-align:center; width:110px;">游戏</td>
+            <td height="40" style="text-align: center; width: 110px;">房间</td>
+            <td height="40" style="text-align: center; width: 110px;">牌局</td>
+            <td style="text-align: center; width: 110px;">抽水</td>
+            <td style="text-align: center; width: 110px;">胜负</td>
+            <td style="text-align: center; width: 120px;">结束时间</td>
+            </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td style="text-align:center" id="pager" height="40" bgcolor="#f2efa9" colspan="6"></td>
+                </tr>
+            </tfoot>
+        </table>        
+    </div>
+
+    <div class="idinfo-wlcome"><img src="/images/cativity/activity-welcome.png" /></div>
+
+
+</div>
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script type="text/javascript">
+    //<![CDATA[
+    Calendar.setup({
+        inputField: "reportGrid_filter_recharge_at_from",
+        trigger: "reportGrid_filter_recharge_at_from_trigger",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        onSelect: function () {
+            this.hide();
+        }
+    });
+    Calendar.setup({
+        inputField: "reportGrid_filter_recharge_at_to",
+        trigger: "reportGrid_filter_recharge_at_to_trigger",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        onSelect: function () {
+            this.hide();
+        }
+    });
+    //]]>
+</script>
+<script type="text/javascript">
+    var _p = new page($("#pager"));
+    var sTimeObj = $("#reportGrid_filter_recharge_at_from").SetDefaultDate(-10);
+    var eTimeObj = $("#reportGrid_filter_recharge_at_to").SetDefaultDate();
+    function pData(isall) {
+        $.SendDataSync("GetRecordUserGameInfo", { currPage: _p.pageIndex(), pageSize: _p.pageSize(), sTime: isall ? "" : sTimeObj.val(), eTime: isall ? "" : eTimeObj.val(), gameid: $("#reportGrid_filter_deal").val() }, function (data) {
+            _p.Bind(data, pData, "reportGrid_table", isall);
+            if (data.Counts == 0) {
+                $("#reportGrid_table").children("tbody").html('<tr><td style="text-align:center;height:40px" colspan="6" bgcolor="#f2efa9">当前记录集为空。</td></tr>');
+            }
+            else {
+                var dataHTML = new String();
+                $.each(data.DataList, function (i, d) {
+                    dataHTML += '<tr align="center"><td style="text-align:center;" bgcolor="#f7f5c2">' + d.KindName + '</td><td style="text-align:center;" height="40" bgcolor="#f7f5c2">' + d.ServerName + '</td><td  style="text-align:center;" height="40" bgcolor="#f7f5c2">' + d.RecordID + '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.Revenue + '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.GameScore + '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.LeaveTime + '</td></tr>';
+                });
+                $("#reportGrid_table").children("tbody").html(dataHTML);
+            }
+        });
+    }
+    (function () {
+        pData();
+    })();
+</script>

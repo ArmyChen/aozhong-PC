@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>牌型活动</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    @*<script>
+        GetRechargeAward = function (tid) {
+            $.SendDataSync("GetRechargeAward", { id: tid }, function (jdata) {
+                alert(jdata.message);
+                $("#li_" + tid).remove();
+            });
+        }
+    </script>*@
+
+
+
+
+    <script src="/Scripts/artDialog/jquery.artDialog.js?skin=black"></script>
+    <script>
+
+        var RuleMessage = function (msg) {
+            $.dialog({
+                lock: true,
+                title: "奖励规则",
+                content: msg
+            });
+        }
+
+        var GetTask = function (taskid) {
+
+            $.ajax({
+                type: 'post',//可选get
+                url: '/AjaxService/GetPaiXing',
+                data: 'taskId=' + taskid,
+                dataType: 'text',
+                async: true,
+                beforeSend: function () {
+                    $("#btn_" + taskid).attr("onclick", "").find("img").attr("src", "/images/renwu1.png");
+                },
+                success: function (msg) {
+                    if (parseInt(msg, 10) > 0) {
+                        //alert("领取成功！");
+                    }
+                    else
+                        alert("领取失败！");
+                },
+                error: function () {
+                    alert("服务器繁忙！");
+                }
+            });
+        }
+
+        var GetAward = function (taskid) {
+            $.ajax({
+                type: 'post',
+                url: '/AjaxService/GetPaiXingAward',
+                data: 'taskId=' + taskid,
+                dataType: 'text',
+                async: true,
+                beforeSend: function () {
+                    $("#btn_" + taskid).attr("onclick", "").find("img").attr("src", "/images/jiangli1.png");
+                },
+                success: function (msg) {
+                    if (parseInt(msg, 10) == 103) {
+                        alert("您还没有进行手机绑定 请在客户端进行手机绑定!");
+                        $("#btn_" + taskid).attr("onclick", "").find("img").attr("src", "/images/jiangli.png");
+                    }
+                    else {
+                        if (parseInt(msg, 10) > 0) {
+                            //alert("奖励领取成功！");
+                            //window.location.reload();
+                        }
+                        else
+                            alert("奖励领取失败！");
+                    }
+                },
+                error: function () {
+                    alert("服务器繁忙！");
+                }
+            });
+        }
+        $(function () {
+            $.ajax({
+                type: 'post',
+                url: 'PaiXingData',
+                dataType: 'text',
+                async: true,
+                beforeSend: function () {
+
+                },
+                success: function (html) {
+                    $("#lodid").remove();
+                    $("#center").append(html);
+                },
+                error: function () {
+                    alert("服务器繁忙！");
+                }
+            });
+        })
+
+    </script>
+</head>
+<body>
+    <div class="hd">
+        <div class="hd-main">
+            <table width="90%" border="0" style="margin-bottom:30px;">
+                <tr>
+                    <td width="10%"><img src="/images/wap/title_large-red.png" width="100%" /></td>
+                    <td width="90%">
+                        <div id=center>
+                            <div class="full">
+                                <div class="full1">
+                                    <div class="full1-2">
+                                        <span style=" font-size:26px;">尊敬的玩家 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                                        <span style=" font-weight:normal;">
+
+                                            温馨提示：每日零点清零当天牌型任务重新计算，奖励机会只在当天有效，第二天不再累计！
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="lodid" class="full3">加载中..</div>
+                        </div>
+
+
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+        @*<div class="hd-01">
+            <div class="title-main">
+                <div class="t1">
+                    
+                </div>
+                <div class="t1x"></div>
+            </div>
+        </div>*@
+    </div>
+</body>
+</html>

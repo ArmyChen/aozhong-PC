@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+}
+@model WebSite_YS.Models.Partial.Pay
+@using (Ajax.BeginForm("PartialBaoFuCardPay", "UserCenter", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "ManagerMain"
+
+                }, new { id = "F_PayBaoFuCard" }))
+{
+    <table width="550" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td height="30">
+                <input type="radio" name="channel_token" id="repaidcard-chinamobile" value="101" checked="checked">
+
+                <label for="repaidcard-chinamobile">神州行</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-unicom" value="102">
+
+                <label for="repaidcard-unicom">联通充值卡</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-telecom" value="103">
+
+                <label for="repaidcard-telecom">电信充值卡</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-shengda" value="111">
+
+                <label for="repaidcard-shengda">盛大一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-zhengtu" value="114">
+
+                <label for="repaidcard-zhengtu">征途一卡通</label>
+            </td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="radio" name="channel_token" id="repaidcard-junnet" value="115">
+
+                <label for="repaidcard-junnet">骏网一卡通</label>
+
+                <input type="radio" name="channel_token" id="repaidcard-netease" value="116">
+
+                <label for="repaidcard-netease">网易一卡通</label>
+
+
+                <input type="radio" name="channel_token" id="repaidcard-wanmei" value="112">
+
+                <label for="repaidcard-wanmei">完美一卡通</label>
+            </td>
+        </tr>
+    </table>
+    <table width="627" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+            <td align="left"><input name="card_username" id="card_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+        </tr>
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+            <td align="left"><input name="card_confirm_username" type="text" id="card_payaccount2" class="kd" value="@Model.PayAccount" />&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="100" height="40" align="right"><em>*</em>&nbsp;卡金额： </td>
+            <td align="left">
+                <input name="card_cardamount" id="card_cardamount" type="text" class="kd" />&nbsp;<span style=" font-size:14px; font-weight:bold; color:#F00;">（请再次核实充值卡面额，如果提交金额错误，将无法补回！）</span>
+            </td>
+        </tr>
+        <tr>
+            <td height="40" colspan="2" align="center">
+                <input type="button" class="submit" tabindex="3" onclick="return CheckPayCardinfo(this)" value="确认充值">
+            </td>
+        </tr>
+    </table>
+}
+<span id="shuoming" style="background:#fafaec; display:block; width:480px; height:100%; border:#fcd344 1px solid; line-height:30px; padding-top:6px; padding-left:15px; padding-right:15px; color:#a4892a;">
+    @Html.Raw(Model.PayOrTradeDescription[3])
+</span>
+
+
+<script type="text/javascript">
+function CheckPayCardinfo(button)
+            {
+                var account = $("#card_payaccount");
+                var account2 = $("#card_payaccount2");
+                var cardamount = $("#card_cardamount");
+
+                if(account.val() == "")
+                {
+                    alert("请填写充值用户名。");
+                    return false;
+                }
+                else
+                {
+                    if (account.val() != account2.val())
+                    {
+                        alert("两次输入的账号不一致！")
+                        return false;
+                    }
+                }
+                var am = cardamount.val();
+                if (am == "")
+                {
+                    alert("请输入卡金额，充值卡面额与提交金额保持一致，否则将无法补回");
+                    return false;
+                }
+                var re = /^[1-9]+[0-9]*$/;
+                if (am == "") {
+                    alert("请填写充值卡面额。");
+                    return;
+                }
+                else {
+
+                    if (!re.test(am)) {
+                        alert("充值金额应为正整数！");
+                        return false;
+                    }
+                }
+                if(isNaN(am) || parseInt(am) < @Model.MinPayAmount || am == "")
+                {
+                    alert("充值金额请输入一个大于或等于 @Model.MinPayAmount 的数字。");
+                    return false;
+                }
+
+                $(button).trigger("submit");
+            }
+</script>

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>满局赠送活动</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    @*<script>
+        GetRechargeAward = function (tid) {
+            $.SendDataSync("GetRechargeAward", { id: tid }, function (jdata) {
+                alert(jdata.message);
+                $("#li_" + tid).remove();
+            });
+        }
+
+
+    </script>*@
+
+    <script>
+        DrawDayTask = function (tid) {
+            $.SendDataSync("GetDayTask", { taskid: tid }, function (jdata) {
+                alert(jdata.message)
+                if (jdata.status != 1)
+                    $("#drawButton_" + tid).attr({ onclick: "" }).children("img").attr("src", "/images/jiangli.png");//"class": "button disabled"
+                if (jdata.status == 0 || jdata.status == 1) {
+                    $("#drawButton_" + tid).attr({ onclick: "" }).children("img").attr("src", "/images/jiangli1.png");
+                    var drNum = parseInt($("#drawed_" + tid).text(), 10);
+                    $("#drawed_" + tid).text(drNum + 1);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="hd">
+        <div class="hd-main">
+            <table width="90%" border="0" style="margin-bottom:30px;">
+                <tr>
+                    <td width="10%"><img src="/images/wap/title_large-red.png" width="100%" /></td>
+                    <td width="90%">
+                        <span style="font-weight:bold; font-size:16px;">尊敬的 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                        温馨提示：每日零点清零当天游戏局数重新计算，奖励只在当天有效，第二天不再累计！<br />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="hd-01">
+
+            <div class="title-main">
+                <div class="t1">
+                    @Html.Raw(ViewData["TaskData"]);
+                </div>
+                <div class="t1x"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

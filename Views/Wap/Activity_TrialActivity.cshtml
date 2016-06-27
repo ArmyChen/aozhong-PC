@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>试玩活动</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script>
+        GetTrial = function (tid) {
+            $.SendDataSync("GetTrialActivity", {}, function (jdata) {
+                alert(jdata.message);
+                $("#lnkGetRewarda").attr("onclick", '').find("img").attr("src", "/images/wap/jiangli1.png");
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="hd">
+        <div class="hd-main">
+            <table width="90%" border="0" style="margin-bottom:30px;">
+                <tr>
+                    <td width="10%"><img src="/images/wap/title_large-red.png" width="100%" /></td>
+                    <td width="90%">
+                        <span style="font-weight:bold; font-size:16px;">尊敬的 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                        温馨提示，点击下面的按钮可以领取您的游戏奖励。<br />                      
+                    </td>
+                </tr>
+            </table>        
+        </div>  
+        <div class="hd-01">
+           
+            <div class="title-main">
+                <div class="t1">
+                    @Html.Raw(ViewData["TrialActiv"])
+                </div>
+                <div class="t1x"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

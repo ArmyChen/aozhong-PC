@@ -1,0 +1,56 @@
+﻿
+@{
+    
+    Layout = null;
+}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width， initial-scale=1.0， minimum-scale=1.0， maximum-scale=1.0， user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+    <link href="../../Content/css/style.css" rel="stylesheet" />
+    
+<title>充值结果</title>
+    <script>
+        DrawDayTask = function (tid) {
+            $.SendDataSync("GetDayTask", { taskid: tid }, function (jdata) {
+                alert(jdata.message)
+                if (jdata.status != 1)
+                    $("#drawButton_" + tid).attr({ onclick: "" }).children("img").attr("src", "/images/jiangli.png");//"class": "button disabled"
+                if (jdata.status == 0 || jdata.status == 1) {
+                    $("#drawButton_" + tid).attr({ onclick: "" }).children("img").attr("src", "/images/jiangli1.png");
+                    var drNum = parseInt($("#drawed_" + tid).text(), 10);
+                    $("#drawed_" + tid).text(drNum + 1);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="win-top" >
+        <b>支付结果</b><br /><br />
+        <font color="#fffaac"></font><br />
+    </div>
+    <div class="win-box">
+        <!--win-start-->
+        <div class=" win-1" style="color:#ffe79d;">
+            <div class="win-box-top"><img src="../../Images/images/win-box-top.png" width="100%" /></div>
+            <div class="win-box-center">
+                <div class="win-txt">
+                    <span style="font-size:36px;">@ViewData["mess"]</span><br />
+                    <span>订单号：@ViewData["order"] </span><br />
+                    <span>支付金额：@ViewData["amt"] 元</span>
+                </div>
+            </div>
+            <div class="win-box-top"><img src="../../Images/images/win-box-dottm.png" width="100%" /></div>
+            
+        </div>
+        <!--win-end-->
+
+    </div>
+</body>
+</html>

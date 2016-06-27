@@ -1,0 +1,75 @@
+/*====================================================
+	Importing bootstrap less files
+====================================================*/
+/*====================================================
+	COLOR VARIABLE FOR THEME
+====================================================*/
+/* common */
+/*====================================================
+	common styles
+====================================================*/
+html,
+body {
+    color: #505050;
+    line-height: 1.75em;
+    position: relative;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+
+
+/* header */
+/*====================================================
+	header
+====================================================*/
+.main-header {
+    /*padding: 42px 0;*/
+    background: #333;
+}
+
+    .main-header img {
+        max-width: 100%;
+    }
+
+.home-template .main-header {
+    background-repeat: no-repeat;
+    background-position: center 20%;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+
+
+
+
+
+/*cellbox*/
+.cellpanel {
+    background: #ffffff;
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .cellpanel .panel-title {
+        border-bottom: 1px solid #CCCCCC;
+        clear: both;
+        overflow: hidden;
+        padding: 10px 0 0;
+        margin-bottom: 0.5em;
+    }
+
+    .cellpanel .panel-content {
+        padding: 5px 5px;
+    }
+
+    
+
+   
+
+    .cellpanel .panel-bottom {
+        clear: both;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+

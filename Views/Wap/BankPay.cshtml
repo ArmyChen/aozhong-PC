@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "手机网银充值";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>充值</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">  
+    <script type="text/javascript">
+        function MM_swapImgRestore() { //v3.0
+            var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+        }
+        function MM_preloadImages() { //v3.0
+            var d = document; if (d.images) {
+                if (!d.MM_p) d.MM_p = new Array();
+                var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                    if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+            }
+        }
+
+        function MM_findObj(n, d) { //v4.01
+            var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+                d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+            }
+            if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+            for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+            if (!x && d.getElementById) x = d.getElementById(n); return x;
+        }
+
+        function MM_swapImage() { //v3.0
+            var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2) ; i += 3)
+                if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+        }
+    </script>
+</head>
+<body onload="MM_preloadImages('/images/wap/fh1.png', '/images/wap/gz01.png', '/images/wap/pm01.png', '/images/wap/tj01.png')">
+    <div class="cz">
+        <div class="cz1">在线充值</div>
+        <div class="cz2"><img src="/images/wap/line.png" width="100%" /></div>
+        <div class="cz3">
+            @using (Html.BeginForm("BankPayForm", "Wap", FormMethod.Post, new { id = "pform" }))
+            {
+                <table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="40%" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" align="right">充值金额：</td>
+                        <td><input type="number" class="czje" name="amount_input" />&nbsp;至少 @ViewData["minmoney"]元.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;">@ViewData["error"]</span></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+                <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+            }
+        </div>
+       
+        <div class="cz5"><a href="#" onclick="document.getElementById('pform').submit()" onmouseout="    MM_swapImgRestore()" onmouseover="    MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></div>
+
+        <div class="cz6">
+            充值规则：<br />
+            1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+            2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+            3. 如有任何疑问，请您联系客服中心。<br />
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+

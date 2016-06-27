@@ -1,0 +1,105 @@
+﻿@model WebSite_YS.Models.Partial.PartialModelBase
+@{
+    ViewBag.Title = "新用户注册";
+    Layout = "~/Views/Shared/_LayoutLeft.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        function F_SubmitForm() {
+            if (!SubmitForm()) {
+                $("#registerForm").submit();
+            }
+        }
+        function F_ResetForm() {
+            $("#registerForm")[0].reset();
+
+        }
+    </script>
+}
+@Scripts.Render("~/Scripts/fastreg")
+@section styles{
+    <link href="/content/login.css" rel="stylesheet" type="text/css" media="all">
+}
+
+
+<!---contact-right开始-->
+<div class="down_right_box">
+    <div class="down_right_top">
+        <div class="down_right_weizhi">当前所在位置>>免费注册</div>
+    </div>
+    <!---center开始-->
+    <div class="down_center_box">
+        <div class="login-kong"></div>
+        <form id="registerForm" class="edit-form" method="post" onsubmit="return SubmitForm();" action="/Register/FastReg">
+            @if (!string.IsNullOrEmpty(Model.EerrorMessage))
+            {
+                <div class="u_error"> @Html.Raw(Model.EerrorMessage)</div>
+            }
+            <!--注册开始-->
+            <div class="login-zhuce-zhanghao">注册账号</div>
+            <div class="login-zhuce-box">
+                <!--login1-->
+                <div class="login-zc-tjr-box-1">
+                    <div class="login-zc-txt"><font class="hongxing">*&nbsp;</font>会员账号：</div>
+                    <div><input name="login_name" id="account" type="text" class="kd" maxlength="16" onblur="FormVerify_account2()" /></div>
+                </div>
+                <div class="login-shuoming">【账号为6-16字符长度的数字和字母组合 】</div>
+                <!--login1-->
+                <div class="login-zc-tjr-box-2">
+                    <div class="login-zc-txt"><font class="hongxing">*&nbsp;</font>真实姓名：</div>
+                    <div><input name="true_name" id="truename" type="text" value="" class="kd" maxlength="10" onblur="FormVerify_truename()" /></div>
+                </div>
+                <div class="login-shuoming">【姓名必须与您用于提款的银行户口相同 ,否则无法提款】</div>
+                <!--login2-->
+                <div class="login-zc-tjr-box-2">
+                    <div class="login-zc-txt"><font class="hongxing">*&nbsp;</font>登录密码：</div>
+                    <div><input onkeyup="CheckStrongPass(this)" name="login_pwd" id="password" type="password" class="kd" onblur="FormVerify_passWord()" /><img id="meter-box_password" src="/images/mima.png" /></div>
+                </div>
+                <div class="login-shuoming"></div>
+                <!--login2-->
+                <!--login4-->
+                <div class="login-zc-tjr-box-2">
+                    <div class="login-zc-txt"><font class="hongxing">*&nbsp;</font>保险柜密码：</div>
+                    <div><input onkeyup="CheckStrongPass(this)" name="Insure_pwd" id="InsurePassWord" type="password" class="kd" onblur="FormVerify_InsurePassWord()" /><img id="meter-box_InsurePassWord" src="/images/mima.png" /></div>
+                </div>
+                <div class="login-shuoming"></div>
+                <div class="login-zc-tjr-box-2">
+                    <div class="login-zc-txt"><font class="hongxing">*&nbsp;</font>电子邮箱：</div>
+                    <div><input name="extra_email" id="emailtext" type="text" class="kd" onblur="FormVerify_Email()" /></div>
+                </div>
+                <div class="login-shuoming">【此为您取回登录密码的途径,请注意安全,务必真实】</div>
+                <!--login4-->
+                <!--login5-->
+                <div class="login-zc-tjr-box-2">
+                    <div class="login-zc-txt"><font class="hongxing">*&nbsp;</font>验证码：</div>
+                    <div><input name="verify_code" id="vcodetext" type="text" class="login-yzm" maxlength="4" onblur="FormVerify_VCode()" /></div>
+                    <div class="login-yzm-tu"><img id="verifycoderefresh" style="width:67px;height:31px;" onclick="$(this).attr('src', '/VerificationCode/VerifCodeImg?' + Math.random())" src="/VerificationCode/VerifCodeImg" /></div>
+                    <div class="login-shaxin"><a href="javascript:void(0);" onclick="$('#verifycoderefresh').attr('src', '/VerificationCode/VerifCodeImg?' + Math.random())">看不清,换一个</a></div>
+                </div>
+                <!--login5-->
+            </div>
+            <!--注册结束-->
+            <!--协议开始-->
+            <div class="login-xieyi-box">
+                <div class="login-xieyi-01">
+                    <div class="login-xieyi-01-kuang"><input name="" type="checkbox" value="" checked /></div>
+                    <div class=" login-xieyi-01-txt">我已满18周岁，且已阅读并同意用户<a href="/Agreement" target="_blank">注册协议</a></p></div>
+                </div>
+                <div class="login-xieyi-zhuce"><a href="javascript:void(0);" onclick="F_SubmitForm();"><img src="/images/login-zhuce.png" /></a></div>
+                <div class="login-xieyi-clear"><a href="javascript:void(0);" onclick="F_ResetForm();"><img src="/images/login-clear.png" /></a></div>
+                <div class="login-xieyi-beizhu" style="clear:both">备注：</div>
+                <div class="login-xieyi-beizhu-01">1:标记<font class="hongxing">&nbsp;*</font> 的项目为必填项目。</div>
+                <div class="login-xieyi-beizhu-01">2:取款密码与真实姓名为取款凭证，请会员务必填写真实资料。</div>
+                <div class="login-xieyi-beizhu-01">3:所有会员数据均经过严格加密，保障玩家隐私与信息安全。</div>
+            </div>
+            <!--协议结束-->
+        </form>
+    </div>
+    <!---center-right开始-->
+    <!----foot开始-->
+    <div class="contact_foot_back"></div>
+    <!----foot结束-->
+</div>
+
+
+<!---contact-right结束-->

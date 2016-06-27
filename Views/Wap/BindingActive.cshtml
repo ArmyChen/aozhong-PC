@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>绑定活动</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    @*<script>
+        GetRechargeAward = function (tid) {
+            $.SendDataSync("GetRechargeAward", { id: tid }, function (jdata) {
+                alert(jdata.message);
+                $("#li_" + tid).remove();
+            });
+        }
+
+
+    </script>*@
+
+    <script>
+        GetBindingAward = function (tid) {
+            $.SendDataSync("GetBindingAward", {}, function (jdata) {
+                alert(jdata.d);
+                $("#lnkGetReward").attr("onclick", "").find("img").attr("src", "/images/jiangli1.png");
+                $("#td_text").html("您已经领取过奖励。");
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="hd">
+        <div class="hd-main">
+            <table width="90%" border="0" style="margin-bottom:30px;">
+                <tr>
+                    <td width="10%"><img src="/images/wap/title_large-red.png" width="100%" /></td>
+                    <td width="90%">
+                        <span style="font-weight:bold; font-size:16px;">尊敬的 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                        温馨提示：必须完成绑定邮箱地址，手机号码，银行卡信息，绑定本机才能领取奖励！<br />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="hd-01">
+
+            <div class="title-main">
+                <div class="t1">
+                    @Html.Raw(ViewData["BindData"])
+                </div>
+                <div class="t1x"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

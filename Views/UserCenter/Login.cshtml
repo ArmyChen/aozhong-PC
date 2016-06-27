@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "用户登录";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        function F_SubmitForm() {
+            var username = $("#u_account").val();
+            var password = $("#u_password").val();
+            var captcha = $("#u_captcha").val();
+            var reg = /^[a-zA-Z0-9_]{6,16}$/;
+            if (!reg.test(username)) {
+                alert("请输入正确的会员账号，会员账号由字母、数字、下划线组成！");
+                return false;
+            }
+            if (password.length < 6) {
+                alert("请输入密码！");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/UserCenter/AjaxLogin",
+                data: { login_username: username, login_password: password, login_captcha: captcha },
+                dataType: "json",
+                success: function (data) {
+                    if (data.State == 1) {
+                        window.location.href = "/";
+                    }
+                    else if (data.State == 2) {
+                        alert(data.Message);
+                        window.location.href = "/";
+                    }
+                    else {
+                        alert(data.Message);
+                        if (data.Number >= 4) {
+                            //
+                            $("#u_captchadiv").show();
+                            $('#u_login_captcha_img').attr('src', '/VerificationCode/VerifCodeImg?' + Math.random());
+                        }
+                    }
+                }
+            });
+        }
+        function F_ResetForm() {
+            $("#u_loginForm")[0].reset();
+
+        }
+
+    </script>
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/personal.css" media="all" />
+}
+
+
+<!--personal-star-->
+<div class="personal-title">
+    <div class="title-txt"><img src="/images/personal-title.png" /></div>
+</div>
+<div class="personal-back">
+    <div class="personal-kong"></div>
+    <div class="personal-welcome-box">
+        <div class="personal-welcome"><img src="/images/personal-welcome.png" /></div>
+        <div class="personal-input-box"><input class="personal-input" placeholder="&nbsp;&nbsp用户名" name="u_account" id="u_account" /></div>
+        <div class="personal-input-box"><input class="personal-input" placeholder="&nbsp;&nbsp登录密码" name="u_password" id="u_password" type="password" /></div>
+        <div class="personal-pt"><a href="javascript:void(0);" onclick="F_SubmitForm();"><img src="/images/denglu-pt.png" /></a></div>
+        <div class="personal-pt"><a href="/Register"><img src="/images/denglu-zc.png" /></a></div>
+    </div>
+    <div class="personal-activity-04"><div class="personal-activity-botton"><a href="/Register"><img src="/images/activity-botton.png" /></a></div></div>
+    <div class="personal-activity-01"><div class="personal-activity-botton"><a href="/ActivityCenter/RechargeAward"><img src="/images/activity-botton.png" /></a></div></div>
+    <!--<div class="personal-activity-02"><div class="personal-activity-botton"><a href="/ActivityCenter/TrialActivity"><img src="/images/activity-botton.png" /></a></div></div>-->
+    <!--<div class="personal-activity-03"><div class="personal-activity-botton"><a href="/ActivityCenter/SignActivity"><img src="/images/activity-botton.png" /></a></div></div>-->
+    <div class="personal-activity-05"><div class="personal-activity-botton"><a href="/ActivityCenter/ShowAwards"><img src="/images/activity-botton.png" /></a></div></div>
+
+<!--personal-end-->

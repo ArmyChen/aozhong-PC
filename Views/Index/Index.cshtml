@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+}
+@section scripts{
+}
+<!--box开始-->
+<div class="box">
+    <!--banner-开始-->
+    <div class="banner">
+        @Html.Partial("_Nav")
+        <!--fast-denglu-star-->
+        <div class="fast-denglu-box">
+            <!--fast-star-->
+            <div class="fast-back">
+                <div class="fast-title"><img src="/images/fast-title.png" /></div>
+                <div class="fast-gr"><a href="/UserCenter/Center"><img src="/images/fast-gr.png" /></a></div>
+                <div class="fast-kf"><a href="/CustomerService"><img src="/images/fast-kf.png" /></a></div>
+                <!--<div class="fast-kf"><a href="/CustomerService"><img src="/images/fast-xs.png" /></a></div>-->
+                <!--<div class="fast-kf"><a href="/CustomerService"><img src="/images/fast-wt.png" /></a></div>-->
+                <div class="fast-down"><a href="/DownLoad/dl"><img src="/images/fast-down.png" /></a></div>
+                <div class="fast-down"><a href="/CustomerService"><img src="/images/fast-online.png" /></a></div>
+            </div>
+            <!--fast-end-->
+            @Html.Action("UserLoginStatus", "UserCenter")
+        </div>
+        <!--fast-denglu-end-->
+
+    </div>
+    <!--banner-结束-->
+</div>
+<!--box-结束-->
+<!--平台推荐-开始-->
+<div class="platform-box">
+    <div class="platform-title"><img src="/images/platform-title_01.png" /></div>
+    <div class="platform-game-box">
+        <div class="platform-ddz"><a href="#"><img src="/images/ddz.png" /></a></div>
+        <div class="platform-zjh"><a href="#"><img src="/images/zjh.png" /></a></div>
+        <div class="platform-zjh"><a href="#"><img src="/images/bjl.png" /></a></div>
+        <div class="platform-zjh"><a href="#"><img src="/images/jcby.png" /></a></div>
+    </div>
+</div>
+
+<!--平台推荐-结束-->

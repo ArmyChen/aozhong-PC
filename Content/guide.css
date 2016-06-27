@@ -1,0 +1,452 @@
+@charset "utf-8";
+/* CSS Document */
+.login-center{width:100%; height:100%; margin-top:10px;}
+.login-box{width:980px; margin:0px auto;  overflow:hidden;}
+
+
+.game_main_box{
+	float:left;
+	width:100%;
+	height:auto;
+	background:url(../images/bg_body.jpg);
+	 }
+	
+.game_main{
+	padding-top:15px;
+	
+	width:980px;
+	height:auto;
+	margin-left:auto;
+	margin-right:auto;
+	}
+	
+	
+	
+	
+#page-wrap { width: 1000px;}
+h1 { font: bold 40px Sans-Serif; margin: 0 0 20px 0; }
+
+/* Generic Utility */
+.hide { position: absolute; top: -9999px; left: -9999px; }
+
+
+/* Specific to example one */
+
+#example-one { height:34px; line-height:34px; }
+
+#example-one .nav {width: 264px; height:693px;float:left; background-image:url(../images/guide-back.png);}
+.guide-title{width:263px; height:81px;}
+#example-one .nav li {}
+#example-one .nav li.last {}
+#example-one .nav li a {
+	
+    display: block;
+    padding: 0px ;
+    height: 34px;//
+    line-height: 34px;
+    font-size: 16px;
+    font-weight: bold;
+    
+    color:#ac958d;
+	text-align:center; }
+#example-one .nav li a:hover {height: 34px;//
+line-height: 34px;  }
+
+#example-one ul { list-style: none; }
+#example-one ul li a { display: block; padding: 4px; color: #666;height: 34px;//
+line-height: 34px; }
+#example-one ul li a:hover {  color: black; }
+#example-one ul li:last-child a { border: none; }
+
+#example-one ul li.nav-one a.current, #example-one ul#featured li a:hover {
+display: block;
+width: 260px;
+height: 34px;//
+line-height: 34px;
+position: relative;
+background: url(../images/sub_nav_bg-active.gif) no-repeat scroll left top transparent;
+z-index: 99;
+color:#d1b782;
+border: 0px none;
+text-align:center;
+
+}
+
+
+.list-wrap{
+	width:680px;
+	float:left;
+	background: none repeat scroll 0% 0% rgb(53, 38, 38);
+    min-height: 500px;
+	padding:13px;
+    
+    border-radius: 6px;
+    box-shadow: 0px 2px 2px rgb(53, 38, 38);
+    margin-left:10px;
+	margin-bottom:20px;
+    }
+.tou_01{ background-image:url(../images/guide-tou-back.png);
+
+text-align: left;
+	
+	}
+.tou-img{ margin-left:8px;}
+.tou-txt{width:665px; margin-left:8px;}
+	
+.tou_01 h1{
+	margin: 0px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(10, 38, 60);
+    display: inline;
+    border-bottom: 2px solid rgb(51, 51, 51);
+    padding: 2px 0px;
+	}
+	
+.sub-title {	
+clear: both;
+padding: 15px 0px 0px;
+
+font-weight: bold;
+margin: 0px 0px 6px;
+color: rgb(204, 181, 170);
+}
+
+
+
+
+
+.vs_banner_box{
+	height:600px;
+	width:100%;
+	background:url(images/a_004-bg.jpg) center no-repeat;
+	}
+	
+	
+.vs_banner{
+	width:1000px;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	}
+.biaoge{
+	width:480px;
+	height:150px;
+	position:absolute;
+	top:410px;
+	left:500px;
+	
+	}	
+.vs_banner ul{
+
+color: rgb(255, 255, 255);
+font-size: 14px;
+line-height: 25px;
+font-family:Verdana, Geneva, sans-serif;
+	}
+	
+.vs_main_box{
+	background-color:#290028;
+	width:auto;
+	height:auto;
+	}
+	
+.vs_main{
+	width:1000px;
+	height:auto;
+	padding-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	}
+.content_head{
+	height:73px;
+	width:100%;
+	background:url(images/match_list_grid_header.jpg) no-repeat left ;
+	}
+
+	
+.headings{
+	height:40px;
+	width:1000px;
+	background:url(images/heading_bg-red.jpg)repeat-x scroll left bottom transparent;
+	}
+	
+
+	
+	
+#matchGrid_table{
+	height:40px;
+	width:1000px;
+	background-color: rgb(117, 49, 57);
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	}
+#matchGrid_table td{
+	vertical-align: middle;
+	height:40px;
+	border-style:none;
+	background-color: transparent;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-color: rgb(117, 49, 57);
+    text-align:center;
+
+
+}
+
+.last a{ color:#000;}
+
+.last a:hover{
+	color:#FFF;}
+#matchGrid_table tr{ background-color:rgb(161, 67, 81);}
+
+.no-link{
+	color: rgb(238, 238, 238);
+    height: 40px;
+    line-height: 40px;}
+	
+.actions{
+	width:1000px;
+	height:40px;
+	margin:3px 0px 0px 0px;
+	background-color:rgb(161, 67, 81)
+	}
+.pager{
+	padding-left:20px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:13px;
+	}	
+.pager input.page {
+    width: 60px;
+	}
+
+input.input-text:hover, select:hover, textarea:hover {
+    background-color: rgb(255, 254, 244);
+    border: 1px solid rgb(255, 153, 0);}
+	
+input.input-text {
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 14px;
+    margin: 0px 5px 0px 0px;
+    padding-left: 4px;
+}
+
+select {
+    padding: 3px 0px;
+}
+input.input-text, select, textarea {
+    border: 1px solid rgb(197, 197, 197);
+    background-color: rgb(246, 246, 246);
+    border-radius: 2px;
+}
+
+.vs_main01{
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-bottom:20px;}
+.content_head01{
+	height:73px;
+	width:100%;
+	background: url(images/reward_list_grid_header.jpg) no-repeat;
+	}
+
+
+
+
+
+
+
+
+
+.huodong_main_box{
+	width:100%;
+	height:auto;
+	background:url(images/bg_body.jpg) repeat;
+	}
+.huodong_main{
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	}
+	
+.huodong_main img{
+	margin-top:30px;
+	border-radius: 10px;
+    box-shadow: 0px 6px 6px rgb(158, 158, 158);
+	border: medium none;
+	}
+.kong{
+	width:100px;
+	height:30px;
+	margin-top:30px;
+	}
+	
+	
+	
+	
+	
+	
+	
+/* kefu */	
+
+
+
+
+.kefu_main_box{
+	width:100%;
+	height:auto;
+	background:url(images/bg_body.jpg) repeat;
+	}
+.kefu_main{
+	width:1000px;
+	height: auto;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:250px;
+padding-bottom:30px;
+	
+	}
+.kefu_main_bg{
+	min-height: 600px;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid rgb(158, 158, 158);
+    border-right: 1px solid rgb(158, 158, 158);
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgb(158, 158, 158);
+
+	}
+
+/* Specific to example one */
+
+
+#kefu_example-one{ width:1000px; padding-top:50px;}
+
+
+#kefu_example-one .kefu_nav{ overflow:hidden; margin:0 0 10px 0}
+#kefu_example-one .kefu_nav li{width:297px;margin:0 0px 0 30px; float:left;}
+#kefu_example-one .kefu_nav li.last{margin-right:0;}
+#kefu_example-one .kefu_nav li a{ height:82px; color:black;font-size:10px;text-align: left;border-bottom: 6px solid rgb(255, 255, 255);
+
+
+padding: 6px 0px 0px 70px;
+margin: 0px 12px 0px 0px;
+
+
+
+}
+/*	
+.xinshouzhinan{
+	background-position: 0px 0px;
+	background-attachment: scroll;
+	background-color: transparent;
+	background-image: url(images/icon_service.gif);
+	background-repeat: no-repeat;
+	}
+
+.changjianwenti{
+	background: url(images/icon_service.gif);
+	background-position: 0px -125px;
+	}
+	
+.zaixiankefu{
+	background:url(images/icon_service.gif);
+	background-position: 0px -368px;
+	}*/
+#kefu_example-one .kefu_nav li a:hover{border-bottom: 6px solid rgb(220, 219, 219);}
+
+#kefu_example-one ul{list-style:none}
+#kefu_example-one ul li a{display:block;border-bottom:1px solid #666;padding:4px;color:#666}
+#kefu_example-one ul li a:hover{color:black;}
+#kefu_example-one ul li:last-child a{border:none}
+
+
+#kefu_example-one ul li.kefu_nav-one a.current, #kefu_example-one ul#featured li a:hover{color:black; border-bottom: 6px solid rgb(76, 76, 76); height:33px; line-height:33px;}
+#kefu_example-one ul li.kefu_nav-two a.current, #kefu_example-one ul#core li a:hover{color:black; border-bottom: 6px solid rgb(76, 76, 76);}
+#kefu_example-one ul li.kefu_nav-three a.current, #kefu_example-one ul#jquerytuts li a:hover{color:black; border-bottom: 6px solid rgb(76, 76, 76);}
+
+
+
+.kefu_nav strong{color: rgb(0, 0, 0);
+font: 22px/100% "Microsoft Yahei","微软雅黑",Arial;}
+
+
+.kefu_nav p{color: rgb(141, 141, 141); font-size:13px;
+padding: 6px 0px 0px;}
+
+
+
+
+.xinshou_main{
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+    }
+.xinshou_main_title{
+	background: url(../../Documents/%E7%95%85%E7%92%87%E6%A3%8B%E7%89%8C/images/bg_hr_a.gif) repeat-x scroll center center transparent;
+	height: 60px;
+    position: relative;
+	clear: both;
+    padding: 15px 0px 0px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 0px 6px;
+    color: rgb(10, 38, 60);
+	
+	}
+	
+	
+.xinshou_main_title span{
+	display: block;
+	position: absolute;
+	left: -10px;
+	top: 10px;
+	width: 240px;
+	height: 60px;
+	color: rgb(255, 255, 255);
+	text-indent: 2em;
+	font: bold 22px/200% "Microsoft Yahei","微软雅黑",Arial;
+	background-attachment: scroll;
+	background-color: transparent;
+	background-image: url(images/bg_pay_title_a.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+
+.xinshou_main_main {
+	width:900px;
+	margin-left:50px;
+	margin-right:50px;
+	}
+.xinshou_main_main dt{
+	font-weight: bold;
+font-size: 16px;
+margin-bottom: 15px;
+color: #000;
+	}
+	
+.xinshou_main_main dl{	
+margin-bottom: 40px;
+font-size: 14px;
+padding-left: 33px;
+font-family:Arial,Verdana,Helvetica,sans-serif;
+color: #6B6B6B;
+line-height: 36px;}
+
+
+.zaixian_main_main{
+	width:900px;
+	margin-left:50px;
+	margin-right:50px;
+	
+	}
+/**/
+.Game-introduction{font-size:13px; color:#9a8179;text-indent:35px;font-family: "Microsoft YaHei"!important; }
+.game-xiaobiao{ font-size:16px;  color:#9a8179;font-family: "Microsoft YaHei"!important; }
+.Game-shuyu{font-size:13px; color:#9a8179;font-family: "Microsoft YaHei"!important; }
+.Game-shuoming{font-size:13px; color:#dabe45;font-family: "Microsoft YaHei"!important; }
+.Game-paixing{font-size:13px; color:#cc6325;font-family: "Microsoft YaHei"!important; }

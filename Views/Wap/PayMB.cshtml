@@ -1,0 +1,54 @@
+﻿@{
+
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width， initial-scale=1.0， minimum-scale=1.0， maximum-scale=1.0， user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+    <link href="../../Content/css/tab.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/ajaxForm")
+<title>网银充值</title>
+</head>
+<body id="home">
+<ul id="tabnav">
+	<li class="home"><a href="BankPay?userid=@ViewData["uid"]&account=@ViewData["account"]&error=">网银充值</a></li>
+	<li class="dev"><a href="Dev?userid=@ViewData["uid"]&account=@ViewData["account"]&error=">充值卡</a></li>
+	
+</ul>
+<div id="content">
+    @using (Html.BeginForm("BankPayFormMB", "Wap", FormMethod.Post, new { id = "mbform" }))
+{
+    <div style="align-content:center;margin-left:10%">
+        <span style="font-size:12px;color:red;">@ViewData["error"]</span>
+    </div>
+    <div class="yonghu-box">
+	<div class="yonghu">用户名：</div><div class="yonghu">@ViewData["account"]</div>
+    </div>
+    <div class="jinke-box">
+         <div class="jinge-1">充值金额：</div>
+         <div class="jinge-2"><input type="text" name="amount_input" id="amount_input" /></div>
+         <div class="jinge-3">至少 @ViewData["minmoney"]元</div>
+        
+        <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+        <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+    </div>
+    <div class="jine-bt"><img src="../../Images/images/money-bt.png" width="100%" onclick="document.getElementById('mbform').submit()" /></div>
+    <div class="jine-p">
+    游戏规则<br />
+    1.请确保您填写的用户名正确无误，因玩家输入错误而导致的任何
+损失由用户自行承担。<br />
+2.充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返
+回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭
+充值窗口。<br />
+3.如有任何疑问，请您联系客服中心。<br />
+    </div>
+    }
+</div>
+</body>
+</html>

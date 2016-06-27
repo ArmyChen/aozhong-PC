@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "满局赠送活动";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+
+}
+@section scripts{
+    <script>
+        DrawDayTask = function (tid) {
+            $.SendDataSync("GetDayTask", { taskid: tid }, function (jdata) {
+                alert(jdata.message)
+                if (jdata.status != 1)
+                    $("#drawButton_" + tid).attr({ onclick: "" }).children("img").attr("src", "/images/jiangli.png");//"class": "button disabled"
+                if (jdata.status == 0 || jdata.status == 1) {
+                    $("#drawButton_" + tid).attr({ onclick: "" }).children("img").attr("src", "/images/jiangli1.png");
+                    var drNum = parseInt($("#drawed_" + tid).text(), 10);
+                    $("#drawed_" + tid).text(drNum + 1);
+                }
+            });
+        }
+    </script>
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+<!--activity开始-->
+<div class="news-title">
+    <div class="title-txt"><img src="/images/manju.png" /></div>
+</div>
+
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div class="full">
+                <div class="full1-1"><img src="/images/title_large-red.png" width="90" height="90" /></div>
+                <div class="full1-2">
+                    <span style=" font-size:26px;">尊敬的玩家 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                    <span style=" font-weight:normal;">
+                        温馨提示：每日零点清零当天游戏局数重新计算，奖励只在当天有效，第二天不再累计！<br />
+                    </span>
+                </div>
+            </div>
+            @Html.Raw(ViewData["TaskData"])
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>

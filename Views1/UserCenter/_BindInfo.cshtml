@@ -1,0 +1,118 @@
+﻿@model WebSite_YS.Models.Partial.BankInfo
+@{
+    string buttonNone = Model.BankName.Length > 0 ? "style='display:none'" : "style='display:block'";
+    string emailReg = "/^[\\w\\-\\.]+@[\\w\\-\\.]+(\\.\\w+)+$/";
+}
+
+<!--login-right-开始-->
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/BindInfo-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+
+        <div class="cm-take-gold">
+            <div class="cm-warning"><img src="/images/warning.png" /></div>
+            <div class="cm-txt">为了您的账号安全，请注意绑定信息的真实性，保证财务出款顺利，对信息绑定有误，将不作处理。</div>
+        </div>
+        <div class="cm-take-gold">
+            <div class="cm-warning"><img src="/images/warning.png" /></div>
+            <div class="cm-txt">@Model.Tags</div>
+        </div>
+        <div class="cm-row">
+            <div class="cm-name"><font color="#FF0000">*</font>持卡人姓名:</div>
+            <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankAccount) class="cm-input" name="name_bankaccount" id="name_bankaccount" value="@Model.BankAccount" type="text" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>开户银行:</div>
+            <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankName) class="cm-input" name="name_bankName" id="name_bankName" value="@Model.BankName" type="text" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>银行账号:</div>
+            <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankNum) class="cm-input" name="name_bankNum" id="name_bankNum" value="@Model.BankNum" type="text" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>开户网点:</div>
+            <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankAddress) class="cm-input" name="name_bankOpenAddress" id="name_bankOpenAddress" value="@Model.BankAddress" type="text" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>QQ:</div>
+            <div class="cm-shuru"><input @Model.IsReadOnly(Model.QQ) class="cm-input" name="name_bankQQ" id="name_bankQQ" value="@Model.QQ" type="text" maxlength="16" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>手机号:</div>
+            <div class="cm-shuru"><input @Model.IsReadOnly(Model.Mobile) class="cm-input" name="name_bankMobile" id="name_bankMobile" value="@Model.Mobile" type="text" maxlength="11" /></div>
+        </div>
+        <div class="cm-row-2" id="bnkTr">
+            <div class="cm-name"></div>
+            <div class="cm-shuru"><input type="button" class="cm-button" id="save" value="确认绑定" onclick="CheckBankInfo(this)" /></div>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!--login-right-结束-->
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script>
+    function ShowMessage() {
+        alert("@Model.EerrorMessage");
+        //if ("@ViewData["errormsg"]" == "succeed") {
+        //window.location.href = "/UserCenter/Center#BankInfo";
+        ////window.location.reload();
+        //}
+    }
+    function CheckBankInfo(button) {
+        var baccount = $("#name_bankaccount").val();
+        var bname = $("#name_bankName").val();
+        var bcode = $("#name_bankNum").val();
+        var baddress = $("#name_bankOpenAddress").val();
+        var bqq = $("#name_bankQQ").val();
+        var bmobile = $("#name_bankMobile").val();
+        if (baccount.length < 2 || baccount.length > 16) {
+            alert("请输入持卡人姓名。");
+            return false;
+        }
+        if (bname.length < 2 || bname.length > 64) {
+            alert("请输入开户银行。");
+            return false;
+        }
+        if (bcode.length < 2 || bcode.length > 25) {
+            alert("请输入银行账号。");
+            return false;
+        }
+        if (baddress.length < 2 || baddress.length > 180) {
+            alert("请输入开户网点。");
+            return false;
+        }
+        var regMobile = /^[\d]{11}$/;
+        if (!regMobile.test(bmobile)) {
+            alert("请输入手机号码,由11位数字组成！");
+            return false;
+        }
+        var regQQ = /^[\d]{6,16}$/;
+        if (!regQQ.test(bqq)) {
+            alert("请输入QQ号码,由6-16位数字组成！");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: { name_bankName: bname, name_bankNum: bcode, name_bankOpenAddress: baddress, hide_bankaccount: baccount, qq: bqq, mobile: bmobile },
+            url: "/AjaxService/SaveUserBankInfo",
+
+            success: function (jdata) {
+                if (jdata.status == 0) {
+                    alert(jdata.message);
+                }
+                else {
+                    alert("银行卡绑定成功");
+                    $("#bnkTr").hide();
+                    window.location.href = "/UserCenter/Center#BindInfo";
+                }
+            }
+        });
+    }
+
+</script>

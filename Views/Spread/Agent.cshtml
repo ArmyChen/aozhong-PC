@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "玩家推广";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+
+}
+@model WebSite_YS.Models.AgentModel
+
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+
+
+
+<div class="news-title">
+    <div class="title-txt"><img src="/images/tuiguang.png" /></div>
+</div>
+
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div style="margin:0px 100px; text-align:left; line-height:26px; font-family:'微软雅黑'; font-size:14px; color:white; padding-top:15px;">
+                1. 推广员系统是平台为了让大家能够在推荐自己的朋友来玩，同时还能获得一定奖励的自主推广系统。<br />
+                2．每一个游戏用户，系统都自动为您生成一个专属推广链接。 <br />
+                3．只要有用户直接在你的推广链接下注册，并参与棋牌类真钱游戏，那么将会为您产生源源不断的金钱收入，会员越多您的收入也将越多。<br />
+                4．推广员佣金比例为20%，即您发展的下线向系统贡献10000的抽水，那么您的收入为2000元（推广员推广比例将在发展的不同时期做适当调整）。<br />
+                <br />
+                <table width="100%" border="0">
+                    <tr height="30">
+                        <td width="30%"><div align="left">您的代理账号是：</div></td>
+                        <td>@Model.AgentName</td>
+                    </tr>
+                    <tr height="30">
+                        <td><div align="left">您代理的比例是：</div></td>
+                        <td>@(Model.AgentNum * 100 + "%")</td>
+                    </tr>
+                    <tr height="30">
+                        <td><div align="left">您的推广页面是：</div></td>
+                        <td><a style="color:white" href="@ViewData["tgurl"]" target="_blank">@ViewData["tgurl"]</a></td>
+                    </tr>
+                    <tr height="30">
+                        <td><div align="left">您的代理后台是：</div></td>
+                        <td><a style="color:white" href="@ViewData["agenturl"]" target="_blank">@ViewData["agenturl"]</a></td>
+                    </tr>
+                </table>
+                <div>
+                </div>
+                <p class="cgreen">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>

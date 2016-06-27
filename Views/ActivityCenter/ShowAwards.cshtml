@@ -1,0 +1,459 @@
+﻿@{
+    ViewBag.Title = " 奖励名单";
+}
+@section scripts{
+    <style>
+        body {
+            background: #290028;
+        }
+
+        #banner {
+            width: 100%;
+            clear: both;
+            position: relative;
+            background-color: #191d3a;
+            margin-bottom: -150px;
+        }
+
+            #banner .bd {
+                overflow: hidden;
+            }
+
+                #banner .bd li {
+                    background-position: center top;
+                    background-repeat: repeat-x;
+                    height: 463px;
+                    width: 100%;
+                }
+
+            #banner .intro {
+                width: 460px;
+                padding: 330px 0 0 600px;
+                margin: auto;
+                position: relative;
+            }
+
+
+            #banner .intro1 {
+                width: 460px;
+                padding: 300px 0 0 470px;
+                margin: auto;
+                position: relative;
+                font-size: 14px;
+                font: "微软雅黑";
+                line-height: 27px;
+                color: #FFF;
+                text-align: left;
+            }
+
+            #banner .intro2 {
+                width: 460px;
+                padding: 180px 0 0 830px;
+                margin: auto;
+                position: relative;
+                font-size: 14px;
+                font: "微软雅黑";
+                line-height: 40px;
+                color: #000000;
+            }
+
+        .zc2 {
+            width: 200px;
+            height: 25px;
+        }
+
+        .dd {
+            width: 94px;
+            height: 33px;
+            background: url(/images/dd.jpg) no-repeat left top;
+            color: #ff8b03;
+            border: 0;
+            font-weight: bold;
+            font-size: 14px;
+            font: "微软雅黑";
+        }
+
+        .tt {
+            width: 94px;
+            height: 33px;
+            background: url(/images/tt.jpg) no-repeat left top;
+            color: #ffffff;
+            border: 0;
+            font-weight: bold;
+            font-size: 14px;
+            font: "微软雅黑";
+        }
+
+        .kefu_main_box {
+            width: 100%;
+            height: auto;
+        }
+
+        .kefu_main {
+            width: 1000px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 180px;
+            padding-bottom: 30px;
+        }
+
+        .kefu_main_bg {
+            min-height: 600px;
+            background-color: #201611;
+            border: #734023 1px solid;
+        }
+
+        .kefu_font {
+            color: #C00;
+            font-size: 16px;
+            font-family: "Microsoft YaHei";
+        }
+
+        /* Specific to example one */
+
+
+        #kefu_example-one {
+            width: 1000px;
+            padding-top: 20px;
+        }
+
+
+            #kefu_example-one .kefu_nav {
+                overflow: hidden;
+                margin: 0 0 10px 0;
+            }
+
+                #kefu_example-one .kefu_nav li {
+                    width: 297px;
+                    margin: 0 0px 0 30px;
+                    float: left;
+                }
+
+                    #kefu_example-one .kefu_nav li.last {
+                        margin-right: 0;
+                    }
+
+                    #kefu_example-one .kefu_nav li a {
+                        height: 82px;
+                        color: black;
+                        font-size: 10px;
+                        text-align: left;
+                        padding: 6px 0px 0px 70px;
+                        margin: 0px 12px 0px 0px;
+                    }
+                        /*	
+.xinshouzhinan{
+	background-position: 0px 0px;
+	background-attachment: scroll;
+	background-color: transparent;
+	background-image: url(images/icon_service.gif);
+	background-repeat: no-repeat;
+	}
+
+.changjianwenti{
+	background: url(images/icon_service.gif);
+	background-position: 0px -125px;
+	}
+	
+.zaixiankefu{
+	background:url(images/icon_service.gif);
+	background-position: 0px -368px;
+	}*/
+                        #kefu_example-one .kefu_nav li a:hover {
+                            border-bottom: 6px solid #40100c;
+                        }
+
+            #kefu_example-one ul {
+                list-style: none;
+            }
+
+                #kefu_example-one ul li a {
+                    display: block;
+                    padding: 4px;
+                    color: #666;
+                }
+
+                    #kefu_example-one ul li a:hover {
+                        color: black;
+                    }
+
+                #kefu_example-one ul li:last-child a {
+                    border: none;
+                }
+
+
+                #kefu_example-one ul li.kefu_nav-one a.current, #kefu_example-one ul#featured li a:hover {
+                    color: black;
+                    border-bottom: 6px solid rgb(76, 76, 76);
+                }
+
+                #kefu_example-one ul li.kefu_nav-two a.current, #kefu_example-one ul#core li a:hover {
+                    color: black;
+                    border-bottom: 6px solid rgb(76, 76, 76);
+                }
+
+                #kefu_example-one ul li.kefu_nav-three a.current, #kefu_example-one ul#jquerytuts li a:hover {
+                    color: black;
+                    border-bottom: 6px solid rgb(76, 76, 76);
+                }
+
+
+
+        .kefu_nav strong {
+            color: #ffffff;
+            font: 22px/100% "Microsoft Yahei","微软雅黑",Arial;
+        }
+
+
+        .kefu_nav p {
+            color: rgb(141, 141, 141);
+            font-size: 13px;
+            padding: 6px 0px 0px;
+        }
+
+
+    </style>
+    <script>
+        var PageCount = new Number();
+        var CacheCondition;
+
+        $(document).ready(function () {
+            GetMatchInfoCount();
+        });
+
+        var RefMatchRankInfo = function () {
+            if (CacheCondition)
+                GetMatchRankInfo(CacheCondition.Tid, CacheCondition.Type, true);
+        }
+
+        var GetMatchRankInfo = function (tid, _type, isref) {
+            var pURL, waittag;
+
+            CacheCondition = {};
+            CacheCondition.Tid = tid;
+            CacheCondition.Type = _type;
+            if (!isref)
+                $("#matchTypeImg")[0].scrollIntoView();
+            if (_type) {
+                $("#matchTypeImg").attr("src", "/images/reward_list_grid_header_js.jpg");
+                pURL = "GetCurrentRankInfoByTaskid";
+                waittag = "排名还未生成，请稍后查询。";
+            }
+            else {
+                $("#matchTypeImg").attr("src", "/images/reward_list_grid_header.jpg");
+                pURL = "GetMatchRankInfoByTaskid";
+                waittag = "奖励名单未生成，请稍后查询。";
+            }
+
+            var tc = $("#showsorttable").find("tbody"); $("table").eq(2).children();
+            tc.html("");
+            $.SendData(pURL, { taskid: tid, type: _type }, function () {
+                tc.html('<tr align="center" style="color:#000000;"><td colspan="6" width="103" height="40" bgcolor="#753139">查询中....</td></tr>');
+            }, function (jdata) {
+                var trString = new String();
+                if ($.isEmptyObject(jdata)) {
+                    tc.html('<tr align="center" style="color:#000000;"><td colspan="6" width="103" height="40" bgcolor="#753139">' + waittag + '</td></tr>');
+                } else {
+                    $.each(jdata, function (i, data) {
+                        trString += "<tr align=\"center\" style=\"color:#000000;\"><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.RankNum + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Userid + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Account + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Reward + "元</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Progress + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Status + "</td></tr>";
+                    });
+                    tc.html(trString);
+                }
+            });
+        }
+        var GetRewardRules = function (tid) {
+
+            $.SendData("GetRewardRules", { taskid: tid }, null, function (jdata) {
+                var message = new String();
+                $.each(jdata, function (i, d) {
+                    message += "第 " + d.TopNum + " 名:奖金 " + d.TopScore + " 元\n";
+                });
+                alert(message);
+                $("#rw_" + tid).attr("onclick", "").click(function () {
+                    alert(message);
+                })
+            });
+        }
+        var SetPageHTML = function () {
+            var pageIndex = new Number(location.hash.replace(/#/, ""));
+            pageIndex = pageIndex == 0 ? 1 : pageIndex;
+            var pagerHTML = new String();
+
+            if (pageIndex == 1)
+                pagerHTML = '<div id=table1 style="float:left; margin:2px;">第</div><div id=table3 style="float:left; margin:2px;"><input name="page" value="' + pageIndex + '" readonly="readonly" type="text" class="ye" /></div>' + (PageCount == 1 ? '<div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right_off.gif" alt="" width="13" height="13" /></div>' : '<a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right.gif" alt="" width="13" height="13" /></div></a>页');
+            else if (pageIndex >= PageCount)
+                pagerHTML = '<div id=table1 style="float:left; margin:2px;">第</div><a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_left.gif" alt="" width="13" height="13" /></div></a><div id=table3 style="float:left; margin:2px;"><input  type="text" name="page" value="' + pageIndex + '" readonly="readonly" class="ye"/></div><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right.gif" alt="" width="13" height="13" /></div>页';
+            else
+                pagerHTML = '<div id=table1 style="float:left; margin:2px;">第</div><a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_left.gif" alt="" width="13" height="13" /></div></a>div id=table3 style="float:left; margin:2px;"><input  type="text" name="page" value="' + pageIndex + '" readonly="readonly" class="ye"/></div><a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right.gif" alt="" width="13" height="13" /></div></a>页';
+
+            //if (pageIndex == 1)
+            //    pagerHTML = '第<img src="/images/pager_arrow_left_off.gif" alt="上一页"  /><input class="ye" type="text" name="page" value="' + pageIndex + '" readonly="readonly" />' + (PageCount == 1 ? '<img  src="/images/pager_arrow_right_off.gif" alt="下一页"  />页' : '<a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><img src="/images/pager_arrow_right.gif" alt="下一页"  /></a>页');
+            //else if (pageIndex >= PageCount)
+            //    pagerHTML = '第<a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><img src="/images/pager_arrow_left.gif" alt="上一页"  /></a><input type="text" name="page" value="' + pageIndex + '" readonly="readonly"  /><img src="/images/pager_arrow_right_off.gif" alt="下一页" />页';
+            //else
+            //    pagerHTML = '第<a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><img src="/images/pager_arrow_left.gif" alt="上一页" /></a><input type="text" name="page" value="' + pageIndex + '" readonly="readonly"/><a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><img src="/images/pager_arrow_right.gif" alt="下一页"  /></a>页';
+            $("#pageContent").html(pagerHTML);
+        }
+        var SetPageSizes = function (c) {
+            var _ps = [20, 30, 50, 100, 200];
+            var _r;
+            var selectOptionStr = new String();
+            for (var i = 0; i < _ps.length; i++) {
+                _r = _ps[i];
+                selectOptionStr += "<option value" + _r + "'>" + _r + "</option>";
+                if (_r > c)
+                    break;
+            }
+            $("#viewSelect").change(function () {
+                SetPageCounts(c);
+                GetMatchinfoData(1);
+            });
+            $("#viewSelect").html(selectOptionStr);
+        };
+        var SetPageCounts = function (count) {
+            var nPCount = new Number($("#viewSelect").val());
+            PageCount = Math.floor(count / nPCount) + (count % nPCount > 0 ? 1 : 0);
+            $("#pageCounts").html(PageCount);
+        }
+        var GetMatchInfoCount = function () {
+            $.SendData("GetMatchInfoCount", null, null, function (count) {
+                SetPageSizes(count);
+                $("#pCount").html(count);
+                SetPageCounts(count);
+                GetMatchinfoData();
+            });
+        }
+        var GetMatchinfoData = function (pindex) {
+            pindex = pindex || new Number(location.hash.replace(/#/, ""));
+            pindex = pindex == 0 ? 1 : pindex;
+            if (PageCount >= pindex) {
+                location.hash = "#" + pindex;
+                SetPageHTML();
+                var dataHTML = $("#showdatatable").find("tbody");
+                dataHTML.html("");
+                $.SendData("GetMatchInfoByPage", { pageIndex: pindex, pageSize: $("#viewSelect").val() }, function () {
+                    dataHTML.html('<tr align="center" style="color:#000000;"><td colspan="7" width="103" height="40" bgcolor="#753139">正在读取比赛信息，请稍后...</td></tr>');
+                }, function (data) {
+                    var tHTML = new String();
+                    $.each(data, function (i, d) {
+                        tHTML += '<tr align="center" style="color:#000000;"><td width="103" bgcolor="#753139">' + d.TaskName + '</td><td width="150" height="40" bgcolor="#753139">' + d.KindName + '</td><td width="204" height="40" bgcolor="#753139">' + d.StartDate + '</td><td width="204" bgcolor="#753139">' + d.EndDate + '</td><td width="60" bgcolor="#753139">' + d.IsEnd + '</td><td width="151" bgcolor="#753139">' + ListHTML(d.IsEnd, d.AwardStatus) + '</td><td width="158" bgcolor="#753139"><a href="javascript:void(0);" style="color:#ffffff;" id="rw_' + d.TaskID + '" onclick="GetRewardRules(' + d.TaskID + ');" title="点击显示规则">奖励规则</a>&nbsp;&nbsp;&nbsp;&nbsp;' + AwardHTML(d.IsEnd, d.AwardStatus, d.TaskID) + '</td>';
+                    });
+                    dataHTML.html(tHTML);
+                });
+            }
+        }
+        var ListHTML = function (isend, status) {
+            if (isend == "已结束") {
+                if (status == 0) {
+                    return "未生成";
+                }
+                else
+                    return "已生成"
+            }
+            else
+                return "-";
+        }
+        var AwardHTML = function (isend, status, taskid) {
+            if (isend == "已结束") {
+                if (status == 0)
+                    return '<a href="javascript:void(0);" style="color:#ffffff;" onclick="GetMatchRankInfo(' + taskid + ', 2)" title="点击显示排名">即时排名</a>';
+                else
+                    return '<a href="javascript:void(0);" style="color:#ffffff;" onclick="GetMatchRankInfo(' + taskid + ')">奖励名单</a>';
+            }
+            else
+                return '<a href="javascript:void(0);" style="color:#ffffff;" onclick="GetMatchRankInfo(' + taskid + ',1)">即时排名</a>'
+        }
+    </script>
+}
+<div id="banner">
+    <div class="bd">
+        <ul>
+            <li id="b5" style="background-image: url(/images/a_004-bg.jpg); height:496px">
+                <div class="intro1">
+                    <p>
+                        1、参加比赛不用报名，在开赛的时间内进入指定房间直接比赛；<br>
+                        2、比赛排名是按照玩家在比赛房间里金币输赢浮动进行即时排名；
+                        <br>
+                        3、比赛结束获奖玩家奖励会在2个小时之内发放；<br>
+                        4、点击"即时排名"可以查看当前时间的比赛排名情况；<br>
+                        5、比赛结束出现"奖励名单"就证明比赛奖励已经发放完毕；
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="kefu_main_box" style="background:#290028;">
+    <div class="kefu_main">
+        <div class="kefu_main_bg">
+            <div id="kefu_example-one">
+
+                <div id=center style="width:850px; margin-left:70px;">
+                    <div id=hd1><img src="/images/match_list_grid_header.png" width="308" height="73" /></div>
+                    <div id=hd2>
+                        <table id="showdatatable" width="850" border="1" bordercolorlight="#a14351" bordercolordark="#a14351" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr align="center" style="color:#FFF; font-weight:bold;">
+                                    <td width="103" bordercolorlight="#753139" bgcolor="#a14351">比赛</td>
+                                    <td width="104" height="40" bordercolorlight="#753139" bgcolor="#a14351">房间</td>
+                                    <td width="204" height="40" bordercolorlight="#753139" bgcolor="#a14351">开赛时间</td>
+                                    <td width="204" bordercolorlight="#753139" bgcolor="#a14351">结束时间</td>
+                                    <td width="60" bordercolorlight="#753139" bgcolor="#a14351">状态</td>
+                                    <td width="151" bordercolorlight="#753139" bgcolor="#a14351">奖励名单</td>
+                                    <td width="158" bordercolorlight="#753139" bgcolor="#a14351" >排名与奖励</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr align="center" >
+                                    <td height="40" colspan="7" bordercolorlight="#753139" bgcolor="#a14351">
+                                        <div id="pageContent">
+                                        </div>
+                                        <div id=table4 style="float:left; margin:2px;">
+                                            页，共 <span id="pageCounts"></span> 页	| 查看<select id="viewSelect" name="limit"></select>
+                                            条 / 每页| 共 <span id="pCount"></span> 条记录
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @*<tr align="center">
+                                        <td height="40" colspan="7" bgcolor="#a14351">
+                                            <span id="pageContent"></span>
+                                            ，共 <span id="pageCounts"></span> 页
+                                            <span class="separator">|</span>
+                                            查看
+                                            <select id="viewSelect" name="limit"></select>
+                                            条 / 每页
+                                            <span class="separator">|</span>
+                                            共 <span id="pCount"></span>  条记录
+                                            <span id="matchGrid-total-count" class="no-display"></span>
+                                        </td>
+                                    </tr>*@
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div id=hd3>
+                        <img id="matchTypeImg" src="/images/reward_list_grid_header.png" width="308" height="73" style="float:left;" />
+                        <input type="button" class="submit" tabindex="3" onclick="RefMatchRankInfo()" value="刷&nbsp;新" style=" color:#a82c43; font-size:18px; font-weight:bold; width:100px; height:40px; float:left; margin-top:20px;">
+                    </div>
+                    <div id=hd4 style=" margin-bottom:20px;">
+                        <table id="showsorttable" width="850" border="1" bordercolorlight="#a14351" bordercolordark="#a14351" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr align="center" style="color:#FFF; font-weight:bold;">
+                                    <td width="123" bordercolorlight="#753139" bgcolor="#a14351">排名</td>
+                                    <td width="178" height="40" bordercolorlight="#753139" bgcolor="#a14351">玩家编号</td>
+                                    <td width="189" height="40" bordercolorlight="#753139" bgcolor="#a14351">玩家账号</td>
+                                    <td width="188" bordercolorlight="#753139" bgcolor="#a14351">奖金</td>
+                                    <td width="142" bordercolorlight="#753139" bgcolor="#a14351">活动金币</td>
+                                    <td width="166" bordercolorlight="#753139" bgcolor="#a14351">状态</td>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

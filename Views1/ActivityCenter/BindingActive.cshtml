@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "绑定活动";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+
+}
+@section scripts{
+    <script>
+        GetBindingAward = function (tid) {
+            $.SendDataSync("GetBindingAward", {}, function (jdata) {
+                alert(jdata.d);
+                $("#lnkGetReward").attr("onclick", "").find("img").attr("src", "/images/jiangli1.png");
+                $("#td_text").html("您已经领取过奖励。");
+            });
+        }
+    </script>
+}
+
+@section styles{
+<link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+
+<!--new-detailed-star-->
+<div class="news-title">
+    <div class="title-txt"><img src="/images/bangding.png" /></div>
+</div>
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div class="full">
+                <div class="full1-1"><img src="/images/title_large-red.png" width="90" height="90" /></div>
+                <div class="full1-2">
+                    <span style=" font-size:26px;">尊敬的玩家 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                    <span style=" font-weight:normal;">
+                        温馨提示：必须完成绑定邮箱，手机号码，银行卡信息，绑定本机才能领取 @ViewData["Award"] 金币奖励！<br />
+                    </span>
+                </div>
+            </div>
+            @Html.Raw(ViewData["BindData"])
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>
+
+<!--new-detailed-end-->

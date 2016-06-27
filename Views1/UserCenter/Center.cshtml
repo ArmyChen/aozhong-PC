@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+@Styles.Render("~/Content/jscalcss")
+@Scripts.Render("~/Scripts/jscal2")
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/Content/down.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/Content/login.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+@section scripts{
+    <script>
+        var LinkArray = [
+                { action: "UserInfo", title: "用户资料", visible: true },
+                { action: "BindInfo", title: "信息绑定", visible: true },
+                { action: "UserGameRecord", title: "游戏记录", visible: true },
+                { action: "Exit", title: "安全退出", visible: true },
+                { action: "ULogonPass", title: "修改登录密码", visible: true },
+                { action: "UInInsurePass", title: "修改保险柜密码", visible: true },
+                { action: "PayTotal", title: "账户充值", visible: true },
+                { action: "TradeMall", title: "兑换申请", visible: true },
+                { action: "GetScore", title: "取金币", visible: true },
+                { action: "SaveScore", title: "存金币", visible: true },
+                { action: "TranRecord", title: "交易记录", visible: true },
+                { action: "PayRecord", title: "充值记录", visible: true }
+                 @if(ViewBag.IsAgent==1){
+                     <text>
+        ,{ action: "SpreadManage", title: "我的推广", visible: true },
+        { action: "AgentImmediate", title: "我的直属下线", visible: true },
+        { action: "AgentAllAgent", title: "我的所有下线", visible: true },
+        { action: "AgentEarnings", title: "我的收益", visible: true },
+        { action: "AgentGetGold", title: "取款", visible: true },
+        { action: "AgentTranRecord", title: "交易记录", visible: true }
+               </text>
+                 }
+        ];
+        $(document).ready(function () {
+            GetUserCenterPartial();
+        });
+        function GetUserCenterPartial(action) {
+            var _action = action || QueryHash() || "UserInfo";
+            for (var i = 0; i < LinkArray.length; i++) {
+                var _link = LinkArray[i];
+                if (_link.visible) {
+                    if (_action == _link.action) {
+                        $("#userManageMenu").find(".login-ziliao").eq(i).html("<a href='#' >" + _link.title + "</a>");
+                    }
+                    else
+                        $("#userManageMenu").find(".login-ziliao").eq(i).html('<a href="#' + _link.action + '" onclick="GetUserCenterPartial(\'' + _link.action + '\')">' + _link.title + '</a>');
+                }
+            }
+            RequestHTML("Partial" + _action);
+        }
+        function RequestHTML(ActionResultName) {
+            var accounts = QueryString("regaccount");
+            var pdata = {};
+            if (accounts != "")
+                pdata.regaccount = accounts;
+            $.ajax({
+                type: "POST",
+                data: pdata,
+                url: "/UserCenter/" + ActionResultName,
+                beforeSend: function () {
+                    $("#ManagerMain").html('<div id="loading" style="color:white;font-size:18px;font-weight:bold;">加载中...</div>');
+                },
+                success: function (showHTML) {
+                    if (showHTML == "0")
+                        location.href = "/";
+                    else {
+                        $("#ManagerMain").html(showHTML);
+                    }
+                },
+                error: function () {
+                    $("#ManagerMain").html('<div id="loaderror" style="color:white;font-size:18px;font-weight:bold;">加载出现错误或者超时，请重试.</div>');
+                }
+            });
+        }
+        function M_RefreshScore() {
+            $("#F_UserInfo").submit();
+        }
+    </script>
+}
+
+
+<!--login-star-->
+<div class="login-center">
+    <div class="login-box">
+        <!--login-letf-开始-->
+        <div class="login-left" id="userManageMenu">
+            <div class="login-fuwu"><img src="/images/login-fuwu.png" /></div>
+            <div class="login-fuwu-back">
+                <div class="login-kong-1"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+            </div>
+            <div class="login-fuwu"><img src="/images/login-anquan.png" /></div>
+            <div class="login-anquan-back">
+                <div class="login-kong-1"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-kong-1"></div>
+                <div class="login-ziliao"></div>
+            </div>
+            <div class="login-fuwu"><img src="/images/login-caiwu.png" /></div>
+            <div class="login-caiwu-back">
+                <div class="login-kong-1"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+            </div>
+            @if(ViewBag.IsAgent==1){
+
+
+            <div class="login-fuwu"><img src="/images/login-caiwu.png" /></div>
+            <div class="login-caiwu-back">
+                <div class="login-kong-1"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+                <div class="login-ziliao"></div>
+            </div>
+                }
+
+        </div>
+
+        <!--login-letf-结束-->
+        <!--login-right-开始-->
+        <div class="login-zongti" id="ManagerMain">
+
+        </div>
+        <!--login-right-结束-->
+    </div>
+</div>
+<!--login-end-->

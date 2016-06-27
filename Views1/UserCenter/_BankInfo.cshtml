@@ -1,0 +1,86 @@
+﻿@model WebSite_YS.Models.Partial.BankInfo
+@{
+    string buttonNone = Model.BankName.Length > 0 ? "style=display:none" : "style=display:block";
+}
+
+<div class="down_right_top">
+    <div class="down_right_weizhi">当前所在位置>>银行绑定</div>
+</div>
+<!---center开始-->
+<div class="down_center_box">
+    <div class="u_warn"> @Model.Tags</div>
+    <div class="tablediv">
+        @using (Ajax.BeginForm("UpdateBankInfo", "UserCenter", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ManagerMain",
+            OnSuccess = "ShowMessage"
+        }, new { id = "F_BankInfo" }))
+        {
+            <table width="500" border="0" cellspacing="0" cellpadding="0" class="tablenoborder">
+                <tr>
+                    <td width="130" height="40" align="right"><em style="color:#FF0000;">*</em>&nbsp;持卡人姓名： </td>
+                    <td align="left"><input @Model.IsReadOnly(Model.BankAccount) name="name_bankaccount" id="name_bankaccount" value="@Model.BankAccount" type="text" class="kd" /><input type="hidden" value="@Model.BankAccount" name="hide_bankaccount">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="130" height="40" align="right"><em style="color:#FF0000;">*</em>&nbsp;开户银行： </td>
+                    <td align="left"><input @Model.IsReadOnly(Model.BankName) name="name_bankName" id="name_bankName" type="text" value="@Model.BankName" class="kd" />&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="130" height="40" align="right"><em style="color:#FF0000;">*</em>&nbsp;银行账号： </td>
+                    <td align="left"><input @Model.IsReadOnly(Model.BankNum) name="name_bankNum" id="name_bankNum" type="text" value="@Model.BankNum" class="kd" />&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="130" height="40" align="right"><em style="color:#FF0000;">*</em>&nbsp;开户网点： </td>
+                    <td align="left"><input @Model.IsReadOnly(Model.BankAddress) name="name_bankOpenAddress" id="name_bankOpenAddress" value="@Model.BankAddress" type="text" class="kd" />&nbsp;</td>
+                </tr>
+                <tr @buttonNone>
+                    <td height="40" colspan="2" align="center">
+                        <input type="button" class="submit" id="save" onclick="CheckBankInfo(this)" tabindex="3" value="确认绑定">
+                    </td>
+                </tr>
+            </table>
+
+        }
+    </div>
+
+    <div class="idinfo-wlcome"><img src="/images/cativity/activity-welcome.png" /></div>
+
+
+</div>
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script>
+    function ShowMessage() {
+        alert("@Model.EerrorMessage");
+        //if ("@ViewData["errormsg"]" == "succeed") {
+            //window.location.href = "/UserCenter/Center#BankInfo";
+            ////window.location.reload();
+        //}
+    }
+    function CheckBankInfo(button) {
+        var baccount = $("#name_bankaccount").val();
+        var bname = $("#name_bankName").val();
+        var bcode = $("#name_bankNum").val();
+        var baddress = $("#name_bankOpenAddress").val();
+        if (baccount.length < 2 || baccount.length > 16) {
+            alert("请输入持卡人姓名。");
+            return false;
+        }
+        if (bname.length < 2 || bname.length > 64) {
+            alert("请输入开户银行。");
+            return false;
+        }
+        if (bcode.length < 2 || bcode.length > 25) {
+            alert("请输入银行账号。");
+            return false;
+        }
+        if (baddress.length < 2 || baddress.length > 180) {
+            alert("请输入开户网点。");
+            return false;
+        }
+        $(button).trigger("submit");
+    }
+</script>

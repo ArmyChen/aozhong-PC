@@ -1,0 +1,128 @@
+﻿@Scripts.Render("~/Scripts/jscal2")
+@Scripts.Render("~/Scripts/pageination")
+
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/My-earnings-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        <div class="tablediv">
+            <table width="100%" border="0" id="reportGrid_table" class="tablewithborder" cellspacing="1" cellpadding="0">
+                <thead>
+                    <tr>
+                        <td height="40" colspan="4" bgcolor="#f2efa9" style="text-align:center">
+                            <table width="380" border="0" align="center" style="text-align:center; margin-left:50px;">
+                                <tr>
+                                    <td>时间 从：</td>
+                                    <td><input id="reportGrid_filter_recharge_at_from" type="text" value="" class="width80" /></td>
+                                    <td><img id="reportGrid_filter_recharge_at_from_trigger" width="14" height="14" src="/images/grid-cal.gif"></td>
+                                    <td>至：</td>
+                                    <td><input id="reportGrid_filter_recharge_at_to" type="text" value="" class="width80" /></td>
+                                    <td><img id="reportGrid_filter_recharge_at_to_trigger" width="14" height="14" src="/images/grid-cal.gif"></td>
+                                    <td><input tabindex="3" class="submit" type="button" onclick="pData()" value="搜索"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; width: 140px;">玩家</td>
+                        <td height="40" style="text-align: center; width: 80px;">获得抽水总额</td>
+                        <td style="text-align: center; width: 80px;">实际获得抽水</td>
+                        <td style="text-align: center; width: 100px;">时间</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td style="text-align:center" id="pager" height="40" bgcolor="#f2efa9" colspan="7"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script type="text/javascript">
+    //<![CDATA[
+    Calendar.setup({
+        inputField: "reportGrid_filter_recharge_at_from",
+        trigger: "reportGrid_filter_recharge_at_from_trigger",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        onSelect: function () {
+            this.hide();
+        }
+    });
+    Calendar.setup({
+        inputField: "reportGrid_filter_recharge_at_to",
+        trigger: "reportGrid_filter_recharge_at_to_trigger",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        onSelect: function () {
+            this.hide();
+        }
+    });
+    //]]>
+</script>
+<script type="text/javascript">
+    var _p = new page($("#pager"));
+    var sTimeObj = $("#reportGrid_filter_recharge_at_from").SetDefaultDate();
+    var eTimeObj = $("#reportGrid_filter_recharge_at_to").SetDefaultDate();
+    function pData(isall) {
+        if (!checkDate()) {
+            return;
+        }
+        $.SendDataSync("GetAgentEarnings", { currPage: _p.pageIndex(), pageSize: _p.pageSize(), sTime: isall ? "" : sTimeObj.val(), eTime: isall ? "" : eTimeObj.val(), pType: $("#reportGrid_filter_mode").val() }, function (data) {
+            _p.Bind(data, pData, "reportGrid_table", isall);
+            if (data.Counts == 0) {
+                $("#reportGrid_table").children("tbody").html('<tr><td style="text-align:center;height:40px" colspan="4" bgcolor="#f7f5c2">当前记录集为空。</td></tr>');
+            }
+            else {
+                var dataHTML = new String();
+                $.each(data.DataList, function (i, d) {
+                    dataHTML += '<tr align="center"><td style="text-align:center;" bgcolor="#f7f5c2">' + d.Account + '</td><td height="40" bgcolor="#f7f5c2" style="text-align:center;">' + d.CsCount + '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.ChangeScore + '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.PayTime + '</td></tr>';
+                });
+                $("#reportGrid_table").children("tbody").html(dataHTML);
+                //<td style="text-align:center;" width="100" height="40" bgcolor="#f7e4e2">' + d.GoldSell + '</td>
+            }
+        });
+    }
+    (function () {
+        pData();
+    })();
+
+    function checkDate()
+    {
+        var icon = true;
+        var nowTime = new Date(@DateTime.Now.Year,@DateTime.Now.Month,@DateTime.Now.Day);
+        var stime = $("#reportGrid_filter_recharge_at_from").val();
+        var etime = $("#reportGrid_filter_recharge_at_to").val();
+        var arrStime = stime.split("-");
+        var starttime = new Date(arrStime[0], arrStime[1], arrStime[2]);
+        var arrEtime = etime.split("-");
+        var endtime = new Date(arrEtime[0], arrEtime[1], arrEtime[2]);
+        var days=Math.abs(((starttime-endtime)/86400000));   
+        if (days > 3) {
+            alert("只能查看近3天的收益情况");
+            return false;
+        }
+        var days2=Math.abs(((starttime-nowTime)/86400000));   
+        if (days2 > 3) {
+            alert("只能查看近3天的收益情况");
+            return false;
+        }
+        var days3=Math.abs(((nowTime-endtime)/86400000));   
+        if (days3 > 3) {
+            alert("只能查看近3天的收益情况");
+            return false;
+        }
+        return true;
+
+        
+    }
+
+</script>

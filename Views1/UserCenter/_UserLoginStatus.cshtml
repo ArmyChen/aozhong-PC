@@ -1,0 +1,88 @@
+﻿@model WebSite_YS.Models.UserCenter
+
+@if (@Model == null)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#login_submit").click(function () {
+                var username = $("#login_username").val();
+                var password = $("#login_password").val();
+                var captcha = $("#login_captcha").val();
+                var reg = /^[a-zA-Z0-9_]{6,16}$/;
+                if (!reg.test(username)) {
+                    alert("请输入正确的用户名，用户名由字母、数字、下划线组成！");
+                    return false;
+                }
+                if (password.length < 6) {
+                    alert("请输入密码！");
+                    return false;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/UserCenter/AjaxLogin",
+                    data: { login_username: username, login_password: password, login_captcha: captcha },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.State == 1) {
+                            window.location.href = "/UserCenter/Center";
+                        }
+                        else if (data.State == 2) 
+                        {
+                            if(data.Message!=""){
+                                alert(data.Message);
+                            }
+                            window.location.href = "/";
+                        }
+                        else {
+                            alert(data.Message);
+                            if (data.Number >= 4) {
+                                //
+                                $("#captchatr").show();
+                                $('#login_captcha_img').attr('src', '/VerificationCode/VerifCodeImg?' + Math.random());
+                            }
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+            <!--登录-开始-->
+            <div class="denglu-back">
+                <div class="fast-title"><img src="/images/denglu-title.png" /></div>
+                <div class="denglu-input-box"><input class="denglu-input" id="login_username" name="login_username" placeholder="&nbsp;&nbsp;&nbsp;用户名" 
+                autofocus/></div>
+                <div class="denglu-input-box"><input class="denglu-input" id="login_password" name="login_password" type="password" placeholder="&nbsp;&nbsp;&nbsp;登录密码" /></div>
+                <div class="denglu-pt"><a href="javascript:void(0);" id="login_submit"><img src="/images/denglu-pt.png" /></a></div>
+                <div class="denglu-pt"><a href="/Register"><img src="/images/denglu-zc.png" /></a></div>
+
+            </div>
+            <!--登录-结束-->
+
+}
+else
+{
+    @*<div class="logo1_02_top">
+        <div style="color: #FFC; width: 100%; font-size: 14px; line-height: 26px;">
+            恭喜登录成功,
+            账号： @Model.Accounts,
+            保险柜余额： @Model.InsureScore,
+            金币： @Model.Score<br />
+            <p ><a class="goldcolor" href="/UserCenter/Center" rel="nofollow"><span style="color:#ff6002; font-weight:bold;">进入个人中心</span></a>　<a class="goldcolor" href="/UserCenter/Center#ULogonPass" rel="nofollow" ><span style="color:#ff6002;font-weight:bold;">修改登录密码</span></a>　<a class="goldcolor" href="/Index/Exit" rel="nofollow">安全退出</a></p>
+        </div>
+    </div>*@
+
+       <!--登录-开始-->
+     <div class="denglu-go-back">
+      <div class="fast-title"><img src="/images/denglu-go-title.png" /></div>
+      <div class="denglu-go-input-box">账号：@Model.Accounts</div>
+      <div class="denglu-go-input-box-1">保险柜余额：@Model.InsureScore</div>
+      <div class="denglu-go-input-box-1">金币：@Model.Score</div>
+      <div class="denglu-go-pt"><a href="/Index/Exit"><img src="/images/exit.png" /></a></div>
+      <div class="denglu-go-pt"><a href="/Register"><img src="/images/denglu-zc.png" /></a></div>
+      
+     </div>
+     <!--登录-结束-->
+
+
+}

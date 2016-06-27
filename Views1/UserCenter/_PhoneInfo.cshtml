@@ -1,0 +1,79 @@
+﻿
+@{
+    string buttonName = "";
+}
+<div class="down_right_top">
+    <div class="down_right_weizhi">当前所在位置>>手机绑定</div>
+</div>
+<!---center开始-->
+<div class="down_center_box">
+    @if (string.IsNullOrEmpty(@ViewBag.userMobile))
+    {
+        buttonName = "确认绑定";
+    <div class="u_warn"> 您尚未绑定手机号码，请在下面进行绑定</div>
+    }
+    else
+    {
+        buttonName = "更改手机号";
+    <div class="u_warn"> 您已经绑定手机号码　<span style="color:black;">@ViewBag.userMobile</span>,可以在下面进行更改</div>
+        
+    }
+    <div class="tablediv">
+        @using (Ajax.BeginForm("PartialPhoneInfo", "UserCenter", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ManagerMain",
+            OnSuccess = "ShowMessage"
+        }, new { id = "F_MobileInfo" }))
+        {
+            <table width="500" border="0" cellspacing="0" cellpadding="0" class="tablenoborder">
+                <tr>
+                    <td width="130" height="40" align="right"><em style="color:#FF0000;">*</em>&nbsp;手机号码： </td>
+                    <td align="left"><input name="name_mobile" id="name_mobile" value="@ViewBag.userMobile" type="text" class="kd" />&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="40" colspan="2" align="center">
+                        <input type="button" class="submit" id="save" onclick="CheckMobileInfo(this)" tabindex="3" value="@buttonName">
+                    </td>
+                </tr>
+            </table>
+
+        }
+    </div>
+
+    <div class="idinfo-wlcome"><img src="/images/cativity/activity-welcome.png" /></div>
+
+
+</div>
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script>
+    function ShowMessage() {
+        var status = @ViewBag.status;
+        if(status==1){
+            alert("绑定成功");
+        }
+        else if(status==10){
+        }
+        else{
+            alert("绑定失败")
+
+        }
+    }
+    function CheckMobileInfo(button) {
+        var mobileReg = /^1\d{10}$/;
+        var umobile = $("#name_mobile").val();
+        
+        if (umobile.length != 11) {
+            alert("请输入正确的手机号码");
+            return false;
+        }
+        if (!mobileReg.test(umobile)) {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+        $(button).trigger("submit");
+    }
+</script>

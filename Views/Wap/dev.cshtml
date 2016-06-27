@@ -1,0 +1,111 @@
+﻿@{
+
+    Layout = null;
+}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width， initial-scale=1.0， minimum-scale=1.0， maximum-scale=1.0， user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+    <link href="../../Content/css/tab.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/ajaxForm")
+<title>充值卡</title>
+</head>
+<body id="dev">
+<ul id="tabnav">
+	<li class="home"><a href="BankPay?userid=@ViewData["uid"]&account=@ViewData["account"]&error=">网银充值</a></li>
+	<li class="dev"><a href="Dev?userid=@ViewData["uid"]&account=@ViewData["account"]&error=">充值卡</a></li>
+	
+</ul>
+<div id="content">
+    @using (Html.BeginForm("BankPayFormYBCard", "Wap", FormMethod.Post, new { id = "qwform" }))
+            {
+
+    <label><input class="n" name="channel_token" type="radio" value="SZX" checked="checked" />移动充值卡</label> 
+    <label><input class="n" name="channel_token" type="radio" value="UNICOM" />联通充值卡</label> 
+    <label><input class="n" name="channel_token" type="radio" value="TELECOM" />电信充值卡 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="SNDACARD" />盛大一卡通 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="ZHENGTU" />征途一卡通 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="QQCARD" /> QQ卡</label> 
+    <label><input class="n" name="channel_token" type="radio" value="JIUYOU" />久游一卡通 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="NETEASE" />网易一卡通 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="SOHU" />搜狐一卡通 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="WANMEI" />完美一卡通 </label>
+    <label><input class="n" name="channel_token" type="radio" value="ZONGYOU" />纵游一卡通 </label> 
+    <label><input class="n" name="channel_token" type="radio" value="JUNNET" /> 骏网一卡通</label> 
+    <label><input class="n" name="channel_token" type="radio" value="TIANXIA" /> 天下一卡通</label> 
+    <label><input class="n" name="channel_token" type="radio" value="TIANHONG" />天宏一卡通 </label> 
+    
+        <div class="y-name-box">
+                <div class="y-name-1" style="color:#999">用户名：&nbsp;<b> @ViewData["account"]</b></div>
+        </div>
+        <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+        <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+        <table>
+        <tr style="color:#999">
+        <td>*充值金额:</td><td><div id="dropDownList3" class="dropdown"> 
+        <select name="amount_input" id="card_value">
+            <option value="10">10 元</option>
+            <option value="20">20 元</option>
+            <option value="30">30 元</option>
+            <option value="50">50 元</option>
+            <option value="100">100 元</option>
+            <option value="200">200 元</option>
+            <option value="300">300 元</option>
+            <option value="500">500 元</option>
+        </select> 
+        <span>请再次核实充值卡面额，如果提交金额错误，将无法补回</span> 
+        <ul></ul> 
+    </div></td>
+        </tr>
+        <tr style="color:#999">
+           <td>*卡号：</td><td><input name="card_cardnum" id="card_cardnum" type="text" class="kd" /></td>
+        </tr>
+        <tr style="color:#999">
+           <td>*卡密码：</td><td><input name="card_cardpwd" id="card_cardpwd" type="text" class="kd" /></td>
+        </tr>
+        <tr style="color:#F00"><td></td><td>@ViewData["error"]</td></tr>
+        </table>
+        <div class="jine-bt"><a href="#" onclick="CheckPayCardinfo()"><img src="../../Images/images/money-bt.png" width="100%" /></a></div>
+        <span style="color: #999; font-size:13px;">
+游戏规则<br />
+    1.请确保您填写的用户名正确无误，银玩家输入错误而导致的任何
+损失由用户自行承担。<br />
+2.充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返
+回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭
+充值窗口。<br />
+3.如有任何疑问，请您联系客服中心。<br />
+</span>
+            } 
+</div>
+</body>
+</html>
+
+
+<script>
+    function CheckPayCardinfo() {
+
+        var cardnum = $("#card_cardnum");
+        var cardpwd = $("#card_cardpwd");
+
+        if (cardnum.val() == "") {
+            alert("请输入充值卡号");
+            return false;
+        }
+        if (cardpwd.val() == "") {
+            alert("请输入充值卡密码");
+            return false;
+        }
+        if ($("#card_value").val() == "") {
+            alert("请选择充值金额");
+            return false;
+        }
+
+        document.getElementById('qwform').submit()
+    }
+</script>

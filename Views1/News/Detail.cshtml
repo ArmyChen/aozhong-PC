@@ -1,0 +1,26 @@
+﻿@model WebSite_YS.Models.CXTreasureDB.News
+@{
+    ViewBag.Title = "新闻公告";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+}
+
+<!--new-detailed-star-->
+<div class="news-title">
+    <div class="title-txt"><img src="/images/news-title.png" /></div>
+</div>
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-title">@Html.Raw(Model.Title)</div>
+        <div class="new-detailde-Content">
+            @Html.Raw(Model.NewsContent)
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>
+
+<!--new-detailed-end-->

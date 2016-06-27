@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*down-star*/
+.banner-down{width:994px; height:226px; background-image:url(/images/new-logo.png); margin: 0px auto; background-repeat:no-repeat;}
+.down-box{width:100%; height:226px; background-color:#332221;}
+.down-title{width:964px; height:70px; margin: 0px auto; background-image:url(/images/title.png); margin-top:10px;}
+.title-txt{width:182px; height:34px; }
+.down-back{width:966px; height:737px; background-image:url(/images/down-back.jpg); margin:0px auto;}
+.down-load{width:740px; height:217px; margin: 0px auto; }
+.pc-box{width:204px; height:205px;float:left; }
+.pc-box-2{width:204px; height:205px;float:left; margin-left:40px;}
+.pc-1{width:194px; height:100px; margin:0px auto;}
+.pc-botton{width:194px; height:71px; margin:0px auto; margin-top:42px;}
+.pc-kong{width:964px; height:60px;}
+.tuijian-title{width:201px; height:42px; margin:0px auto; margin-top:43px;}
+.tuijian-box{width:740px; height:143px; margin:0px auto;}
+.tuijian-game-1{width:141px; height:142px; float:left;}
+.tuijian-game-2{width:141px; height:142px; margin-left:58px;float:left;}
+/*down-end*/
+.erwm-box{width:420px; height:140px; margin-left:390px; margin-top:10px;}
+.erwm-iso{width:140px; height:140px; float:left;}
+.erwm-an{width:140px; height:140px; float:left; margin-left:110px;}

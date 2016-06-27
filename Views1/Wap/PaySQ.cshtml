@@ -1,0 +1,440 @@
+﻿@{
+    ViewBag.Title = "手机网银充值";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>充值</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <link rel="stylesheet" type="text/css" href="/Content/wap/lanrenzhijia.css">
+    <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#content div").hide(); // Initially hide all content
+            $("#tabs li:first").attr("id", "current"); // Activate first tab
+            $("#content div:first").fadeIn(); // Show first tab content
+
+            $('#tabs a').click(function (e) {
+                e.preventDefault();
+                $("#content div").hide(); //Hide all content
+                $("#tabs li").attr("id", ""); //Reset id's
+                $(this).parent().attr("id", "current"); // Activate this
+                $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+            });
+
+           // ChechJE();
+        });
+
+        function ChechJE() {
+            debugger;
+            var amountObj = $("#amount_inputZFB").val();
+
+            //判断正整数
+            var reg = /^[1-9]\d*$/;
+            var result = reg.test(amountObj);
+            if (!result) {
+                $("#CZJINE").css("display", "block");
+                return false;
+            } else {
+
+                $("#mbform").submit();
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function MM_swapImgRestore() { //v3.0
+            var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+        }
+        function MM_preloadImages() { //v3.0
+            var d = document; if (d.images) {
+                if (!d.MM_p) d.MM_p = new Array();
+                var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                    if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+            }
+        }
+
+        function MM_findObj(n, d) { //v4.01
+            var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+                d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+            }
+            if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+            for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+            if (!x && d.getElementById) x = d.getElementById(n); return x;
+        }
+
+        function MM_swapImage() { //v3.0
+            var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2) ; i += 3)
+                if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+        }
+    </script>
+</head>
+<body style="margin: 0 auto 0 auto;" onload="MM_preloadImages('/images/wap/fh1.png', '/images/wap/gz01.png', '/images/wap/pm01.png', '/images/wap/tj01.png')">
+
+    <ul id="tabs">
+        @*<li><a href="#" title="tab1">支付宝充值</a></li>*@
+        <li><a href="#" title="tab2" id="HC">网银充值</a></li>
+        <li><a href="#" title="tab3" id="QW">充值卡</a></li>
+    </ul>
+    <div id="content">
+        @*<div id="tab1">
+                @using (Html.BeginForm("BankPayFormZFB", "Wap", FormMethod.Post, new { id = "pform" }))
+                {
+                    <table width="90%" border="0" style="margin:auto;">
+                        <tr>
+                            <td width="40%" align="right">用户名：</td>
+                            <td>@ViewData["account"]</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" align="right">充值金额：</td>
+                            <td><input type="number" class="czje" name="amount_input" id="amount_inputZFB" />&nbsp;至少 @ViewData["minmoney"]元.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><span style="font-size:12px;color:red;display: none"  id="CZJINE">充值金额必须为正整数</span></td>
+                            <td colspan="2" align="center"><span style="font-size:12px;color:red;">@ViewData["error"]</span></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+                    <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+
+
+                    <span class="cz5"><a href="#" onclick="ChechJE();" onmouseout="    MM_swapImgRestore()" onmouseover="    MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                    <span class="cz6">
+                        充值规则：<br />
+                        1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                        2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                        3. 如有任何疑问，请您联系客服中心。<br />
+                    </span>
+
+                }
+            </div>*@
+        <div id="tab2">
+            @using (Html.BeginForm("BankPayFormSQ", "Wap", FormMethod.Post, new { id = "sqform" }))
+            {
+                @*<table width="100%" style="margin-bottom: 10px;" border="0">
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-BOC" value="BOCSH" checked="checked">
+                            <label for="banktransfer-ebank-BOC">中国银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-CCB" value="CCB">
+
+                            <label for="banktransfer-ebank-CCB">建设银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-ABC" value="ABC">
+
+                            <label for="banktransfer-ebank-ABC">农业银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-ICBC" value="ICBC">
+
+                            <label for="banktransfer-ebank-ICBC">工商银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-PSBC" value="PSBC">
+
+                            <label for="banktransfer-ebank-PSBC">中国邮政储蓄银行</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-CMB" value="CMB">
+
+                            <label for="banktransfer-ebank-CMB">招商银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-COMM" value="BOCOM">
+
+                            <label for="banktransfer-ebank-COMM">交通银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-CEB" value="CEB">
+
+                            <label for="banktransfer-ebank-CEB">光大银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-PAB" value="PAB">
+
+                            <label for="banktransfer-ebank-PAB">平安银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-CMBC" value="CMBC">
+
+                            <label for="banktransfer-ebank-CMBC">民生银行</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-SPDB" value="SPDB">
+
+                            <label for="banktransfer-ebank-SPDB">浦发银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-CIB" value="CIB">
+
+                            <label for="banktransfer-ebank-CIB">兴业银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-CGB" value="GDB">
+
+                            <label for="banktransfer-ebank-CGB">广发银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-BOB" value="BCCB">
+
+                            <label for="banktransfer-ebank-BOB">北京银行</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-BOS" value="BOS">
+
+                            <label for="banktransfer-ebank-BOS">上海银行</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-ECITIC" value="CNCB">
+
+                            <label for="banktransfer-ebank-ECITIC">中信银行</label>
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-HXB" value="HXB">
+
+                            <label for="banktransfer-ebank-HXB">华夏银行</label>
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-SRCB" value="SRCB">
+
+                            <label for="banktransfer-ebank-SRCB">上海农商</label>
+
+                            <input type="radio" name="channel_id" id="banktransfer-ebank-BOC" value="BOC">
+
+                            <label for="banktransfer-ebank-BOC">中行（大额）</label>
+                        </td>
+                    </tr>
+                </table>*@
+
+
+                <table width="90%" border="0" style="margin:auto;">
+                    <tr>
+                        <td width="40%" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" align="right">充值金额：</td>
+                        <td><input type="number" class="czje" name="amount_input" id="amount_input" />&nbsp;至少 @ViewData["minmoney"]元.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;">@ViewData["error"]</span></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+                <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+                <span class="cz5"><a href="#" onclick="document.getElementById('sqform').submit()" onmouseout="    MM_swapImgRestore()" onmouseover="    MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                <span class="cz6">
+                    充值规则：<br />
+                    1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+            }
+        </div>
+        <div id="tab3">
+            @using (Html.BeginForm("BankPayFormQW", "Wap", FormMethod.Post, new { id = "qwform" }))
+            {
+
+                <table width="100%" border="0" style="margin-bottom: 10px;" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_token" id="repaidcard-chinamobile" value="cm" checked="checked">
+
+                            <label for="repaidcard-chinamobile">神州行全国卡</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-unicom" value="cc">
+
+                            <label for="repaidcard-unicom">联通充值卡</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-telecom" value="dx">
+
+                            <label for="repaidcard-telecom">电信充值卡</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-shengda" value="sd">
+
+                            <label for="repaidcard-shengda">盛大一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-zhengtu" value="zt">
+
+                            <label for="repaidcard-zhengtu">征途一卡通</label>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_token" id="repaidcard-qqcard" value="qq">
+
+                            <label for="repaidcard-qqcard">Q币充值卡</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-jiuyou" value="jy">
+
+                            <label for="repaidcard-jiuyou">久游一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-netease" value="wy">
+
+                            <label for="repaidcard-netease">网易一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-sohu" value="sh">
+
+                            <label for="repaidcard-sohu">搜狐一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-wanmei" value="se">
+
+                            <label for="repaidcard-wanmei">32一卡通</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" height="30" align="center">
+                            <input type="radio" name="channel_token" id="repaidcard-zongyou" value="zy">
+
+                            <label for="repaidcard-zongyou">纵游一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-junnet" value="jw">
+
+                            <label for="repaidcard-junnet">骏网一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-tianxia" value="tx">
+
+                            <label for="repaidcard-tianxia">天下一卡通</label>
+
+                            <input type="radio" name="channel_token" id="repaidcard-tianhong" value="th">
+
+                            <label for="repaidcard-tianhong">天宏一卡通</label>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <table width="90%" style="margin:auto;" border="0" cellspacing="0" cellpadding="0">
+                    @*<tr>
+                            <td width="40%" height="40" align="right"><em>*</em>充值用户名： </td>
+                            <td align="left"><input name="username" id="card_payaccount" type="text" class="kd" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td width="40%" height="40" align="right"><em>*</em>确认用户名： </td>
+                            <td align="left"><input name="confirm_username" type="text" id="card_payaccount2" class="kd" value="" />&nbsp;</td>
+                        </tr>*@
+                    <tr>
+                        <td width="40%" height="40" align="right">用户名：</td>
+                        <td>@ViewData["account"]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" height="40" align="right"><em>*</em>充值金额： </td>
+                        <td align="left">
+                            <select name="amount_input" id="card_value">
+                                <option value="10">10 元</option>
+                                <option value="20">20 元</option>
+                                <option value="30">30 元</option>
+                                <option value="50">50 元</option>
+                                <option value="100">100 元</option>
+                                <option value="200">200 元</option>
+                                <option value="300">300 元</option>
+                                <option value="500">500 元</option>
+                            </select>&nbsp;（请再次核实充值卡面额，如果提交金额错误，将无法补回！）
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%" height="40" align="right"><em>*</em>卡号： </td>
+                        <td align="left"><input name="card_cardnum" id="card_cardnum" type="text" class="kd" />&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="40%" height="40" align="right"><em>*</em>卡密码： </td>
+                        <td align="left"><input name="card_cardpwd" id="card_cardpwd" type="text" class="kd" />&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><span style="font-size:12px;color:red;">@ViewData["error"]</span></td>
+                    </tr>
+                    @*<tr>
+                            <td height="40" colspan="2" align="center">
+                                <input type="button" class="submit" tabindex="3" onclick="return CheckPayCardinfo(this)" value="确认充值">
+                            </td>
+                        </tr>*@
+                </table>
+
+
+                @*<table width="90%" border="0" style="margin:auto;">
+                        <tr>
+                            <td width="40%" align="right">用户名：</td>
+                            <td>@ViewData["account"]</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" align="right">充值金额：</td>
+                            <td><input type="number" class="czje" name="amount_input" />&nbsp;至少 @ViewData["minmoney"]元.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><span style="font-size:12px;color:red;">@ViewData["error"]</span></td>
+                        </tr>
+                    </table>*@
+                <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+                <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+                <span class="cz5"><a href="#" onclick="CheckPayCardinfo()" onmouseout="    MM_swapImgRestore()" onmouseover="    MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></span>
+                <span class="cz6">
+                    充值规则：<br />
+                    1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                    2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                    3. 如有任何疑问，请您联系客服中心。<br />
+                </span>
+            }
+        </div>
+    </div>
+
+    <script>
+        function CheckPayCardinfo() {
+
+            var cardnum = $("#card_cardnum");
+            var cardpwd = $("#card_cardpwd");
+
+            if (cardnum.val() == "") {
+                alert("请输入充值卡号");
+                return false;
+            }
+            if (cardpwd.val() == "") {
+                alert("请输入充值卡密码");
+                return false;
+            }
+            if ($("#card_value").val() == "") {
+                alert("请选择充值金额");
+                return false;
+            }
+
+            document.getElementById('qwform').submit()
+        }
+    </script>
+
+
+
+    @*<div class="cz">
+              <div class="cz1">在线充值</div>
+              <div class="cz2"><img src="/images/wap/line.png" width="100%" /></div>
+              <div class="cz3">
+                  @using (Html.BeginForm("BankPayForm", "Wap", FormMethod.Post, new { id = "pform" }))
+                  {
+                      <table width="90%" border="0" style="margin:auto;">
+                          <tr>
+                              <td width="40%" align="right">用户名：</td>
+                              <td>@ViewData["account"]</td>
+                          </tr>
+                          <tr>
+                              <td width="40%" align="right">充值金额：</td>
+                              <td><input type="number" class="czje" name="amount_input" />&nbsp;至少 @ViewData["minmoney"]元.</td>
+                          </tr>
+                          <tr>
+                              <td colspan="2" align="center"><span style="font-size:12px;color:red;">@ViewData["error"]</span></td>
+                          </tr>
+                      </table>
+                      <input type="hidden" name="accounts_input" value="@ViewData["account"]" />
+                      <input type="hidden" value="@ViewData["uid"]" name="puserid" />
+                  }
+              </div>
+
+             <div class="cz5"><a href="#" onclick="document.getElementById('pform').submit()" onmouseout="    MM_swapImgRestore()" onmouseover="    MM_swapImage('Image18', '', '/images/wap/tj01.png', 1)"><img src="/images/wap/tj.png" name="Image18" width="100%" border="0" id="Image18" /></a></div>
+
+              <div class="cz6">
+                  充值规则：<br />
+                  1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                  2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                  3. 如有任何疑问，请您联系客服中心。<br />
+              </div>
+
+        </div>*@
+
+
+</body>
+</html>

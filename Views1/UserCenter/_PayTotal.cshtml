@@ -1,0 +1,449 @@
+﻿@{
+    Layout = null;
+}
+@Scripts.Render("~/Scripts/jscal2")
+@model WebSite_YS.Models.Partial.Pay
+<script type="text/javascript">
+    function CheckPayBankinfo(formId, formPerfix) {        
+        var account = $("#" + formPerfix + "_bank_payaccount").val();
+        var account2 = $("#" + formPerfix + "_bank_payaccount2").val();
+        var amount = $("#" + formPerfix + "_bank_payamount").val();
+        if (account == "") {
+            alert("请填写充值用户名。");
+            return;
+        }
+        else {
+            if (account != account2) {
+                alert("两次输入的账号不一致！");
+                return;
+            }
+        }
+        var re = /^[1-9]+[0-9]*$/;
+        if (amount == "") {
+            alert("请填写充值金额。");
+            return;
+        }
+        else {
+            if (!re.test(amount)) {
+                alert("充值金额应为大于0的整数！");
+                return;
+            }
+        }
+        $("#" + formId).submit();
+    }
+</script>
+
+
+
+<!--login-right-开始-->
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/Account-recharge-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        <!---center开始-->
+        @if (!string.IsNullOrEmpty(Model.EerrorMessage))
+        {
+            <div class="u_warn"> @Html.Raw(Model.EerrorMessage)</div>
+        }
+        <div class="tablediv">
+            @*<ul id="tabs">
+                <li><a href="#" title="tab1">网银</a></li>              
+                <li><a href="#" title="tab4">支付宝</a></li>
+                <li><a href="#" title="tab5">微信充值</a></li>
+            </ul>*@
+            <div id="content">
+                 <div id="tab1">
+                    @using (Html.BeginForm("PartialBanktransferQianyifu", "UserCenter", FormMethod.Post, new { name = "F_PayQYFALIPAY", id = "F_PayQYFALIPAY", target = "_blank" }))
+                    {
+                        <table width="500" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_username" id="qyfalipay_bank_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_confirm_username" id="qyfalipay_bank_payaccount2" type="text" value="@Model.PayAccount" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+        <td width="100" height="40" align="right"><em>*</em>&nbsp;充值金额： </td>
+        <td align="left"><input name="qyf_recharge_amount" id="qyfalipay_bank_payamount" type="text" class="kd">
+        </td>
+    </tr>@*
+    <tr height="10"></tr>
+    <tr>
+        <td width="40%" height="25" align="left"><input name="bankid" type="radio" value="ICBC-NET" checked="checked">
+            <span class="STYLE2">中国工商银行</span></td>
+        <td width="25%" height="25" align="left"><input type="radio" name="bankid" value="CCB-NET">
+            建设银行</td>
+        <td width="35%" height="25" align="left"><input type="radio" name="bankid" value="BOC-NET">
+            中国银行</td>
+    </tr>
+    <tr>
+      <td height="25" align="left"><input type="radio" name="bankid" value="CMBCHINA-NET">
+        招商银行</td>
+      <td height="25" align="left"><input type="radio" name="bankid" value="ECITIC-NET">
+        中信银行</td>
+      <td height="25" align="left"><input type="radio" name="bankid" value="CIB-NET">
+        兴业银行</td>
+      </tr>
+        <tr>
+          <td height="25" align="left"><input type="radio" name="bankid" value="CEB-NET">
+            光大银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="ABC-NET">
+            农业银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="POST-NET">
+            邮政银行</td>
+          </tr>
+        <tr>
+          <td height="25" align="left"><input type="radio" name="bankid" value="SDB-NET">
+            深圳发展银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="GDB-NET">
+            广东发展银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="SPDB-NET">
+            上海浦东发展银行</td>
+          </tr>
+        <tr>
+          <td height="25" align="left"><input type="radio" name="bankid" value="CMBC-NET">
+            民生银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="BOCO-NET">
+            交通银行</td>
+          <td height="25" align="left"><input name="bankid" type="radio" value="NJCB-NET">
+            南京银行</td>
+          </tr>
+        <tr>
+          <td height="25" align="left"><input type="radio" name="bankid" value="PINGANBANK">
+            平安银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="CBHB-NET">
+            渤海银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="HKBEA-NET">
+            东亚银行</td>
+        </tr>
+        <tr>
+          <td height="25" align="left"><input type="radio" name="bankid" value="NBCB-NET">
+            宁波银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="SHB-NET">
+            上海银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="CZ-NET">
+            浙商银行</td>
+        </tr>
+        <tr>
+          <td height="25" align="left"><input type="radio" name="bankid" value="HZBANK-NET">
+            杭州银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="NCBBANK-NET">
+            南洋银行</td>
+          <td height="25" align="left"><input type="radio" name="bankid" value="SCCB-NET">
+            河北银行</td>
+        </tr>*@
+                            <tr>
+                                <td height="40" colspan="2" align="center">
+                                    <input type="button" id="qyfalipay_submit" class="submit" onclick="CheckPayAlipay()" tabindex="2" value="确认充值">
+                                </td>
+                            </tr>
+                        </table>                
+                    }<br />
+                    <span style="background: #fafaec; display: block; width: 550px; height: 100%; border: #fcd344 1px solid; line-height: 30px; padding-top: 6px; padding-left: 15px; padding-right: 15px; color: #a4892a;">1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                        2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                        3. 如有任何疑问，请您联系客服中心。
+                    </span>
+                </div>
+                 <div id="tab4">
+                  @using (Html.BeginForm("PartialBanktransferJunFuTong", "UserCenter", FormMethod.Post, new { name = "F_PayJFTALIPAY", id = "F_PayJFTALIPAY", target = "_blank" }))
+                    {
+                        <!--<table width="500" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+                                <td align="left">
+                                    <input name="jft_username" id="jftalipay_bank_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+                                <td align="left">
+                                    <input name="jft_confirm_username" id="jftalipay_bank_payaccount2" type="text" value="@Model.PayAccount" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值金额： </td>
+                                <td align="left"><input name="qyf_recharge_amount" id="qyfalipay_bank_payamount" type="text" class="kd">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="40" colspan="2" align="center">
+                                    <input type="button" id="jftalipay_submit" class="submit" onclick="CheckPayBankinfo('F_PayJFTALIPAY', 'jftalipay')" tabindex="2" value="确认充值"><input type="hidden" name="jft_paymethod" value="4">
+                                </td>
+                            </tr>
+                        </table> -->               
+                    }<br />
+                    <span style="background: #fafaec; display: block; width: 550px; height: 100%; border: #fcd344 1px solid; line-height: 30px; padding-top: 6px; padding-left: 15px; padding-right: 15px; color: #a4892a;">充值规则：<br />
+                    <a style="color:#F00">1.支付宝充值转账至支付宝账户 （）转账时请备注游戏账号！</a><br />
+                    <a style="color:#F00">注：支付宝充值奖励百分之五（需单比100以上）</a><br/>
+                    <a style="color:#F00">注：本支付宝帐号不添加任何好友。</a><br/>
+                    <!--2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />-->
+                    <a style="color:#F00">2. 如有充值遇到问题，请您联系客服中心。<br />
+                        
+                    </span>
+                </div>
+		@*<div id="tab5">
+                    @using (Html.BeginForm("PartialBanktransferQianyifu", "UserCenter", FormMethod.Post, new { name = "F_PayQYFALIPAY1", id = "F_PayQYFALIPAY1", target = "_blank" }))
+                    {
+                        <table width="500" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_username" id="qyfalipay_bank_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_confirm_username" id="qyfalipay_bank_payaccount2" type="text" value="@Model.PayAccount" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值金额： </td>
+                                <td align="left"><input name="qyf_recharge_amount" id="qyfalipay_bank_payamount" type="text" class="kd">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="40" colspan="2" align="center">
+                                    <input type="button" id="qyfalipay_submit" class="submit" onclick="CheckPayAlipay('F_PayQYFALIPAY1', 'qyfwx')" tabindex="2" value="确认充值"><input type="hidden" name="bankid" value="weixin">
+                                </td>
+                            </tr>
+                        </table>                
+                    }<br />
+                    <span style="background: #fafaec; display: block; width: 550px; height: 100%; border: #fcd344 1px solid; line-height: 30px; padding-top: 6px; padding-left: 15px; padding-right: 15px; color: #a4892a;">1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                        2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                        3. 如有任何疑问，请您联系客服中心。
+                    </span>
+                </div>
+                 <div id="tab6">
+                    @using (Html.BeginForm("PartialBanktransferQianyifu", "UserCenter", FormMethod.Post, new { name = "F_PayQYFALIPAY", id = "F_PayQYFALIPAY", target = "_blank" }))
+                    {
+                        <table width="500" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_username" id="qyfalipay_bank_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_confirm_username" id="qyfalipay_bank_payaccount2" type="text" value="@Model.PayAccount" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值金额： </td>
+                                <td align="left">
+                                    <select name="qyf_recharge_amount" id="qyfalipay_bank_payamount" style="height: 30px;">
+                                        <option value="20">20元</option>
+                                        <option value="50">50元</option>
+                                        <option value="100">100元</option>
+                                        <option value="200">200元</option>
+                                        <option value="500">500元</option>
+                                        <option value="1000">1000元</option>
+                                        <option value="2000">2000元</option>
+                                        <option value="5000">5000元</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="40" colspan="2" align="center">
+                                    <input type="button" id="qyfalipay_submit" class="submit" onclick="CheckPayAlipay('F_PayQYFALIPAY', 'qyfwx')" tabindex="2" value="确认充值"><input type="hidden" name="bankid" value="zhifubao">
+                                </td>
+                            </tr>
+                        </table>                
+                    }<br />
+                    <span style="background: #fafaec; display: block; width: 550px; height: 100%; border: #fcd344 1px solid; line-height: 30px; padding-top: 6px; padding-left: 15px; padding-right: 15px; color: #a4892a;">1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                        2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                        3. 如有任何疑问，请您联系客服中心。
+                    </span>
+                </div>*@
+                @* <div id="tab7">
+                    @using (Html.BeginForm("PartialBanktransferQianyifu", "UserCenter", FormMethod.Post, new { name = "F_PayQYFWEIXIN", id = "F_PayQYFWEIXINPAY", target = "_blank" }))
+                    {
+                        <table width="500" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_username" id="qyfweixin_bank_payaccount" type="text" class="kd" value="@Model.PayAccount" /></td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;确认用户名： </td>
+                                <td align="left">
+                                    <input name="qyf_confirm_username" id="qyfweixin_bank_payaccount2" type="text" value="@Model.PayAccount" class="kd" />&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="100" height="40" align="right"><em>*</em>&nbsp;充值金额： </td>
+                                <td align="left">
+                               <input name="qyf_recharge_amount" type="text" id="qyfweixin_bank_payamount" class="kd" maxlength="6" />&nbsp;至少 @Model.MinWangYinPayAmount 元。</td>
+                            </tr>
+                            <tr>
+                                <td height="40" colspan="2" align="center">
+                                    <input type="button" id="qyfweixin_submit" class="submit" onclick="CheckPayBankinfo('F_PayQYFWEIXINPAY', 'qyfweixin')" tabindex="2" value="确认充值"><input type="hidden" name="bankid" value="weixin">
+                                </td>
+                            </tr>
+                        </table>                
+                    }<br />
+                    <span style="background: #fafaec; display: block; width: 550px; height: 100%; border: #fcd344 1px solid; line-height: 30px; padding-top: 6px; padding-left: 15px; padding-right: 15px; color: #a4892a;">1. 请确保您填写的用户名正确无误，因玩家输入错误而导致的任何损失由用户自行承担。<br />
+                        2. 充值过程中，浏览器会跳转至支付页面，支付成功后，会自动返回本网站，如果没有跳转或是弹出充值成功的页面，请您不要关闭充值窗口。<br />
+                        3. 如有任何疑问，请您联系客服中心。
+                    </span>
+                </div>*@
+                <script>
+                    var zzStatus = 0;
+                    function CheckPayBankinfo(formId, formPerfix) {
+                        var account = $("#" + formPerfix + "_bank_payaccount").val();
+                        var account2 = $("#" + formPerfix + "_bank_payaccount2").val();
+                        var amount = $("#" + formPerfix + "_bank_payamount").val();
+                        if (account == "") {
+                            alert("请填写充值用户名。");
+                            return;
+                        }
+                        else {
+                            if (account != account2) {
+                                alert("两次输入的账号不一致！");
+                                return;
+                            }
+                        }
+                        var re = /^[1-9]+[0-9]*$/;
+                        if (amount == "") {
+                            alert("请填写充值金额。");
+                            return;
+                        }
+                        else {
+                            if (!re.test(amount)) {
+                                alert("充值金额应为大于0的整数！");
+                                return false;
+                            }
+                        }
+                        $("#" + formId).submit();
+                    }
+                    function CheckPayAlipay() {
+                        var account = $("#qyfalipay_bank_payaccount").val();
+                        var account2 = $("#qyfalipay_bank_payaccount2").val(); 
+                        var amount = $("#qyfalipay_bank_payamount ").val();  
+                    
+                        if (account == "") {
+                            alert("请填写充值用户名。");
+                            return;
+                        }
+                        else {
+                            if (account != account2) {
+                                alert("两次输入的账号不一致！");
+                                return;
+                            }
+                        } 
+                        var re = /^[1-9]+[0-9]*$/;
+                        if (amount == "") {
+                            alert("请填写充值金额。");
+                            return;
+                        }
+                        else {
+                            if (!re.test(amount)) {
+                                alert("充值金额应为大于0的整数！");
+                                return;
+                            }else{
+				if (toInt(amount) < 20) {
+                                alert("最低充值20元！");
+                                return;
+				}
+                        }
+			
+                        window.location.href ="http://aozo.peking114.com/SYT/account/JtpayWY.aspx?payAccounts="+account+"&amount="+amount+"";
+                    }
+                    function CheckPayment(button)
+                    {
+                        var cname  = $("#manual_cardholder");
+                        var pdata = $("#manual_transfer_date");
+                        var amount = $("#manual_order-amount");
+                        var fs = $("#manual_transfer-mode");
+                        var fstext = $("#manual_other-mode");
+                        var caddress = $("#recharge_transfer_address");
+                        if(isNaN(amount.val()) || parseInt(amount.val()) < @Model.MinPayAmount || amount.val() == "")
+                        {
+                            alert("请输入一个大于或等于 @Model.MinPayAmount 的数字。");
+                            return false;
+                        }
+                        else if(fs.val() == "0" && fstext.val()=="")
+                        {
+                            alert("请填写汇款方式。");
+                            return false;
+                        }
+                        else if(cname.val() == "")
+                        {
+                            alert("请填写持卡人姓名。");
+                            return false;
+                        }
+                        else if(pdata.val() == "")
+                        {
+                            alert("请填写汇款时间。");
+                            return false;
+                        }
+                        else if(caddress.val() == "")
+                        {
+                            alert("请填写汇款地点。");
+                            return false;
+                        }
+                        if (zzStatus == 1) {
+                            alert('正在提交信息中，请稍后...');
+                            return;
+                        }
+                        else{
+                            zzStatus=1;
+                            $(button).trigger("submit");
+                        }
+                    }
+                </script>
+            </div>
+
+            <script>
+                function ShowMessage(str)
+                {
+                    alert(str);
+                }
+                $(document).ready(function () {
+                    $("#content div").hide(); // Initially hide all content
+                    $("#tabs li:first").attr("id", "current"); // Activate first tab
+                    $("#content div:first").fadeIn(); // Show first tab content
+
+                    $('#tabs a').click(function (e) {
+                        e.preventDefault();
+                        $("#content div").hide(); //Hide all content
+                        $("#tabs li").attr("id", ""); //Reset id's
+                        $(this).parent().attr("id", "current"); // Activate this
+                        $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+                    });
+
+                    $("#manual_transfer-mode").change(function(){
+                        if($(this).val() == "0")
+                            $("#manual_other-mode").show().val("");
+                        else
+                            $("#manual_other-mode").hide();
+                    });
+                    $.SendData("GetPayInfo", null, null, function (jdata) {
+                        var ulString = "";
+                        var ulString2 = "";
+                        $.each(jdata, function (i, data) {
+                            ulString +="<tr><td style='text-align:center; padding:6px;'>"+data.BankName+"</td><td style='text-align:center; padding:6px;'>"
+                                +data.BankCardId+"</td><td style='text-align:center; padding:6px;'>"+data.AcountName+"</td></tr>";
+                            //ulString2 +="<option value='"+data.BankName+"'>"+data.BankName+"</option>";
+                        });
+                        $("#tb_payinfo").find("tbody").html(ulString);
+                        //$("#manual_banks").html(ulString2);
+                    });
+                    $.SendData("GetRemittanceType", null, null, function (jdata) {
+                        var ulString = "";
+                        $.each(jdata, function (i, data) {
+                            ulString +="<option value='"+data.TypeName+"'>"+data.TypeName+"</option>";
+                        });
+                        $("#manual_transfer-mode").html(ulString);
+                    });
+
+                });
+            </script>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+</div>
+<!--login-right-结束-->
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->

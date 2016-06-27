@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "支付结果";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+@section styles{
+    <link href="/content/activity.css" rel="stylesheet" type="text/css" media="all">
+}
+<!--activity开始-->
+<div class="activity_box">
+    <div class="activity_top_box">
+        <div class="activity_top_weizhi">当前所在位置>>支付结果</div>
+        <div class="activity_center_box">
+            <div style="width:300px; margin:0 auto; height:100px; padding:10px 10px; color:#fff;">
+                充值结果 ： @ViewData["mess"]<br />
+                订单号：@ViewData["order"]<br />
+                充值金额：@ViewData["amt"] 元<br />    
+            </div>
+
+            <!--welcome束-->
+        </div>
+        <!--center-结束-->
+        <div class="activity_foot"></div>
+
+    </div>
+</div>
+<!--activity结束-->

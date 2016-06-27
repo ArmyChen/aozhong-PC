@@ -1,0 +1,56 @@
+﻿@Scripts.Render("~/Scripts/jscal2")
+@Scripts.Render("~/Scripts/pageination")
+
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/TranRecord-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        <div class="tablediv">
+            <table width="100%" border="0" id="reportGrid_table" class="tablewithborder" cellspacing="1" cellpadding="0">
+                <thead>
+                    <tr>
+                        <td style="text-align: center; width: 140px; height:40px;">玩家</td>
+                        <td style="text-align: center; width: 100px;">登录时间</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td style="text-align:center" id="pager" height="40" bgcolor="#f2efa9" colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script type="text/javascript">
+    var _p = new page($("#pager"));
+    function pData(isall) {
+
+        $.SendDataSync("GetAgentToday", { currPage: _p.pageIndex(), pageSize: _p.pageSize(),t:2 }, function (data) {
+            _p.Bind(data, pData, "reportGrid_table", isall);
+            if (data.Counts == 0) {
+                $("#reportGrid_table").children("tbody").html('<tr><td style="text-align:center;height:40px" colspan="2" bgcolor="#f7f5c2">当前记录集为空。</td></tr>');
+            }
+            else {
+                var dataHTML = new String();
+                $.each(data.DataList, function (i, d) {
+                    dataHTML += '<tr align="center"><td style="text-align:center;" bgcolor="#f7f5c2">' + d.AgentAccount + '</td><td height="40" bgcolor="#f7f5c2" style="text-align:center;">' + d.UperAgentAccount + '</td></tr>';
+                });
+                $("#reportGrid_table").children("tbody").html(dataHTML);
+                //<td style="text-align:center;" width="100" height="40" bgcolor="#f7e4e2">' + d.GoldSell + '</td>
+            }
+        });
+    }
+    (function () {
+        pData();
+    })();
+
+
+</script>

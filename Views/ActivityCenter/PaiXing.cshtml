@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "牌型活动";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+
+}
+@section scripts{
+    <script src="/Scripts/artDialog/jquery.artDialog.js?skin=black"></script>
+    <script>
+
+        var RuleMessage = function (msg) {
+            $.dialog({
+                lock: true,
+                title: "奖励规则",
+                content: msg
+            });
+        }
+
+        var GetTask = function (taskid) {
+
+            $.ajax({
+                type: 'post',//可选get
+                url: '/AjaxService/GetPaiXing',
+                data: 'taskId=' + taskid,
+                dataType: 'text',
+                async: true,
+                beforeSend: function () {
+                    $("#btn_" + taskid).attr("onclick", "").find("img").attr("src", "/images/renwu1.png");
+                },
+                success: function (msg) {
+                    if (parseInt(msg, 10) > 0) {
+                        //alert("领取成功！");
+                    }
+                    else
+                        alert("领取失败！");
+                },
+                error: function () {
+                    alert("服务器繁忙！");
+                }
+            });
+        }
+
+        var GetAward = function (taskid) {
+            $.ajax({
+                type: 'post',
+                url: '/AjaxService/GetPaiXingAward',
+                data: 'taskId=' + taskid,
+                dataType: 'text',
+                async: true,
+                beforeSend: function () {
+                    $("#btn_" + taskid).attr("onclick", "").find("img").attr("src", "/images/jiangli1.png");
+                },
+                success: function (msg) {
+                    if (parseInt(msg, 10) == 103) {
+                        alert("您还没有进行手机绑定 请绑定手机!");
+                        $("#btn_" + taskid).attr("onclick", "").find("img").attr("src", "/images/jiangli.png");
+                    }
+                    else {
+                        if (parseInt(msg, 10) > 0) {
+                            //alert("奖励领取成功！");
+                            //window.location.reload();
+                        }
+                        else
+                            alert("奖励领取失败！");
+                    }
+                },
+                error: function () {
+                    alert("服务器繁忙！");
+                }
+            });
+        }
+        $(function () {
+            $.ajax({
+                type: 'post',
+                url: 'PaiXingData',
+                dataType: 'text',
+                async: true,
+                beforeSend: function () {
+
+                },
+                success: function (html) {
+                    $("#lodid").remove();
+                    $("#center").append(html);
+                },
+                error: function () {
+                    alert("服务器繁忙！");
+                }
+            });
+        })
+
+    </script>
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+<!--activity开始-->
+<div class="news-title">
+    <div class="title-txt"><img src="/images/paixing.png" /></div>
+</div>
+
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div class="full">
+                <div class="full1-1"><img src="/images/title_large-red.png" width="90" height="90" /></div>
+                <div class="full1-2">
+                    <span style=" font-size:26px;">尊敬的玩家 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                    <span style=" font-weight:normal;">
+                        温馨提示：每日零点清零当天牌型任务重新计算，奖励机会只在当天有效，第二天不再累计！
+                    </span>
+                </div>
+            </div>
+            <div id="center">
+                <div id="lodid" class="full3">加载中..</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>

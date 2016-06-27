@@ -1,0 +1,281 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>奖励名单</title>
+    <link rel="stylesheet" type="text/css" href="/Content/wap/css.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    @*<script>
+        GetRechargeAward = function (tid) {
+            $.SendDataSync("GetRechargeAward", { id: tid }, function (jdata) {
+                alert(jdata.message);
+                $("#li_" + tid).remove();
+            });
+        }
+    </script>*@
+
+
+    <script>
+        var PageCount = new Number();
+        var CacheCondition;
+
+        $(document).ready(function () {
+            GetMatchInfoCount();
+        });
+
+        var RefMatchRankInfo = function () {
+            if (CacheCondition)
+                GetMatchRankInfo(CacheCondition.Tid, CacheCondition.Type, true);
+        }
+
+        var GetMatchRankInfo = function (tid, _type, isref) {
+            var pURL, waittag;
+
+            CacheCondition = {};
+            CacheCondition.Tid = tid;
+            CacheCondition.Type = _type;
+            if (!isref)
+                $("#matchTypeImg")[0].scrollIntoView();
+            if (_type) {
+                $("#matchTypeImg").attr("src", "/images/reward_list_grid_header_js.jpg");
+                pURL = "GetCurrentRankInfoByTaskid";
+                waittag = "排名还未生成，请稍后查询。";
+            }
+            else {
+                $("#matchTypeImg").attr("src", "/images/reward_list_grid_header.jpg");
+                pURL = "GetMatchRankInfoByTaskid";
+                waittag = "奖励名单未生成，请稍后查询。";
+            }
+
+            var tc = $("#showsorttable").find("tbody"); $("table").eq(2).children();
+            tc.html("");
+            $.SendData(pURL, { taskid: tid, type: _type }, function () {
+                tc.html('<tr align="center" style="color:#000000;"><td colspan="6" width="103" height="40" bgcolor="#753139">查询中....</td></tr>');
+            }, function (jdata) {
+                var trString = new String();
+                if ($.isEmptyObject(jdata)) {
+                    tc.html('<tr align="center" style="color:#000000;"><td colspan="6" width="103" height="40" bgcolor="#753139">' + waittag + '</td></tr>');
+                } else {
+                    $.each(jdata, function (i, data) {
+                        trString += "<tr align=\"center\" style=\"color:#000000;\"><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.RankNum + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Userid + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Account + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Reward + "元</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Progress + "</td><td width=\"103\" height=\"40\" bgcolor=\"#753139\">" + data.Status + "</td></tr>";
+                    });
+                    tc.html(trString);
+                }
+            });
+        }
+        var GetRewardRules = function (tid) {
+
+            $.SendData("GetRewardRules", { taskid: tid }, null, function (jdata) {
+                var message = new String();
+                $.each(jdata, function (i, d) {
+                    message += "第 " + d.TopNum + " 名:奖金 " + d.TopScore + " 元\n";
+                });
+                alert(message);
+                $("#rw_" + tid).attr("onclick", "").click(function () {
+                    alert(message);
+                })
+            });
+        }
+        var SetPageHTML = function () {
+            var pageIndex = new Number(location.hash.replace(/#/, ""));
+            pageIndex = pageIndex == 0 ? 1 : pageIndex;
+            var pagerHTML = new String();
+
+            if (pageIndex == 1)
+                pagerHTML = '<div id=table1 style="float:left; margin:2px;">第</div><div id=table3 style="float:left; margin:2px;"><input name="page" value="' + pageIndex + '" readonly="readonly" type="text" class="ye" /></div>' + (PageCount == 1 ? '<div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right_off.gif" alt="" width="13" height="13" /></div>' : '<a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right.gif" alt="" width="13" height="13" /></div></a>页');
+            else if (pageIndex >= PageCount)
+                pagerHTML = '<div id=table1 style="float:left; margin:2px;">第</div><a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_left.gif" alt="" width="13" height="13" /></div></a><div id=table3 style="float:left; margin:2px;"><input  type="text" name="page" value="' + pageIndex + '" readonly="readonly" class="ye"/></div><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right.gif" alt="" width="13" height="13" /></div>页';
+            else
+                pagerHTML = '<div id=table1 style="float:left; margin:2px;">第</div><a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_left.gif" alt="" width="13" height="13" /></div></a>div id=table3 style="float:left; margin:2px;"><input  type="text" name="page" value="' + pageIndex + '" readonly="readonly" class="ye"/></div><a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><div id=table2 style="float:left; margin:2px; margin-top:5px;"><img src="/images/pager_arrow_right.gif" alt="" width="13" height="13" /></div></a>页';
+
+            //if (pageIndex == 1)
+            //    pagerHTML = '第<img src="/images/pager_arrow_left_off.gif" alt="上一页"  /><input class="ye" type="text" name="page" value="' + pageIndex + '" readonly="readonly" />' + (PageCount == 1 ? '<img  src="/images/pager_arrow_right_off.gif" alt="下一页"  />页' : '<a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><img src="/images/pager_arrow_right.gif" alt="下一页"  /></a>页');
+            //else if (pageIndex >= PageCount)
+            //    pagerHTML = '第<a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><img src="/images/pager_arrow_left.gif" alt="上一页"  /></a><input type="text" name="page" value="' + pageIndex + '" readonly="readonly"  /><img src="/images/pager_arrow_right_off.gif" alt="下一页" />页';
+            //else
+            //    pagerHTML = '第<a href="#' + (pageIndex - 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex - 1) + ')"><img src="/images/pager_arrow_left.gif" alt="上一页" /></a><input type="text" name="page" value="' + pageIndex + '" readonly="readonly"/><a href="#' + (pageIndex + 1) + '" title="下一页" onclick="GetMatchinfoData(' + (pageIndex + 1) + ')"><img src="/images/pager_arrow_right.gif" alt="下一页"  /></a>页';
+            $("#pageContent").html(pagerHTML);
+        }
+        var SetPageSizes = function (c) {
+            var _ps = [20, 30, 50, 100, 200];
+            var _r;
+            var selectOptionStr = new String();
+            for (var i = 0; i < _ps.length; i++) {
+                _r = _ps[i];
+                selectOptionStr += "<option value" + _r + "'>" + _r + "</option>";
+                if (_r > c)
+                    break;
+            }
+            $("#viewSelect").change(function () {
+                SetPageCounts(c);
+                GetMatchinfoData(1);
+            });
+            $("#viewSelect").html(selectOptionStr);
+        };
+        var SetPageCounts = function (count) {
+            var nPCount = new Number($("#viewSelect").val());
+            PageCount = Math.floor(count / nPCount) + (count % nPCount > 0 ? 1 : 0);
+            $("#pageCounts").html(PageCount);
+        }
+        var GetMatchInfoCount = function () {
+            $.SendData("GetMatchInfoCount", null, null, function (count) {
+                SetPageSizes(count);
+                $("#pCount").html(count);
+                SetPageCounts(count);
+                GetMatchinfoData();
+            });
+        }
+        var GetMatchinfoData = function (pindex) {
+            pindex = pindex || new Number(location.hash.replace(/#/, ""));
+            pindex = pindex == 0 ? 1 : pindex;
+            if (PageCount >= pindex) {
+                location.hash = "#" + pindex;
+                SetPageHTML();
+                var dataHTML = $("#showdatatable").find("tbody");
+                dataHTML.html("");
+                $.SendData("GetMatchInfoByPage", { pageIndex: pindex, pageSize: $("#viewSelect").val() }, function () {
+                    dataHTML.html('<tr align="center" style="color:#000000;"><td colspan="7" width="103" height="40" bgcolor="#753139">正在读取比赛信息，请稍后...</td></tr>');
+                }, function (data) {
+                    var tHTML = new String();
+                    $.each(data, function (i, d) {
+                        tHTML += '<tr align="center" style="color:#000000;"><td width="103" bgcolor="#753139">' + d.TaskName + '</td><td width="150" height="40" bgcolor="#753139">' + d.KindName + '</td><td width="204" height="40" bgcolor="#753139">' + d.StartDate + '</td><td width="204" bgcolor="#753139">' + d.EndDate + '</td><td width="60" bgcolor="#753139">' + d.IsEnd + '</td><td width="151" bgcolor="#753139">' + ListHTML(d.IsEnd, d.AwardStatus) + '</td><td width="158" bgcolor="#753139"><a href="" style="color:#000000;"><a href="javascript:void(0);" style="color:#000000;" id="rw_' + d.TaskID + '" onclick="GetRewardRules(' + d.TaskID + ');">奖励规则</a>&nbsp;&nbsp;&nbsp;&nbsp;' + AwardHTML(d.IsEnd, d.AwardStatus, d.TaskID) + '</td>';
+                    });
+                    dataHTML.html(tHTML);
+                });
+            }
+        }
+        var ListHTML = function (isend, status) {
+            if (isend == "已结束") {
+                if (status == 0) {
+                    return "未生成";
+                }
+                else
+                    return "已生成"
+            }
+            else
+                return "-";
+        }
+        var AwardHTML = function (isend, status, taskid) {
+            if (isend == "已结束") {
+                if (status == 0)
+                    return '<a href="javascript:void(0);" style="color:#000000;" onclick="GetMatchRankInfo(' + taskid + ', 2)">即时排名</a>';
+                else
+                    return '<a href="javascript:void(0);" style="color:#000000;" onclick="GetMatchRankInfo(' + taskid + ')">奖励名单</a>';
+            }
+            else
+                return '<a href="javascript:void(0);" style="color:#000000;" onclick="GetMatchRankInfo(' + taskid + ',1)">即时排名</a>'
+        }
+    </script>
+
+
+
+</head>
+<body>
+    <div class="hd">
+        <div class="hd-main">
+            <table width="90%" border="0" style="margin-bottom:30px;">
+                <tr>
+                    <td width="10%"><img src="/images/wap/title_large-red.png" width="100%" /></td>
+                    <td width="90%">
+                        <span style="font-weight:bold; font-size:16px;">尊敬的 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="hd-01">
+
+
+            <div class="kefu_main_box">
+                <div class="kefu_main">
+                    <div class="kefu_main_bg">
+                        <div id="kefu_example-one">
+
+                            <div id=center style="width:100%; margin-left:70px;">
+                                <div id=hd1><img src="/images/match_list_grid_header.png" width="308" height="73" /></div>
+                                <div id=hd2>
+                                    <table id="showdatatable" width="85%" border="1" bordercolorlight="#a14351" bordercolordark="#a14351" cellspacing="0" cellpadding="0">
+                                        <thead>
+                                            <tr align="center" style="color:#FFF; font-weight:bold;">
+                                                <td width="10%" bordercolorlight="#753139" bgcolor="#a14351">比赛</td>
+                                                <td width="10%" height="40" bordercolorlight="#753139" bgcolor="#a14351">房间</td>
+                                                <td width="20%" height="40" bordercolorlight="#753139" bgcolor="#a14351">开赛时间</td>
+                                                <td width="20%" bordercolorlight="#753139" bgcolor="#a14351">结束时间</td>
+                                                <td width="6%" bordercolorlight="#753139" bgcolor="#a14351">状态</td>
+                                                <td width="15%" bordercolorlight="#753139" bgcolor="#a14351">奖励名单</td>
+                                                <td width="16%" bordercolorlight="#753139" bgcolor="#a14351">排名与奖励</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot>
+                                            <tr align="center">
+                                                <td height="40" colspan="7" bordercolorlight="#753139" bgcolor="#a14351">
+                                                    <div id="pageContent">
+                                                    </div>
+                                                    <div id=table4 style="float:left; margin:2px;">
+                                                        页，共 <span id="pageCounts"></span> 页	| 查看<select id="viewSelect" name="limit"></select>
+                                                        条 / 每页| 共 <span id="pCount"></span> 条记录
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            @*<tr align="center">
+                                            <td height="40" colspan="7" bgcolor="#a14351">
+                                                <span id="pageContent"></span>
+                                                ，共 <span id="pageCounts"></span> 页
+                                                <span class="separator">|</span>
+                                                查看
+                                                <select id="viewSelect" name="limit"></select>
+                                                条 / 每页
+                                                <span class="separator">|</span>
+                                                共 <span id="pCount"></span>  条记录
+                                                <span id="matchGrid-total-count" class="no-display"></span>
+                                            </td>
+                                        </tr>*@
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div id=hd3>
+                                    <img id="matchTypeImg" src="/images/reward_list_grid_header.png" width="308" height="73" style="float:left;" />
+                                    <input type="button" class="submit" tabindex="3" onclick="RefMatchRankInfo()" value="刷&nbsp;新" style=" color:#a82c43; font-size:18px; font-weight:bold; width:100px; height:40px; float:left; margin-top:20px;">
+                                </div>
+                                <div id=hd4 style=" margin-bottom:20px;">
+                                    <table id="showsorttable" width="85%" border="1" bordercolorlight="#a14351" bordercolordark="#a14351" cellspacing="0" cellpadding="0">
+                                        <thead>
+                                            <tr align="center" style="color:#FFF; font-weight:bold;">
+                                                <td width="123" bordercolorlight="#753139" bgcolor="#a14351">排名</td>
+                                                <td width="178" height="40" bordercolorlight="#753139" bgcolor="#a14351">玩家编号</td>
+                                                <td width="189" height="40" bordercolorlight="#753139" bgcolor="#a14351">玩家账号</td>
+                                                <td width="188" bordercolorlight="#753139" bgcolor="#a14351">奖金</td>
+                                                <td width="142" bordercolorlight="#753139" bgcolor="#a14351">活动金币</td>
+                                                <td width="166" bordercolorlight="#753139" bgcolor="#a14351">状态</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="title-main">
+                <div class="t1">
+                    @Html.Raw(ViewData["RechargeAward"]);
+                </div>
+                <div class="t1x"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿@model WebSite_YS.Models.Partial.GetScore
+@using (Ajax.BeginForm("PartialGetScore", "UserCenter", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ManagerMain",
+            OnSuccess = "ShowMessage"
+        }, new { id = "F_GetScore" }))
+        {
+<!--login-right-开始-->
+<div class="cm-right">
+    <div class="cm-title-back"><img src="../../images/cm-Take-gold.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+
+        <div class="cm-take-gold">
+            <div class="cm-warning"><img src="../../images/warning.png" /></div>
+            <div class="cm-txt">从保险柜里取出金币。</div>
+        </div>
+        <div class="cm-row">
+            <div class="cm-name"><font color="#FF0000">*</font>提取金额:</div>
+            <div class="cm-shuru"><input class="cm-input" name="amount" id="txt_amount" type="text" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>登录密码:</div>
+            <div class="cm-shuru"><input class="cm-input" name="login_pwd" id="login_pwd_txt" type="password" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"><font color="#FF0000">*</font>保险柜密码:</div>
+            <div class="cm-shuru"><input class="cm-input" name="account_pwd" id="account_pwd_txt" type="password" /></div>
+        </div>
+        <div class="cm-row-2">
+            <div class="cm-name"></div>
+            <div class="cm-shuru"><input type="submit" class="cm-button" value="确认取出" onclick="return CheckAmount(this)" /></div>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="../../images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!--login-right-结束-->
+        }
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script>
+    function ShowMessage() {
+        var t = "@Model.EerrorMessage";
+        if (t.length > 0) {
+            alert(t);
+        }
+    }
+    var jsAlt = "@ViewBag.IsAllowed";
+    if (jsAlt.length > 0) {
+        alert(jsAlt);
+    }
+    function CheckAmount(button) {
+        var _amount = $("#txt_amount").val();
+        var re = /^[1-9]+[0-9]*$/;
+        if (_amount == "") {
+            alert("请填写提取金额。");
+            return false;
+        }
+        else {
+            if (isNaN(_amount) || parseInt(_amount) <= 0) {
+                alert("请输入一个大于 0 的数字。")
+                return false;
+            }
+            if (!re.test(_amount)) {
+                alert("提取金额应为正整数！");
+                return false;
+            }
+        }
+        if ($("#login_pwd_txt").val() == "") {
+            alert("登陆密码不能为空！");
+            return false;
+        }
+
+        if ($("#account_pwd_txt").val() == "") {
+            alert("保险柜密码不能为空！");
+            return false;
+        }
+
+
+        //$(button).trigger("submit");
+        return true;
+    }
+</script>

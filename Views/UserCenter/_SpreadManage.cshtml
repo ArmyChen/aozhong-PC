@@ -1,0 +1,223 @@
+﻿@{
+    string emailReg = "/^[\\w\\-\\.]+@[\\w\\-\\.]+(\\.\\w+)+$/";
+}
+<script src="~/Scripts/jquery.qrcode.min.js"></script>
+<style>
+    .title-1 {
+        width: 600px;
+        height: 20px;
+        font-size: 18px;
+        color: #F7F5C2;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-left: 30px;
+        border-bottom-color: #FF0;
+    }
+
+    .line-1 {
+        width: 600px;
+        height: 10px;
+        margin-top: 8px;
+        margin-left: 10px;
+    }
+
+    .title-2 {
+        width: 600px;
+        height: 20px;
+        font-size: 14px;
+        color: #F7F5C2;
+        margin-top: 10px;
+        margin-left:10px;
+    }
+
+    .title-gk {
+        width: 640px;
+        height: 20px;
+        font-size: 16px;
+        color: #F7F5C2;
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+
+    .line-2 {
+        width: 600px;
+        height: 10px;
+        margin-left: 10px;
+    }
+
+    .wangzhi-zhuce {
+        width: 300px;
+        height: 24px;
+        margin-left: 300px;
+    }
+
+    .wangzhi {
+        width: 300px;
+        height: 24px;
+        margin-left: 260px;
+    }
+
+    .txt-box {
+        width: 750px;
+        height: 26px;
+        font-size: 14px;
+        color: #F7F5C2;
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+
+    .txt-renshu {
+        width: 50px;
+        height: 26px;
+        font-size: 14px;
+        color: #F7F5C2;
+        float: left;
+    }
+
+    .txt-chakan {
+        width: 700px;
+        height: 26px;
+        font-size: 14px;
+        color: #F7F5C2;
+        float: left;
+        margin-bottom: 3px;
+    }
+
+    .but {
+        width: 60px;
+        height: 24px;
+    }
+
+    .txt-bili {
+        width: 200px;
+        height: 26px;
+        font-size: 14px;
+        color: #F7F5C2;
+        float: left;
+    }
+
+    .input-1 {
+        width: 240px;
+        height: 24px;
+    }
+
+    .zhuyi {
+        width: 600px;
+        height: 24px;
+        background-color: #FFC;
+        color: #F60;
+        border: 1px solid;
+        margin-top: 10px;
+        margin-left: 30px;
+        font-size: 14px;
+    }
+	.wangzhi-zhuce-t {
+width: 300px;
+height: 24px;
+margin-left: 225px;
+color: #F7F5C2;
+}
+.wangzhi-zhuce-k {
+width: 300px;
+height: 24px;
+margin-left: 195px;
+color: #F7F5C2;
+}
+</style>
+<script type="text/javascript">
+    var qr_coder = null;
+    $(document).ready(function () {
+        var t1 = "@ViewBag.userID" + ".yingshengqipai.com";
+        var t2 = "@ViewBag.userID" + ".yingshengqipai.com/Register";
+        $("#qr_containerText1").text(t1);
+        $("#qr_containerText2").text(t2);
+        $('#qr_container').qrcode({ width: 200, height: 200, text: t1 });
+        $('#qr_container2').qrcode({ width: 200, height: 200, text: t2 });
+        $.ajax({
+            type: "POST",
+            url: "/AjaxService/GetAgentTodayCount",
+            data: { },
+            dataType: "json",
+            success: function (data) {
+                $("#GetAgentLastDateNumText").text(data[0]);
+                $("#GetAgentRegDateNumText").text(data[1]);
+                $("#GetAgentNumText").text(data[2]);
+            }
+        });
+
+
+    });
+
+</script>
+<!--login-right-开始-->
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/My-promotion-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+
+        <table width="750" border="0">
+            <tr>
+                <td>
+                    <div class="title-2">注册推广码地址</div>
+                    <div class="line-2"><img src="/images/right_x.png" /></div>
+                    <div id="qr_container" style=" position: relative; width: 200px; height: 200px; margin-left:220px; "></div>
+                    <br />
+                    <div class="wangzhi-zhuce-t" ><label id="qr_containerText1"></label></div>
+
+                    <div class="title-2">首页推广码地址</div>
+                    <div class="line-2"><img src="/images/right_x.png" /></div>
+                    <div id="qr_container2" style="margin-left:220px; position: relative; width: 200px; height: 200px;"></div>
+                    <br />
+                    <div class="wangzhi-zhuce-k"><label id="qr_containerText2"></label></div>
+                    <!--今日概况-开始-->
+                    <div class="title-gk">今日概况</div>
+                    <div class="line-2"><img src="/images/right_x.png" /></div>
+                    <div class="title-2">今日登录的直属下线玩家数：</div>
+                    <div class="txt-box">
+                        <div class="txt-renshu"><label id="GetAgentLastDateNumText">0</label>人</div>
+                        <div class="txt-chakan"><input id="AgentLastDateNum" value="查看" type="button" onclick="AgentLastDateNum()" /></div>
+                    </div>
+                    <div class="title-2">新注册的直属下线数：</div>
+                    <div class="txt-box">
+                        <div class="txt-renshu"><label id="GetAgentRegDateNumText">0</label>人</div>
+                        <div class="txt-chakan"><input id="AgentRegDateNum" value="查看" type="button" onclick="AgentRegDateNum()" /></div>
+                    </div>
+                    <!--今日概况-结束-->
+                    <!--推广总计-开始-->
+                    <div class="title-gk">推广总计</div>
+                    <div class="line-2"><img src="/images/right_x.png" /></div>
+                    <div class="title-2">直属下线总人数：</div>
+                    <div class="txt-box">
+                        <div class="txt-renshu"><label id="GetAgentNumText">0</label>人</div>
+                        <div class="txt-chakan"><input id="AgentNum" value="查看" type="button" onclick="AgentNum()" /></div>
+                    </div>
+                    <div class="title-2">抽水比例：</div>
+                    <div class="txt-box">
+                        <div class="txt-bili">第一级比例：@ViewBag.pPer %;</div>
+                        <div class="txt-bili">上级比例：@ViewBag.cPer %</div>
+                    </div>
+                    <!--推广总计-结束-->
+                    <div style="width:750px; height:30px;"></div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!--login-right-结束-->
+<script>
+    //直属下线总人
+    function AgentNum() {
+        GetUserCenterPartial("AgentImmediate");
+    }
+    //今日登录的直属下线
+    function AgentLastDateNum() {
+        GetUserCenterPartial("AgentImmediateTLogon");
+    }
+    //新注册的直属下线
+    function AgentRegDateNum() {
+        GetUserCenterPartial("AgentImmediateTReg");
+    }
+</script>

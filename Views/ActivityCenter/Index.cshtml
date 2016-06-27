@@ -1,0 +1,37 @@
+﻿@model List<WebSite_YS.Models.CXTreasureDB.ActivityShowSetting>
+@{
+    ViewBag.Title = "活动中心";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+    //var Register = Model.SingleOrDefault(x => x.ActiveCode == "Register");
+    //var Bind = Model.SingleOrDefault(x => x.ActiveCode == "Bind");
+    //var CardType = Model.SingleOrDefault(x => x.ActiveCode == "CardType");
+    //var Full = Model.SingleOrDefault(x => x.ActiveCode == "Full");
+    //var Match = Model.SingleOrDefault(x => x.ActiveCode == "Match");
+    //var Recharge = Model.SingleOrDefault(x => x.ActiveCode == "Recharge");
+    //var Sign = Model.SingleOrDefault(x => x.ActiveCode == "Sign");
+    //var Trial = Model.SingleOrDefault(x => x.ActiveCode == "Trial");
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/content/activity.css" media="all" />
+}
+<!--down-star-->
+<div class="activity-title">
+    <div class="title-txt"><img src="images/activity-title.png" /></div>
+</div>
+<div class="activity-back">
+    <div class="activity-kong"></div>
+    <div class="activity-04"><div class="activity-botton"><a href="/Register"><img src="/images/activity-botton.png" /></a></div></div>
+    <div class="activity-01"><div class="activity-botton"><a href="/ActivityCenter/RechargeAward"><img src="/images/activity-botton.png" /></a></div></div>
+   
+   <!-- <div class="activity-03"><div class="activity-botton"><a href="/ActivityCenter/SignActivity"><img src="/images/activity-botton.png" /></a></div></div>-->
+    <div class="activity-05"><div class="activity-botton"><a href="/ActivityCenter/ShowAwards"><img src="/images/activity-botton.png" /></a></div></div>
+    <div class="activity-06"><div class="activity-botton"><a href="/ActivityCenter/BindingActive"><img src="/images/activity-botton.png" /></a></div></div>
+    <div class="activity-07"><div class="activity-botton"><a href="/ActivityCenter/PaiXing"><img src="/images/activity-botton.png" /></a></div></div>
+   <!-- <div class="activity-08"><div class="activity-botton"><a href="/ActivityCenter/TrialActivity"><img src="/images/activity-botton.png" /></a></div></div>-->
+    <div class="activity-09"><div class="activity-botton"><a href="/ActivityCenter/DayTask"><img src="/images/activity-botton.png" /></a></div></div>
+</div>
+<div class="activity-dibu"></div>
+
+
+<!--down-end-->

@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "玩家推广";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+
+}
+@section scripts{
+    <script src="~/Scripts/tuiguangVerify.js"></script>
+}
+@model WebSite_YS.Models.AgentModel
+@section styles{
+<link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+
+
+
+<div class="news-title">
+    <div class="title-txt"><img src="/images/tuiguang.png" /></div>
+</div>
+
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div style="margin:0px 100px; text-align:left; line-height:26px; font-family:'微软雅黑'; font-size:14px; color:white; padding-top:15px;">
+                1．推广员系统是平台为了让大家能够在推荐自己的朋友来玩，同时还能获得一定奖励的自主推广系统。<br />
+                2．每一个游戏用户，系统都自动为您生成一个专属推广链接。 <br />
+                3．只要有用户直接在你的推广链接下注册，并参与棋牌类真钱游戏，那么将会为您产生源源不断的金钱收入，会员越多您的收入也将越多。<br />
+                4．推广员佣金比例为20%，即您发展的下线向系统贡献10000的抽水，那么您的收入为2000元（推广员推广比例将在发展的不同时期做适当调整）。<br />
+
+                @if (!string.IsNullOrEmpty(Model.EerrorMessage))
+                {
+                    <br />
+                    <div class="u_error" style="margin:0 0;"> @Model.EerrorMessage</div>
+                    <br />
+                }
+                @using (Html.BeginForm("game", "Spread", FormMethod.Post, new { OnSubmit = "return SubmitForm();" }))
+                {
+                    <table width="100%" border="1">
+                        <tr height="50">
+                            <td width="20%"><div align="right">*代理号：</div></td>
+                            <td width="20%"><input name="AgentName" id="account" type="text" value="@Model.AgentName" class="kd" /></td>
+                            <td><div id="form7">登陆账号为6-16位字符之间。 </div></td>
+                        </tr>
+                        <tr height="50">
+                            <td><div align="right">*真实姓名：</div></td>
+                            <td><input name="AgentTrueName" id="truename" type="text" class="kd" value="@Model.AgentTrueName"></td>
+                            <td><div id="form7">真实姓名与银行信息关联，请如实填写。 </div></td>
+                        </tr>
+                        <tr height="50">
+                            <td><div align="right">*登录密码：</div></td>
+                            <td><input onkeyup="CheckStrongPass(this)" name="login_pwd" id="password" type="password" class="kd" /></td>
+                            <td><img id="meter-box_password" src="/images/mima.png" /></td>
+                        </tr>
+                        <tr height="50">
+                            <td><div align="right">*确认密码：</div></td>
+                            <td><input name="AgentPwd" id="password1" type="password" class="kd" /></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr height="50">
+                            <td><div align="right">*QQ：</div></td>
+                            <td><input name="QQ" id="telQQ" type="text" value="@Model.QQ" class="kd" /></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr height="50">
+                            <td><div align="right">验证码：</div></td>
+                            <td><input name="Verifycode" id="vcodetext" type="text" class="kd width50" />&nbsp;<img onclick="$(this).attr('src', '/VerificationCode/VerifCodeImg?' + Math.random())" src="/VerificationCode/VerifCodeImg" style="height:25px; vertical-align:central;" /></td>
+                            <td></td>
+                        </tr>
+                        <tr height="50">
+                            <td>&nbsp;</td>
+                            <td colspan="2">
+                                <input type="submit" class="btns" onmouseover="this.style.backgroundPosition = 'left -40px'" onmouseout="    this.style.backgroundPosition = 'left top'" value="提交信息" />
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>

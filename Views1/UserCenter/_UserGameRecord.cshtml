@@ -1,0 +1,521 @@
+﻿@Scripts.Render("~/Scripts/jscal2")
+@Scripts.Render("~/Scripts/pageination")
+
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/Game-record-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        <div class="tablediv">
+            <table width="100%" border="0" id="reportGrid_table" class="tablewithborder" cellspacing="1" cellpadding="0">
+                <thead>
+                    <tr>
+                        <td height="40" colspan="7" bgcolor="#f2efa9" style="text-align:center">
+                            <div style="width:640px; height:24px; padding-top:5px; padding-left:10px; text-align:left;"><span style="color:red;">只能查看近3天的流水情况</span></div>
+                            <div style="width:640px; height:30px; padding-top:5px; padding-left:10px; text-align:left;"><input id="btnRefreshLs" name="Rep" type="button" value="刷新" onclick="pRefreshLs()" style=" vertical-align:middle;" />　请先选择时间段，仅刷新总局数，总时间，总流水，不刷新新游戏记录！</div>
+                            <div style="width: 640px; height: 26px; padding-left: 10px; text-align: left; ">总局数:　<span id="GameInfos" style="color:red;"></span>　局,　总时间:　<span id="PlayTimeCount" style="color:red;"></span>　,　总流水:　<span id="GameScore" style="color:red;"></span>　金币　,输:<span id="GameScoreLost" style="color:red;"></span>金币,　赢:<span id="GameScoreWin" style="color:red;"></span>金币</div>
+                            <div style="width: 640px; height: 26px; padding-left: 10px; text-align: left; ">
+                                日期查询:
+                                <input id="reportGrid_filter_recharge_at_from" type="text" value="" class="width80" style="height: 20px; vertical-align: middle;" />
+                                <img id="reportGrid_filter_recharge_at_from_trigger" width="14" height="14" src="/images/grid-cal.gif" style=" vertical-align:middle;"><select name="report_s_hour" id="report_s_hour" style="height: 20px; vertical-align: middle;">
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                                ：
+                                <select name="report_s_min" id="report_s_min" style="height: 20px; vertical-align: middle;">
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                                ：
+                                <select name="report_s_sec" id="report_s_sec" style="height: 20px; vertical-align: middle;">
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>至:<input id="reportGrid_filter_recharge_at_to" type="text" value="" class="width80" style="height: 20px; vertical-align: middle;" />
+                                <img id="reportGrid_filter_recharge_at_to_trigger" width="14" height="14" src="/images/grid-cal.gif" style=" vertical-align:middle;"><select name="report_e_hour" id="report_e_hour" style="height: 20px; vertical-align: middle;">
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                                ：
+                                <select name="report_e_min" id="report_e_min" style="height: 20px; vertical-align: middle;">
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                                ：
+                                <select name="report_e_sec" id="report_e_sec" style="height: 20px; vertical-align: middle;">
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                            </div>
+                            <div style="width:640px; height:30px; padding-top:5px; padding-left:10px; padding-bottom:10px; text-align:left;">
+                                游戏类型:
+                                <select style="width: 120px" id="reportGrid_filter_deal" class="width80" name="select" onchange="GetRoomOption(this)"></select>
+                                <select style="width: 240px" id="reportGrid_filter_room" class="width80" name="select"></select>
+                                <input tabindex="3" class="submit" type="button" onclick="pData()" value="搜索">
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; width: 110px;">携带金币</td>
+                        <td style="text-align: center; width: 110px;">获得金币</td>
+                        <td style="text-align: center; width: 110px;">抽取税收</td>
+                        <td style="text-align: center; width: 110px;">游戏类型</td>
+                        <td style="text-align: center; width: 110px;">房间ID</td>
+                        <td style="text-align: center; width: 110px;">游戏时间</td>
+                        <td style="text-align: center; width: 110px;">记录时间</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td style="text-align:center" id="pager" height="40" bgcolor="#f2efa9" colspan="7"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="../../images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+
+<script type="text/javascript">
+    //<![CDATA[
+    Calendar.setup({
+        inputField: "reportGrid_filter_recharge_at_from",
+        trigger: "reportGrid_filter_recharge_at_from_trigger",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        onSelect: function () {
+            this.hide();
+        }
+    });
+    Calendar.setup({
+        inputField: "reportGrid_filter_recharge_at_to",
+        trigger: "reportGrid_filter_recharge_at_to_trigger",
+        dateFormat: "%Y-%m-%d",
+        showTime: false,
+        onSelect: function () {
+            this.hide();
+        }
+    });
+    //]]>
+</script>
+<script type="text/javascript">
+    var _p = new page($("#pager"));
+    var sTimeObj = $("#reportGrid_filter_recharge_at_from").SetDefaultDate();
+    var eTimeObj = $("#reportGrid_filter_recharge_at_to").SetDefaultDate();
+
+    function pData(isall) {
+        var stime = $("#reportGrid_filter_recharge_at_from").val() + " " + $("#report_s_hour").val() + ":" + $("#report_s_min").val() + ":" + $("#report_s_sec").val();
+        var etime = $("#reportGrid_filter_recharge_at_to").val() + " " + $("#report_e_hour").val() + ":" + $("#report_e_min").val() + ":" + $("#report_e_sec").val();
+        var gameid=$("#reportGrid_filter_deal").val();
+        var roomid=$("#reportGrid_filter_room").val();
+        if (!checkDate()) {
+            return;
+        }
+        $.SendDataSync("GetUserGameRecordList", { currPage: _p.pageIndex(), pageSize: _p.pageSize(), sTime: isall ? "" : stime, eTime: isall ? "" : etime, gameid: gameid, roomid: roomid }, function (data) {
+            _p.Bind(data, pData, "reportGrid_table", isall);
+            if (data.Counts == 0) {
+                $("#reportGrid_table").children("tbody").html('<tr><td style="text-align:center;height:40px" colspan="7" bgcolor="#f2efa9">当前记录集为空。</td></tr>');
+            }
+            else {
+                var dataHTML = new String();
+                $.each(data.DataList, function (i, d) {
+                    dataHTML += '<tr align="center"><td style="text-align:center;" height="40" bgcolor="#f7f5c2">' + d.EnterScoreStr +
+                        '</td><td  style="text-align:center;" height="40" bgcolor="#f7f5c2">' + d.GameScoreStr +
+                        '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.RevenueStr +
+                        '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.KindName +
+                        '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.ServerName +
+
+                        '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.PlayTimeCountStr +
+                        '</td><td style="text-align:center;" bgcolor="#f7f5c2">' + d.LeaveTimeDate +
+                        '</td></tr>';
+                });
+                $("#reportGrid_table").children("tbody").html(dataHTML);
+            }
+        });
+
+        $.SendDataSync("GetNunCount", { stime: stime, etime: etime,gameid:gameid,roomid:roomid }, function (data) {
+            $("#GameInfos").text(data[2]);
+            $("#PlayTimeCount").text(data[0]);
+            $("#GameScore").text(data[1]);
+            $("#GameScoreLost").text(data[4]);
+            $("#GameScoreWin").text(data[3]);
+        });
+    }
+
+    function pRefreshLs() {
+        var stime = $("#reportGrid_filter_recharge_at_from").val() + " " + $("#report_s_hour").val() + ":" + $("#report_s_min").val() + ":" + $("#report_s_sec").val();
+        var etime = $("#reportGrid_filter_recharge_at_to").val() + " " + $("#report_e_hour").val() + ":" + $("#report_e_min").val() + ":" + $("#report_e_sec").val();
+        var gameid = $("#reportGrid_filter_deal").val();
+        var roomid = $("#reportGrid_filter_room").val();
+        if (!checkDate()) {
+            return;
+        }
+        $.SendDataSync("GetNunCount", { stime: stime, etime: etime, gameid: gameid, roomid: roomid }, function (data) {
+            $("#GameInfos").text(data[2]);
+            $("#PlayTimeCount").text(data[0]);
+            $("#GameScore").text(data[1]);
+            $("#GameScoreLost").text(data[4]);
+            $("#GameScoreWin").text(data[3]);
+        });
+    }
+
+    function GetKindOption(optList) {
+        $.SendDataSync("UGRList", {}, function (data) {
+            var optHTML = new String();
+            $.each(data, function (i, o) {
+                optHTML += "<option value='" + o.RecordID + "'>" + o.ServerName + "</option>";
+            });
+            if (optList) {
+                for (var i = 0; i < optList.length; i++) {
+                    var t = new String();
+                    if (optList[i].t)
+                        t = "<option value='-1'>全部游戏类型</option>";
+                    $("#" + optList[i].id).append(t + optHTML);
+                }
+            } else
+                $("#reportGrid_filter_deal").append("<option value='-1'>全部游戏类型</option>" + optHTML);
+                $("#reportGrid_filter_room").append("<option value='-1'>全部房间</option>");
+        });
+    }
+
+    (function () {
+        $("#report_e_hour").val(@DateTime.Now.Hour);
+        $("#report_e_min").val(@DateTime.Now.Minute);
+        $("#report_e_sec").val(@DateTime.Now.Second);
+        pData();
+        GetKindOption();
+    })();
+
+
+    function GetRoomOption(kind, optList)
+    {
+        $.SendDataSync("UGRList2", { kindId: kind.value }, function (data) {
+            var optHTML = new String();
+            $.each(data, function (i, o) {
+                optHTML += "<option value='" + o.RecordID + "'>" + o.ServerName + "</option>";
+            });
+            if (optList) {
+                for (var i = 0; i < optList.length; i++) {
+                    var t = new String();
+                    if (optList[i].t)
+                        t = "<option value='-1'>全部房间</option>";
+                    $("#" + optList[i].id).append(t + optHTML);
+                }
+            } else
+                $("#reportGrid_filter_room").empty();
+                $("#reportGrid_filter_room").append("<option value='-1'>全部房间</option>" + optHTML);
+        });
+    }
+
+    function checkDate()
+    {
+        var icon = true;
+        var nowTime = new Date(@DateTime.Now.Year,@DateTime.Now.Month,@DateTime.Now.Day);
+        var stime = $("#reportGrid_filter_recharge_at_from").val();
+        var etime = $("#reportGrid_filter_recharge_at_to").val();
+        var arrStime = stime.split("-");
+        var starttime = new Date(arrStime[0], arrStime[1], arrStime[2]);
+        var arrEtime = etime.split("-");
+        var endtime = new Date(arrEtime[0], arrEtime[1], arrEtime[2]);
+        var days=Math.abs(((starttime-endtime)/86400000));
+        if (days > 3) {
+            alert("只能查看近3天的流水情况");
+            return false;
+        }
+        var days2=Math.abs(((starttime-nowTime)/86400000));
+        if (days2 > 3) {
+            alert("只能查看近3天的流水情况");
+            return false;
+        }
+        var days3=Math.abs(((nowTime-endtime)/86400000));
+        if (days3 > 3) {
+            alert("只能查看近3天的流水情况");
+            return false;
+        }
+        return true;
+
+
+    }
+
+</script>

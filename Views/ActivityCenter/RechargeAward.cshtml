@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "充值抽奖";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+@section scripts{
+    <script>
+        GetRechargeAward = function (tid) {
+
+            $.SendDataSync("GetRechargeAward", { id: tid }, function (jdata) {
+                if (jdata == "0") {
+                    alert("未登录，或者登陆超时");
+                    return;
+                }
+                if (jdata.status != 0) {
+                    alert("恭喜您，您本次充值抽奖获得" + jdata.status + "金币，已存入您的账户，请查收，多充多抽奖哦！");
+                    $("#li_" + tid).remove();
+                }
+                else {
+                    alert(jdata.message);
+                }
+            });
+        }
+    </script>
+}
+@section styles{
+<link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+<!--new-detailed-star-->
+<div class="news-title">
+    <div class="title-txt"><img src="/images/choujiang.png" /></div>
+</div>
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div class="full">
+                <div class="full1-1"><img src="/images/title_large-red.png" width="90" height="90" /></div>
+                <div class="full1-2">
+                    <span style=" font-size:26px;">尊敬的玩家 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                    <span style=" font-weight:normal;">
+                        温馨提示：单笔充值满足 @ViewData["AwardValue"]元或者超出 @ViewData["AwardValue"]元，即可获得抽奖一次！奖励高达充值的 @ViewData["Flor"]%- @ViewData["Up"]%之间！ 充值越多 奖金越高。<br />
+                    </span>
+                </div>
+            </div>
+            @Html.Raw(ViewData["RechargeAward"])
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>
+
+<!--new-detailed-end-->

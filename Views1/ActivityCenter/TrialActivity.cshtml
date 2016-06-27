@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "试玩赠送";
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+
+}
+@section scripts{
+    <script>
+        GetTrial = function (tid) {
+            $.SendDataSync("GetTrialActivity", {}, function (jdata) {
+                alert(jdata.message);
+                $("#lnkGetRewarda").attr("onclick", '').find("img").attr("src", "/images/jiangli1.png");
+            });
+        }
+    </script>
+}
+@section styles{
+<link rel="stylesheet" type="text/css" href="/content/down.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/content/new.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/Content/my.css" media="all" />
+}
+
+<!--new-detailed-star-->
+<div class="news-title">
+    <div class="title-txt"><img src="/images/active-shiwan.png" /></div>
+</div>
+<div class="new-detailde-box">
+    <div class="new-detailde-txt">
+        <div class="new-detailde-Content">
+            <div class="full">
+                <div class="full1-1"><img src="/images/title_large-red.png" width="90" height="90" /></div>
+                <div class="full1-2">
+                    <span style=" font-size:26px;">尊敬的玩家 @ViewData["Accounts"] 您好，欢迎您光临！</span><br />
+                    <span style=" font-weight:normal;">
+                        温馨提示：在试玩房间游戏 @ViewData["PlayTime"]分钟（激情30秒、捕鱼房间不计算在内），送 @ViewData["Award"] 金币！点击下面的按钮可以领取您的游戏奖励！<br />
+                    </span>
+                </div>
+            </div>
+            @Html.Raw(ViewData["TrialActiv"])
+        </div>
+    </div>
+</div>
+<div class="new-bottom"><img src="/images/new-bottom.png" /></div>
+
+<!--new-detailed-end-->

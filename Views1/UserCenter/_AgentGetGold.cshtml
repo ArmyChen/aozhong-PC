@@ -1,0 +1,136 @@
+﻿@model WebSite_YS.Models.Agent.AgentWithdrawal
+
+
+<!--login-right-开始-->
+<style>
+.notice-msg{width:630px; height:auto; margin:0px auto; font-size:14px; color:#F7F5C2; line-height:24px;font-family: "Microsoft YaHei"!important;}
+.tuiguang-txt {
+width: 200px;
+height: 23px;
+float: left;
+font-size:14px; color:#F7F5C2;
+}
+.kong-1{width:630px; height:10px;}
+</style>
+<div class="cm-right">
+    <div class="cm-title-back"><img src="/images/money-title.png" /></div>
+    <!--修改登录密码-开始-->
+    <div class="cm-back">
+        @if (!string.IsNullOrEmpty(Model.EerrorMessage)) { 
+        <div class="cm-take-gold">
+            <div class="cm-warning"><img src="/images/warning.png" /></div>
+            <div class="cm-txt">@Html.Raw(Model.EerrorMessage)</div>
+        </div>
+        }
+        @using (Ajax.BeginForm("SaveAgentWithdrawal", "UserCenter", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "ManagerMain",
+        }, new { @class = "edit-form" }))
+        {
+           <div class="kong-1"></div>
+            <div class="cm-row">
+                <div class="cm-name">推广账号:</div>
+                <div class="tuiguang-txt">@Model.AgentAccount</div>
+            </div>
+            <div class="cm-row">
+                <div class="cm-name">可结算金币:</div>
+                <div class="tuiguang-txt">@Model.Gold</div>
+            </div>
+            <div class="cm-row-2">
+                <div class="cm-name"><font color="#FF0000">*</font>开户姓名:</div>
+                <div class="cm-shuru"><input class="cm-input" name="name_realName" id="realName" type="text" maxlength="20" value="@Model.Bank.RealName" /></div>
+            </div>
+            <div class="cm-row-2">
+                <div class="cm-name"><font color="#FF0000">*</font>开户银行:</div>
+                <div class="cm-shuru"><input class="cm-input" name="name_bankName" id="bankName" type="text" maxlength="20" value="@Model.Bank.BankName" /></div>
+            </div>
+            <div class="cm-row-2">
+                <div class="cm-name"><font color="#FF0000">*</font>银行账号:</div>
+                <div class="cm-shuru"><input class="cm-input" name="name_bankNum" id="bankNum" type="text" maxlength="20" value="@Model.Bank.CardNumber" /></div>
+            </div>
+            <div class="cm-row-2">
+                <div class="cm-name"><font color="#FF0000">*</font>开户网点:</div>
+                <div class="cm-shuru"><input class="cm-input" name="name_bankOpenAddress" id="bankOpenAddress" type="text" maxlength="128" value="@Model.Bank.Address" /></div>
+            </div>
+            <div class="cm-row-2">
+                <div class="cm-name"><font color="#FF0000">*</font>结算金币:</div>
+                <div class="cm-shuru"><input class="cm-input" name="name_jiesuanGold" id="jiesuanGold" type="text" maxlength="10" value="" /></div>
+            </div>
+            <div class="cm-row-2" id="bnkTr">
+                <div class="cm-name"></div>
+                <div class="cm-shuru"><input type="button" class="cm-button" id="save" value="确认结算" onclick="CheckJieSuanGold();" /></div>
+            </div>
+        }
+        <p class="clear">&nbsp;</p>
+        <div class="notice-msg">
+            <ul >
+                <li class="red">1. 本系统每周 @Model.Setting.OpenWeek 开放，开放时间为当天的 @Model.Setting.BeginTime 点到 @Model.Setting.EndTime 点。</li>
+                <li class="red">2. 本系统当前状态为 @Model.Setting.SystemOpen。</li>
+                <li class="red">3. 当前系统金币价格为：@Model.Setting.ApplyRate 金币=1元，每次最少结算 @Model.Setting.MinApplyScore 金币。</li>
+                <li class="red">4. 当前每次结算手续费为交易总额的 @Model.Setting.ApplyEndRate%，最低手续费额为 @Model.Setting.MinScore 元 。每天最多提交结算申请 @Model.Setting.ApplyNum 次！</li>
+                <li class="red">5. 成功提交结算申请后，您的账上的金币会被扣掉。如结算申请被拒绝后，相应的金币会返给您。</li>
+                <li class="red">6. 请正确填写开户行，银行账号，开户行具体地址（例：某省某市某区某某分行）开户名需与注册时一致,以免影响出款.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="cm-bottom"><img src="/images/cm-bottom.png" /></div>
+    <!--修改登录密码-结束-->
+</div>
+<!--login-right-结束-->
+<!---center-right开始-->
+<!----foot开始-->
+<div class="contact_foot_back"></div>
+<!----foot结束-->
+<script>
+    function CheckJieSuanGold() {
+        var realName = $("#realName").val();
+        var bankName = $("#bankName").val();
+        var bankNum = $("#bankNum").val();
+        var bankOpenAddress = $("#bankOpenAddress").val();
+        var jiesuanGold = $("#jiesuanGold").val();
+
+        if (realName.length < 2) {
+            alert('请输入开户姓名');
+            return false;
+        }
+        if (bankName.length < 2) {
+            alert('请输入开户银行名称');
+            return false;
+        }
+        if (bankNum.length < 5) {
+            alert('请输入银行账号');
+            return false;
+        }
+        if (bankOpenAddress.length < 2) {
+            alert('请输入开户网点');
+            return false;
+        }
+        if (jiesuanGold.length < 1) {
+            alert('请输入要结算的金币数');
+            return false;
+        }
+        var reg = /^[0-9]{1,9}$/;
+        if (!reg.test(jiesuanGold)) {
+            alert("结算金币数必须是整数");
+            return false;
+        }
+        if(parseInt(jiesuanGold)<1){
+            alert("结算金币数必须大于0");
+            return false;
+
+        }
+        if(parseInt(jiesuanGold)>@Model.Gold){
+            alert("可结算金币不够"+jiesuanGold+"金币");
+        return false;
+
+        }
+        if(parseInt(jiesuanGold)<@Model.Setting.MinApplyScore){
+            alert("最低结算"+@Model.Setting.MinApplyScore+"金币");
+            return false;
+
+        }
+        $("#save").trigger("submit");
+
+    }
+</script>
