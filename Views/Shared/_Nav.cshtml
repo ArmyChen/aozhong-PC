@@ -24,17 +24,27 @@
 
 
 <div class="nav-back">
-    <div class="nav-left"></div>
-    <div class="nav-down"><a href="/"><img src="/images/new/nav_03.png" /></a></div>
+    <div class="nav-center">
+        <div class="nav-down"><a href="/"><img src="/images/new/nav_03.png" /></a></div>
 
-    <div class="nav-down"><a href="/UserCenter/Center"><img src="/images/new/nav_04.png" /></a> </div>
+        <div class="nav-down"><a href="/UserCenter/Center"><img src="/images/new/nav_04.png" /></a> </div>
 
-    <div class="nav-down"><a href="/DownLoad/dl"><img src="/images/new/nav_05.png" /></a> </div>
+        <div class="nav-down"><a href="/DownLoad/dl"><img src="/images/new/nav_05.png" /></a> </div>
 
-    <div class="logo"><img src="/images/new/logo.png" width="400px"></div>
-    <div class="nav-down"><a href="/Agreement"><img src="/images/new/nav_06.png" /></a> </div>
+      
+        <div class="nav-down"><a href="/Agreement"><img src="/images/new/nav_06.png" /></a> </div>
 
-    <div class="nav-down"><a href="/ActivityCenter"><img src="/images/new/nav_07.png" /></a></div>
+        <div class="nav-down"><a href="/ActivityCenter"><img src="/images/new/nav_07.png" /></a></div>
 
-    <div class="nav-down"><a href="/Spread"><img src="/images/new/nav_08.png" /></a></div>
+        <div class="nav-down"><a href="/Spread"><img src="/images/new/nav_08.png" /></a></div>
+    </div>
 </div>
+<div class="logo"><img src="/images/new/logo.png" width="400px"></div>
+    
+<script>
+    $(function(){
+        var width = $("body").width() / 2  - $(".logo").width()/2;
+
+        $(".logo").attr("style","left:"+width + "px !important");
+    })
+</script>
