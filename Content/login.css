@@ -1,41 +1,62 @@
 ﻿@charset "utf-8";
+*{padding:0px; margin:0px;font-family: "宋体"}
+font {
+    font-family: '微软雅黑';
+
+}
+a{
+        background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgb(249, 249, 249)), to(#FFAE00));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 /* CSS Document */
-.login-zongti{width:693px; height:auto; float:left;}
-.login-center{width:100%; height:100%; margin-top:10px;}
-.login-box{width:970px; margin:0px auto;  overflow:hidden;}
-.login-left{width:267px; height: auto; float:left;}
+.login-zongti{width:693px;height: 100%;float:left;margin: 0;}
+.login-center{width:100%; height:100%;margin-top: 156px;margin-bottom: 50px;}
+.login-box{width: 1050px; margin:0px auto;  overflow:hidden;}
+.login-left{width: 289px; height: auto; float:left;}
 .login-fuwu{width:264px; height:70px; background-image:url(/images/login.png);}
+.login-head1{width: 264px; height:70px;background-repeat: no-repeat;position: relative;background-image:url(/images/new/hd_03.png);}
+
+.login-head2{width:264px; height:70px;position: relative;background-image:url(/images/new/hd_10.png);}
+.login-head3{width:264px; height:70px;background-repeat: no-repeat;background-image:url(/images/new/hd_12.png);position: relative;}
+.login-head4{width:264px; height:70px;background-repeat: no-repeat;background-image:url(/images/new/hd_13.png);position: relative;}
+
 .login-fuwu-back{width:264px; height:151px; background-image:url(/images/login-left-1.png);}
-.login-kong-1{width:264px; height:10px;}
-.login-ziliao{width:264px; height:33px; font-size:16px; line-height:33px; text-align:center; color:#ac958d;  font-weight:bold;font-family: "Microsoft YaHei"!important; }
-.login-ziliao a{ color:#ac958d;font-family: "Microsoft YaHei"!important; }
+.login-head1-back{width:264px;height: 229px;background-repeat: no-repeat;background-image:url(/images/new/bbb_03.png);margin-top: -68px;/* top: -10px; */text-align: center;/* padding-top: 0px; */}
+.login-head2-back{width:264px; height:151px;background-repeat: no-repeat;background-image:url(/images/new/bbb_06.png);margin-top: -16px;}
+.login-head3-back{width:264px;height: 266px;background-repeat: no-repeat;background-image:url(/images/new/bbb_09.png);margin-top: -10px;}
+.login-head4-back{width: 265px;height: 266px;background-repeat: no-repeat;background-image:url(/images/new/bbb_03.png);margin-top: -55px;margin-left: 3px;}
+
+.login-kong-1{width:264px; height:10px;/* margin-top: -12px; */}
+.login-ziliao{width:264px;height: 2px; font-size:16px;margin-top: 34px;/* line-height:33px; */ text-align:center; color:#ac958d;  font-weight:bold;font-family: "Microsoft YaHei"!important;}
+.login-ziliao a{color: #fcd071;opacity: 0.9;font-family: "Microsoft YaHei"!important;}
 .login-anquan-back{width:264px; height:92px; background-image:url(/images/login-left-2.png);}
 .login-caiwu-back{width:264px; height:245px; background-image:url(/images/login-left-3.png);}
 
-.login-right{width:693px; height:679px; background-color:#352626; float:left; margin-left:9px;}
-.login-right-title{width:644px; height:80px; margin:0px auto; margin-top:17px; background-color:#433333; font-size:23px; color:#dec39c; line-height:80px;  font-weight:bold; padding-left:24px;}
-.login-table-box{width:668px; height:557px; color:#433333; border:2px solid; margin:0px auto; margin-top:15px;}
-.login-table-row{ width:668px; height:60px; border-bottom:2px solid;color:#433333;}
-.login-name{width:160px; height:60px; border-right:2px solid;color:#433333; background-color:#2c1e1e; float:left; font-size:16px;font-family:"黑体"; text-align:center; line-height:60px;}
+.login-right{width:693px; height:679px;/* background-color:#352626; *//* background: rgba(0,0,0,0.4); */float:left; margin-left:9px;}
+.login-right-title{width:644px; height:80px; margin:0px auto;/* margin-top:17px; */background-color: #171d2a; font-size:23px;box-shadow: inset 0px 0px 30px white;border: 1px solid #fcd071;border-radius: 7px;color: #fcd071; line-height:80px;  font-weight:bold;opacity: 0.9;padding-left:24px;position: relative;}
+.login-table-box{width: 667px;height: 95%;color: transparent;background: url(/images/new/eee.png);background-size: 100% 100%;/* margin-top: -66px; *//* position: relative; */z-index: 1;top: -84px;position:;border:2px solid; margin:0px auto;background-repeat: no-repeat;}
+.login-table-row{ width:668px; height:60px;margin-bottom: 2px;/* color:#433333; */background-color: rgba(255,255,255,0.1);}
+.login-name{width:160px; height:60px;/* border-right:2px solid; *//* color: rgba(217,176,97,0.4); *//* opacity: 0.4; */background-color: rgba(255,255,255,0.2); float:left;font-size:16px;/* font-family:"黑体"; */ text-align:center;line-height:60px;border-radius: 10px;}
 .login-txt{width:500px; height:60px; float:left; line-height:60px; text-align:center;color:#806961;font-size:16px;font-family:"黑体";}
-.login-left-bottom{width:264px; height:52px;}
+.login-left-bottom{width:264px; height:52px;display: none;}
 /*修改登录密码-开始*/
-.cm-right{width:695px; height:auto;float:left; margin-left:6px;}
-.cm-title-back{width:695px; height:70px; background-image: url(/images/title-small.png);}
-.cm-back{width:695px; height: auto; background-image:url(/images/cm-back.png);}
-.cm-bottom{width:695px; height:38px;}
+.cm-right{width:695px;height: 100%;float:left; margin-left:6px;}
+.cm-title-back{width:695px;background-color: #171d2a;      font-size: 23px;      box-shadow: inset 0px 0px 30px white;      border: 1px solid #fcd071;      border-radius: 7px;      color: #fcd071;line-height: 85px;height:70px;text-indent: 20pt;position: relative;}
+.cm-back{width:695px;height: 100%; background-image:url(/images/cm-back.png);background-repeat: no-repeat;background-size: 100% 100%;margin-top: -20px;padding-top: 21px;}
+.cm-bottom{width:695px; height:38px;display: none;}
 .cm-kong{width:680px; height:40px;}
-.cm-row{width:500px; height:27px; margin:0px auto; }
-.cm-row-2{width:500px; height:27px; margin:0px auto; margin-top:15px; }
-.cm-name{width:100px; height:27px; line-height:27px; font-size:14px; text-align:right; float:left; color:#ccb5aa;}
-.cm-shuru{width:200px; height:23px; float:left;}
-.cm-input{width:200px; height:23px;border-radius:3px 3px 3px 3px }
-.cm-button{width:80px; height:27px;}
+.cm-row{width: 600px; height:27px; margin:0px auto;}
+.cm-row-2{width:600px; height:27px; margin:0px auto; margin-top:15px;margin-bottom: 20px;}
+.cm-name{width:100px; height:27px; line-height:27px; font-size:14px; text-align:right; float:left;color: #EDD094;/* display: none; */}
+.cm-shuru{width: 400px; height:23px; float:left;margin-left: 20px;}
+.cm-input{width: 400px; height:23px;border-radius: 10px;background: black;border: none;}
+.cm-button{width: 100px;height: 35px;color: #FFE197;background: rgba(255,255,255,0.4);border-radius: 8px;border: none;font-size: 14pt;font-family: '微软雅黑';box-shadow: inset 1px 1px 1px 1px #1D1C1C;}
 /*修改登录密码-结束*/
 /*取金币-开始*/
-.cm-take-gold{width:660px; height:30px; background-color:#816a64; margin:0px auto; margin-bottom:15px; margin-top:10px; padding-top:10px;}
-.cm-warning{width:20px; height:20px;margin-left:5px; float:left;}
-.cm-txt{width:630px; height:20px; margin-left:5px; float:left; font-size:14px; color:#ccb5aa;font-family: "Microsoft YaHei"!important;}
+.cm-take-gold{width:660px;height: 22px;background-color: #293245; margin:0px auto; margin-bottom:15px;margin-top: 8px;padding-top: 22px;border-radius: 8px;line-height: 0;}
+.cm-warning{width:20px; height:20px;margin-left:5px; float:left;margin-top: -8px;}
+.cm-txt{width:630px;/* height: 15px; */margin-left:5px; float:left; font-size:14px;color: #F2EFA9;font-family: "Microsoft YaHei"!important;}
 /*取金币-结束*/
 /*交易记录-开始*/
 .tablediv {width: 670px;height: auto;margin: 10px auto 0px;overflow: hidden;
@@ -71,18 +92,18 @@ font-size: 12px;
 .BindInfo-button{width:80px; height:27px;}
 /*银行绑定-结束*/
 /*免费注册-开始*/
-.registration-back{width:695px; height:600px; background-image:url(/images/cm-back.png);}
+.registration-back{width: 93%; height:600px; background-image:url(/images/cm-back.png);background-repeat: no-repeat;background-size: 100% 100%;margin-top: -24px;padding: 25px;}
 .registration-kong{width:650px; height:5px;}
-.registration-biaoti{width:660px; height:30px; color:#816a64; margin:0px auto; margin-bottom:15px; margin-top:10px; padding-top:10px; border-bottom:dashed 1px;}
+.registration-biaoti{width:660px; height:30px; color:#816a64; margin:0px auto;margin-bottom: 20px;margin-top:10px; padding-top:10px;/* border-bottom:dashed 1px; */}
 .registration-warning{width:20px; height:20px;margin-left:5px; float:left;}
 .registration-txt{width:630px; height:20px; margin-left:15px; float:left; font-size:16px; color:#ccb5aa;font-family: "Microsoft YaHei"!important;}
 .registration-name{width:100px; height:27px; line-height:27px; font-size:14px; text-align:right; float:left; color:#ccb5aa;}
 .registration-shuru{width:108px; height:23px; float:left;}
-.registration-input{width:100px; height:23px;border-radius:3px 3px 3px 3px }
-.registration-yzm{width:60px; height:22px; float:left; margin-top:3px;}
+.registration-input{width:100px; height:23px;border-radius:3px 3px 3px 3px;border-radius: 10px;      background: black;      border: none;margin-left: 20px;}
+.registration-yzm{width:60px; height:22px; float:left; margin-top:3px;margin-left: 20px;}
 .registration-huan{ font-size:14px; color:#816a64; line-height:27px;}
-.registration-huan a{ font-size:14px; color:#816a64; line-height:27px;}
-.registration-xieyi{width:660px; height:30px; color:#816a64; margin:0px auto; margin-bottom:15px; font-size:14px;}
+.registration-huan a{ font-size:14px;color: #CCC97B; line-height:27px;margin-left: 5px;}
+.registration-xieyi{width:660px; height:30px; color:#816a64;text-indent: 55pt;margin:0px auto;margin-bottom:15px; font-size:14px;}
 .registration-duihao{width:20px; height:20px;}
-.registration-anniu{width:100px; height:23px; float:left;}
+.registration-anniu{width:100px; height:23px; float:left;margin-left: 12%;}
 /*免费注册-结束*/

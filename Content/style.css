@@ -1,66 +1,77 @@
 ﻿@charset "utf-8";
+@font-face { 
+font-family: DeliciousRoman; 
+src: url('/font/mqlang.otf'); 
+} 
+*{padding:0px; margin:0px;font-family: "DeliciousRoman" ;}
 /* CSS Document */
 img { border:0 } 
-a {text-transform:none;text-decoration:none;}
-*{padding:0px; margin:0px;}
-body{background-color:#2d1d1d;}
-.box{width:100%; height:461px; background-color:#332221;}
-.banner{width:994px; height:461px; background-image:url(/images/banner.png); margin: 0px auto; background-repeat:no-repeat;}
+a {text-transform:none;text-decoration:none;background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgb(249, 249, 249)), to(#FFAE00));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;}
+
+body{background:url(/images/new/cover.png); background-size: cover;}
+html{padding: 0;margin: 0;}
+.box{width:100%;height: 100%; background-color:#332221;}
+.banner{width: 100%;height: 100%;background-image: url(/images/new/mid_02.jpg);background-size: 100% 100%;/* background-size: cover; */margin: 0px auto;/* background-repeat:no-repeat; */text-align: center;}
 /*导航-开始*/
-.nav-back{width:952px; height:109px; margin: 0px auto; background-image:url(/images/nv-back.png);}
-.nav-left{width:46px; height:109px; float:left;}
-.nav-shouye a{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold;background-image:url(/images/nv-back-1.png);}
-.nav-shouye a:hover{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; background-image:url(/images/nv-back-1.png);}
+.nav-back{width: 100%;height: 134px;margin: 0px auto;border-bottom: 1px solid #fcd071;background-image: url(/images/new/head_01.jpg);background-size: 100% 134px;}
+.nav-left{width: 25%; height:109px; float:left;}
+.nav-shouye a{width:88px;height: 85px; font-size:16px; float:left;color:#fcd071; text-align:center;line-height: 90px;background-image: url(/images/new/hover_02.png);}
+.nav-shouye a:hover{width:88px; height:85px; font-size:16px; float:left; color:#fcd071; text-align:center; line-height:90px; font-weight:bold; background-image:url(/images/new/hover_02.png);}
 
-.nav-gr a{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px; }
-.nav-gr a:hover{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px;background-image:url(/images/nv-back-1.png); }
+.nav-gr a{width:88px;height: 85px; font-size:16px; float:left; color:#fcd071; text-align:center;line-height: 90px; margin-left:3px;}
+.nav-gr a:hover{width:88px; height:85px; font-size:16px; float:left; color:#fcd071; text-align:center; line-height:90px; font-weight:bold; margin-left:3px;background-image:url(/images/new/hover_02.png); }
+
+.nav-down{/* margin-left:20px; */float: left;}
+.nav-down a{/* width: 123px; */font-size: 22px; float:left; color:#fcd071; text-align:center;line-height: 89px;/* margin-left: 30px; */}
+.nav-down a img{line-height: 90px;margin-top: 15px;}
+
+.nav-down a:hover img{line-height: 90px;margin-top: 15px;background: url(/images/new/hover.png);background-repeat: no-repeat;background-size: 120% auto; }
+
+.logo{width: auto;height: 110px; float:left;left: 39%;top: 135px;position: absolute;}
+
+.nav-js a{width:88px;height: 85px; font-size:16px; float:left; color:#fcd071; text-align:center;line-height: 90px; margin-left:3px;}
+.nav-js a:hover{width:88px; height:85px; font-size:16px; float:left; color:#fcd071; text-align:center; line-height:90px; font-weight:bold; margin-left:3px;background-image:url(/images/new/hover_02.png); }
 
 
-.nav-down a{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px; }
-.nav-down a:hover{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px;background-image:url(/images/nv-back-1.png); }
+.nav-hd a{width:88px;height: 85px; font-size:16px; float:left; color:#fcd071; text-align:center;line-height: 90px; margin-left:3px;}
+.nav-hd a:hover{width:88px; height:85px; font-size:16px; float:left; color:#fcd071; text-align:center; line-height:90px; font-weight:bold; margin-left:3px;background-image:url(/images/new/hover_02.png); }
 
-.logo{width:325px; height:109px; float:left; margin-left:15px;}
-
-.nav-js a{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px; }
-.nav-js a:hover{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px;background-image:url(/images/nv-back-1.png); }
-
-
-.nav-hd a{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px; }
-.nav-hd a:hover{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px;background-image:url(/images/nv-back-1.png); }
-
-.nav-new a{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px; }
-.nav-new a:hover{width:88px; height:109px; font-size:16px;font-family: "Microsoft YaHei"!important; float:left; color:#fcd071; text-align:center; line-height:98px; font-weight:bold; margin-left:3px;background-image:url(/images/nv-back-1.png); }
+.nav-new a{width:88px;height: 85px; font-size:16px; float:left; color:#fcd071; text-align:center;line-height: 90px; margin-left:3px;}
+.nav-new a:hover{width:88px; height:85px; font-size:16px; float:left; color:#fcd071; text-align:center; line-height:90px; font-weight:bold; margin-left:3px;background-image:url(/images/new/hover_02.png); }
 
 /*导航-结束*/
 /*快速通道-开始*/
-.fast-denglu-box{width:953px; height:314px; margin: 0px auto;  margin-top:15px;}
-.fast-back{width:224px; height:314px; background-image:url(/images/denglu-back.png); float:left;}
-.fast-title{width:155px; height:35px; margin: 0px auto;}
-.fast-gr{width:98px; height:22px; margin: 0px auto; margin-top:15px;}
-.fast-kf{width:98px; height:22px; margin: 0px auto; margin-top:5px; }
-.fast-down{width:186px; height:65px; margin: 0px auto; margin-top:10px;}
+.fast-denglu-box{width: 1024px;height: 520px; margin: 0px auto;margin-top: 110px;}
+.fast-back{width: 234px;height: 398px; background-image:url(/images/denglu-back.png); float:left;}
+.fast-title{width: 100%;height: 37px; margin: 0px auto;}
+.fast-gr{/* width:98px; */height: 40px; margin: 0px auto;margin-top: 40px;}
+.fast-kf{/* width:98px; *//* height:22px; */ margin: 0px auto;margin-top: 24px;}
+.fast-down{/* width:186px; */height: 75px; margin: 0px auto;margin-top: 10px;}
 /*快速通道-结束*/
 /*登录-开始*/
-.denglu-back{width:224px; height:314px; background-image:url(/images/denglu-back.png); float:right;}
-.denglu-input-box{width:194px; height:34px; margin: 0px auto; margin-top:17px;border:0px;}
-.denglu-input{width:194px; height:34px; background-image:url(/images/in-back.png);  border:0px; color:#826844; line-height:34px;}
-.denglu-pt{width:186px; height:65px; margin: 0px auto; margin-top:15px;}
+.denglu-back{width: 236px;height: 400px; background-image:url(/images/denglu-back.png); float:right;}
+.denglu-input-box{width:194px; height:34px; margin: 0px auto;margin-top: 40px;border:0px;}
+.denglu-input{width:194px; height:34px;/* background-image:url(/images/in-back.png); */  border:0px; color:#826844; line-height:34px;background-color: black;border-radius: 25px;text-indent: 2pt;}
+.denglu-pt{width:186px;height: 55px; margin: 0px auto;margin-top: 38px;}
 /*登录-结束*/
 /*平台推荐-开始*/
-.platform-box{width:990px; height:259px; margin: 0px auto; background-image:url(/images/platfrom-bttom_01.png); background-repeat:no-repeat; background-position:bottom;}
-.platform-title{width:990px; height:68px;}
-.platform-game-box{width:888px; height:152px; margin: 0px auto;}
+.platform-box{width: 1280px;height: 400px; margin: 0px auto;/* background-image:url(/images/platfrom-bttom_01.png); */ background-repeat:no-repeat; background-position:bottom;}
+.platform-box2{width: 100%;margin:0 auto;text-align: center;margin-bottom: 10px;}
+.platform-title{/* width:1366px; *//* height:68px; */}
+.platform-game-box{width: 1366px; height:152px; margin: 0px auto;}
 .platform-ddz{width:168px; height:152px; float:left;}
-.platform-zjh{width:168px; height:152px; float:left; margin-left:68px;}
-.platform-bottm{width:990px; height:49px;}
+.platform-zjh{width: 300px; height:152px; float:left;margin-left: 90px;}
+.platform-bottm{width:1366px; height:49px;}
 /*平台推荐-结束*
 /*bottm-star*/
-.bottm-box{width:990px; height:141px; margin: 0px auto; margin-top:-2px;}
-.bottm-title{width:986px; height:43px; background-image:url(/images/bottm-nav.png);}
-.bottm-nav{width:550px; height:43px; text-align:center; line-height:43px; color:#e0cb97; margin: 0px auto; font-size:13px;}
-.bottm-nav a{width:550px; height:43px; text-align:center; line-height:43px; color:#e0cb97; margin: 0px auto; font-size:13px;}
-.bottm-back{width:990px; height:97px; background-image:url(/images/bottm-back_01.png); }
-.bottm-zy{width:708px; height:23px; text-align:center; line-height:43px; color:#a6876f; margin: 0px auto; font-size:12px; padding-top:10px;}
+.bottm-box{width: 100%;height: 100%; margin: 0px auto; margin-top:-2px;bottom: 0;/* position: fixed; */margin-bottom: -100px;}
+.bottm-title{/* width:986px; */ height:43px;margin: 0 auto;}
+.bottm-nav{width: 1366px; height:43px; text-align:center; line-height:43px; color:#fcd071; margin: 0px auto; font-size:12px;}
+.bottm-nav a{width:550px; height:43px; text-align:center; line-height:43px;color: #fcd071; margin: 0px auto;font-size: 22px;margin-left: 10px;margin-right: 10px;/* font-weight: bold; *//* font-family:"Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"; */}
+.bottm-back{width: auto;height: 100%; background-image:url(/Images/new/bottom_02.jpg);}
+.bottm-zy{width: 900px; height:23px; text-align:center; line-height:43px; color:#a6876f; margin: 0px auto;font-size: 18px;padding-top: 38px;}
 .bottm-by{width:708px; height:23px; text-align:center; line-height:43px; color:#a6876f; margin: 0px auto; font-size:12px; padding-top:10px;}
 /*bottm-end*/
 /*欢迎登录-开始*/
@@ -70,3 +81,17 @@ body{background-color:#2d1d1d;}
 .denglu-go-input{width:194px; height:34px; background-image:url(/images/in-back.png);  border:0px; color:#826844; line-height:34px;}
 .denglu-go-pt{width:186px; height:65px; margin: 0px auto; margin-top:9px;}
 /*欢迎登录-结束*/
+/*头部的分隔符*/
+.header-split{height: 85px;    width: 1px;    float: left;    line-height: 85px;    margin-right: 17px; margin-left: 17px;    color: #fcd071;}
+.banner2 {
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/new/back_02.png);
+    background-size: 100% 100%;
+    /* background-size: cover; */
+    margin: 0px auto;
+    /* background-repeat: no-repeat; */
+}
+
+.downa{    float: left;
+    margin-left: 45px;}

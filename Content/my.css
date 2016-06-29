@@ -18,7 +18,7 @@
         .u_warn {
             width: 635px;
             height: 30px;
-            border-color: #ffe79d;
+            border-color: #FFE288;
             border: solid 1px;
             margin: 0 auto;
             color: #a4892a;
@@ -27,9 +27,10 @@
             overflow: hidden;
             text-align: left;
             padding-left: 35px;
-            padding-top: 7px;
+            padding-top: 9px;
             background: url("/Images/warning.png") no-repeat 10px center;
-            background-color: rgb(249,250,235);
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
         }
 
         .submit {

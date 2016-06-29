@@ -1,10 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 .activity-box{width:100%; height:226px; background-color:#332221;}
-.activity-title{width:964px; height:70px; margin: 0px auto; background-image:url(/images/title.png); margin-top:10px;}
-.title-txt{width:182px; height:34px; }
-.activity-back{width:964px; height:1178px; background-image:url(/images/beijing-b.png); margin:0px auto;}
-.activity-dibu{width:964px; height:29px; background-image:url(/images/dibu.png); margin:0px auto;}
+.activity-title{width: 1008px;height: 83px; margin: 0px auto; background-image:url(../images/title.png);background-size: 1010px;background-repeat: no-repeat;margin-top: 156px;}
+.title-txt{width:182px; height:34px; display: none}
+.activity-back{width: 989px;height: 756px; background-image:url(../images/personal-back.png);background-size: 1041px 702px;      background-repeat: no-repeat;margin:0px auto;}
+.activity-dibu{width:964px; height:29px; background-image:url(/images/dibu.png); margin:0px auto; display: none}
 /**/
 .activity-kong{width:964px; height:10px;}
 .activity-01{width:739px; height:124px; margin:0px auto; background-image:url(/images/active-01.png);}
@@ -25,3 +25,14 @@
 .activity-08{width:739px; height:124px; margin:0px auto; background-image:url(/images/active-08.jpg); margin-top:3px;}
 
 .activity-09{width:739px; height:124px; margin:0px auto; background-image:url(/images/active-09.jpg); margin-top:3px;}
+
+
+.huodong-07{width:739px; height:124px; margin:0px auto; background-image:url(/images/new/huodong-07.png); margin-top:3px;}
+
+.huodong-09{width:739px; height:124px; margin:0px auto; background-image:url(/images/new/huodong-09.png); margin-top:3px;}
+
+.huodong-11{width:739px; height:124px; margin:0px auto; background-image:url(/images/new/huodong-11.png); margin-top:3px;}
+
+.huodong-15{width:739px; height:124px; margin:0px auto; background-image:url(/images/new/huodong-15.png); margin-top:3px;}
+
+.huodong-17{width:739px; height:124px; margin:0px auto; background-image:url(/images/new/huodong-17.png); margin-top:3px;}

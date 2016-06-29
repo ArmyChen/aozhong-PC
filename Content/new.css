@@ -1,10 +1,17 @@
 ﻿@charset "utf-8";
+@font-face { 
+font-family: DeliciousRoman; 
+src: url('/font/mqlang.otf'); 
+} 
+*{padding:0px; margin:0px;font-family: "DeliciousRoman"}
 /* CSS Document */
-
+body{
+    background-image:url(/images/new/back_02.png);
+}
 .news-box{width:100%; height:226px; background-color:#332221;}
-.news-title{width:964px; height:70px; margin: 0px auto; background-image:url(/images/title.png); margin-top:10px;}
-.title-txt{width:182px; height:34px; }
-.news-back{width:964px; height:675px; background-image:url(/images/news-back.png); margin:0px auto;}
+.news-title{width: 1008px;height: 83px; margin: 0px auto; background-image:url(../images/title2.png);background-size: 1010px;background-repeat: no-repeat;margin-top: 156px;}
+.title-txt{width:182px; height:34px; display: none }
+.news-back{width: 989px;height: 756px; background-image:url(../images/personal-back.png);background-size: 1041px 702px;      background-repeat: no-repeat;margin:0px auto;}
 /*新闻1开始*/
 .news-1{width:927px; height:30px; color:#8b6f66; border-bottom:1px dashed; margin:0px auto; padding-top:4px;}
 .news-kong{width:927px; height:15px;}
@@ -20,11 +27,11 @@
 /*新闻3结束*/
 .Page{width:927px; height:26px; margin:0px auto; margin-top:75px; color:#917065; font-size:12px; text-align:center;}
 /*新闻详细页-开始*/
-.new-detailde-box{width:968px; height:auto; margin: 0px auto; background-image:url(/images/new-beijing.png);}
+.new-detailde-box{width: 980px;height: 756px; background-image:url(../images/personal-back.png);background-size: 976px 702px;      background-repeat: no-repeat;margin:0px auto;}
 .new-bottom{width:968px; height:38px; margin : 0px auto;}
 .new-detailde-txt{width:910px; height:auto; margin:0px auto; padding-top:20px; font-size:14px;}
 .new-detailde-title{width:910px; height:20px; font-size:16px; text-align:center; color:#ccb5aa;font-family: "Microsoft YaHei"!important;}
-.new-detailde-Content{width:910px; line-height:24px; height:auto; margin:0px auto;  padding-top:20px; font-size:14px; color:#816a64;text-indent:35px;}
+.new-detailde-Content{width:910px;line-height: 25px; height:auto; margin:0px auto;padding-top:20px; font-size:14px;color: #9a7350;/* text-indent:35px; */}
 /*新闻详细页-开始*/
 /*客服中心-开始*/
 .Customer-service-txt{width:910px; height:auto;}

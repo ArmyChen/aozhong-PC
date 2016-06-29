@@ -38,6 +38,9 @@
                             $('#u_login_captcha_img').attr('src', '/VerificationCode/VerifCodeImg?' + Math.random());
                         }
                     }
+                },
+                error:function(data){
+                    console.log(data);
                 }
             });
         }
@@ -56,21 +59,21 @@
 
 <!--personal-star-->
 <div class="personal-title">
-    <div class="title-txt"><img src="/images/personal-title.png" /></div>
+    <!--<div class="title-txt"><img src="/images/personal-title.png" /></div>-->
 </div>
 <div class="personal-back">
     <div class="personal-kong"></div>
     <div class="personal-welcome-box">
-        <div class="personal-welcome"><img src="/images/personal-welcome.png" /></div>
+        <div class="personal-welcome"></div>
         <div class="personal-input-box"><input class="personal-input" placeholder="&nbsp;&nbsp用户名" name="u_account" id="u_account" /></div>
         <div class="personal-input-box"><input class="personal-input" placeholder="&nbsp;&nbsp登录密码" name="u_password" id="u_password" type="password" /></div>
-        <div class="personal-pt"><a href="javascript:void(0);" onclick="F_SubmitForm();"><img src="/images/denglu-pt.png" /></a></div>
-        <div class="personal-pt"><a href="/Register"><img src="/images/denglu-zc.png" /></a></div>
+        <div class="personal-pt" style="margin-left: 74px;margin-top: 29px;"><a href="javascript:void(0);" onclick="F_SubmitForm();"><img src="/images/new/login站_03.png" /></a></div>
+        <div class="personal-pt" style="margin-top: 30px;"><a href="/Register"><img src="/images/new/login站_06.png" /></a></div>
     </div>
-    <div class="personal-activity-04"><div class="personal-activity-botton"><a href="/Register"><img src="/images/activity-botton.png" /></a></div></div>
-    <div class="personal-activity-01"><div class="personal-activity-botton"><a href="/ActivityCenter/RechargeAward"><img src="/images/activity-botton.png" /></a></div></div>
+    <!--<div class="personal-activity-04"><div class="personal-activity-botton"><a href="/Register"><img src="/images/activity-botton.png" /></a></div></div>-->
+    <a href="/ActivityCenter/RechargeAward"><div class="personal-activity-01"><div class="personal-activity-botton"></div></div></a>
     <!--<div class="personal-activity-02"><div class="personal-activity-botton"><a href="/ActivityCenter/TrialActivity"><img src="/images/activity-botton.png" /></a></div></div>-->
     <!--<div class="personal-activity-03"><div class="personal-activity-botton"><a href="/ActivityCenter/SignActivity"><img src="/images/activity-botton.png" /></a></div></div>-->
-    <div class="personal-activity-05"><div class="personal-activity-botton"><a href="/ActivityCenter/ShowAwards"><img src="/images/activity-botton.png" /></a></div></div>
-
+    <a href="/ActivityCenter/ShowAwards"><div class="personal-activity-05"><div class="personal-activity-botton"></div></div></a>
+</div>
 <!--personal-end-->

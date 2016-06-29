@@ -1,17 +1,53 @@
 ﻿@{
     ViewBag.Title = "下载中心";
-    Layout = "~/Views/Shared/_NavLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @section styles{
-    <link rel="stylesheet" type="text/css" href="/Content/down.css" media="all" />
 }
-<!--down-star-->
-<div class="down-title">
-    <div class="title-txt"><img src="/images/down-title.png" /></div>
+@section scripts{
+}
+<!--box开始-->
+<div class="box">
+    <!--banner-开始-->
+    <div class="banner2">
+        @Html.Partial("_Nav")
+        <!--fast-denglu-star-->
+        <div class="fast-denglu-box">
+            <a target="_blank" href="../DownLoad/澳众棋牌.exe"><div class="downa"><img src="/images/new/down_03.png"/></div></a>
+            <a target="_blank" href=http://fir.im/4l27><div class="downa"><img src="/images/new/down_05.png"/></div></a>
+            <a target="_blank" href="http://fir.im/wtcd"><div class="downa"><img src="/images/new/down_08.png"/></div></a>
+            
+        </div>
+        <!--fast-denglu-end-->
+
+    </div>
+    <!--banner-结束-->
 </div>
-<div class="down-back">
-    <div class="pc-kong"></div>
-    <div class="down-load">
+<!--box-结束-->
+<!--平台推荐-开始-->
+<div class="platform-box">
+    <div class="platform-title"><img src="/images/new/ddd.png" /></div>
+    <div class="platform-game-box">
+        <!--<div class="platform-ddz"><a href="#"><img src="/images/ddz.png" /></a></div>
+        <div class="platform-zjh"><a href="#"><img src="/images/zjh.png" /></a></div>
+        <div class="platform-zjh"><a href="#"><img src="/images/bjl.png" /></a></div>
+        <div class="platform-zjh"><a href="#"><img src="/images/jcby.png" /></a></div>-->
+        <div class="platform-zjh"><a href="/Register"><img src="/images/new/d1.png" /></a></div>
+        <div class="platform-zjh"><a href="/ActivityCenter/RechargeAward"><img src="/images/new/d2.png" /></a></div>
+        <div class="platform-zjh"><a href="/ActivityCenter/ShowAwards"><img src="/images/new/d3.png" /></a></div>
+
+    </div>
+  
+</div>
+
+<!--平台推荐-结束-->
+<!--广告 开始-->
+<div class="platform-box2">  <img src="/images/new/gg.png" /></div>
+<!--广告 结束-->
+
+
+ <!--<div class="down-load">
         <div class="pc-box">
             <div class="pc-1"><img src="/images/pc-1.png" /></div>
             <div class="pc-botton"><a target="_blank" href="../DownLoad/澳众棋牌.exe"><img src="/images/pc-button.png" /></a></div>
@@ -25,20 +61,4 @@
             <div class="pc-1"><img src="/images/phone-down.png" /></div>
             <div class="pc-botton"><a target="_blank" href="http://fir.im/wtcd"><img src="/images/phone-button.png" /></a></div>
         </div>
-    </div>
-    <!--二维码-开始-->
-    <div class="erwm-box">
-    <div class="erwm-iso"><img src="/Images/APK.png" width="140px" height="140px" /></div>
-    <div class="erwm-an"><img src="/Images/IOS.png" width="140px" height="140px"  /></div>
-    </div>
-    <!--二维码-结束-->
-    <div class="tuijian-title"><img src="/images/tuijian-title.png" /></div>
-    <div class="tuijian-box">
-        <div class="tuijian-game-1"><a href="#"><img src="/images/game-01.png" /></a></div>
-        <div class="tuijian-game-2"><a href="#"><img src="/images/game-02.png" /></a></div>
-        <div class="tuijian-game-2"><a href="#"><img src="/images/game-03.png" /></a></div>
-        <div class="tuijian-game-2"><a href="#"><img src="/images/game-04.png" /></a></div>
-    </div>
-</div>
-
-<!--down-end-->
+    </div>-->

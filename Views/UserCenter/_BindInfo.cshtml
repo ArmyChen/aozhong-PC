@@ -5,8 +5,8 @@
 }
 
 <!--login-right-开始-->
-<div class="cm-right">
-    <div class="cm-title-back"><img src="/images/BindInfo-title.png" /></div>
+<div class="login-right">
+    <div class="login-right-title"> </div>
     <!--修改登录密码-开始-->
     <div class="cm-back">
 
@@ -19,27 +19,27 @@
             <div class="cm-txt">@Model.Tags</div>
         </div>
         <div class="cm-row">
-            <div class="cm-name"><font color="#FF0000">*</font>持卡人姓名:</div>
+            <div class="cm-name">持卡人姓名:</div>
             <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankAccount) class="cm-input" name="name_bankaccount" id="name_bankaccount" value="@Model.BankAccount" type="text" /></div>
         </div>
         <div class="cm-row-2">
-            <div class="cm-name"><font color="#FF0000">*</font>开户银行:</div>
+            <div class="cm-name">开户银行:</div>
             <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankName) class="cm-input" name="name_bankName" id="name_bankName" value="@Model.BankName" type="text" /></div>
         </div>
         <div class="cm-row-2">
-            <div class="cm-name"><font color="#FF0000">*</font>银行账号:</div>
+            <div class="cm-name">银行账号:</div>
             <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankNum) class="cm-input" name="name_bankNum" id="name_bankNum" value="@Model.BankNum" type="text" /></div>
         </div>
         <div class="cm-row-2">
-            <div class="cm-name"><font color="#FF0000">*</font>开户网点:</div>
+            <div class="cm-name">开户网点:</div>
             <div class="cm-shuru"><input @Model.IsReadOnly(Model.BankAddress) class="cm-input" name="name_bankOpenAddress" id="name_bankOpenAddress" value="@Model.BankAddress" type="text" /></div>
         </div>
         <div class="cm-row-2">
-            <div class="cm-name"><font color="#FF0000">*</font>QQ:</div>
+            <div class="cm-name">QQ:</div>
             <div class="cm-shuru"><input @Model.IsReadOnly(Model.QQ) class="cm-input" name="name_bankQQ" id="name_bankQQ" value="@Model.QQ" type="text" maxlength="16" /></div>
         </div>
         <div class="cm-row-2">
-            <div class="cm-name"><font color="#FF0000">*</font>手机号:</div>
+            <div class="cm-name">手机号:</div>
             <div class="cm-shuru"><input @Model.IsReadOnly(Model.Mobile) class="cm-input" name="name_bankMobile" id="name_bankMobile" value="@Model.Mobile" type="text" maxlength="11" /></div>
         </div>
         <div class="cm-row-2" id="bnkTr">
