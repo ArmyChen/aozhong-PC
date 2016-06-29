@@ -50,7 +50,7 @@ a{
 .cm-row-2{width:600px; height:27px; margin:0px auto; margin-top:15px;margin-bottom: 20px;}
 .cm-name{width:100px; height:27px; line-height:27px; font-size:14px; text-align:right; float:left;color: #EDD094;/* display: none; */}
 .cm-shuru{width: 400px; height:23px; float:left;margin-left: 20px;}
-.cm-input{width: 400px; height:23px;border-radius: 10px;background: black;border: none;}
+.cm-input{width: 400px; height:23px;border-radius: 10px;background: black;border: none;color: #fcd071;}
 .cm-button{width: 100px;height: 35px;color: #FFE197;background: rgba(255,255,255,0.4);border-radius: 8px;border: none;font-size: 14pt;font-family: '微软雅黑';box-shadow: inset 1px 1px 1px 1px #1D1C1C;}
 /*修改登录密码-结束*/
 /*取金币-开始*/
@@ -99,7 +99,7 @@ font-size: 12px;
 .registration-txt{width:630px; height:20px; margin-left:15px; float:left; font-size:16px; color:#ccb5aa;font-family: "Microsoft YaHei"!important;}
 .registration-name{width:100px; height:27px; line-height:27px; font-size:14px; text-align:right; float:left; color:#ccb5aa;}
 .registration-shuru{width:108px; height:23px; float:left;}
-.registration-input{width:100px; height:23px;border-radius:3px 3px 3px 3px;border-radius: 10px;      background: black;      border: none;margin-left: 20px;}
+.registration-input{width:100px; height:23px;border-radius:3px 3px 3px 3px;border-radius: 10px;      background: black;      border: none;margin-left: 20px;color: #fcd071;}
 .registration-yzm{width:60px; height:22px; float:left; margin-top:3px;margin-left: 20px;}
 .registration-huan{ font-size:14px; color:#816a64; line-height:27px;}
 .registration-huan a{ font-size:14px;color: #CCC97B; line-height:27px;margin-left: 5px;}
