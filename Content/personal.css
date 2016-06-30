@@ -26,3 +26,6 @@ body{
 .personal-activity-04{width:739px; height:124px; margin:0px auto; background-image:url(../images/active-04.png); margin-top:3px;}
 
 .personal-activity-05{width: 743px; height:124px; margin:0px auto; background-image:url(../images/active-05.png);background-repeat: no-repeat;margin-top:3px;}
+.personal-input{
+    width: 290px !important;
+}
