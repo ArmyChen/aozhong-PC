@@ -75,11 +75,11 @@ html{padding: 0;margin: 0;}
 .bottm-by{width:708px; height:23px; text-align:center; line-height:43px; color:#a6876f; margin: 0px auto; font-size:12px; padding-top:10px;}
 /*bottm-end*/
 /*欢迎登录-开始*/
-.denglu-go-back{width:224px; height:314px; background-image:url(/images/denglu-back.png); float:right;}
-.denglu-go-input-box{width:194px; height:34px; margin: 0px auto; margin-top:17px;border:0px; color:#e8cda3; font-size:14px;}
+.denglu-go-back{width: 236px;height: 398px; background-image:url(/images/denglu-back.png);background-repeat: no-repeat;float:right;}
+.denglu-go-input-box{width:194px;height: 70px; margin: 0px auto;margin-top: 43px;border:0px; color:#e8cda3; font-size:14px;}
 .denglu-go-input-box-1{width:194px; height:34px; margin: 0px auto;border:0px; color:#e8cda3; font-size:14px;}
 .denglu-go-input{width:194px; height:34px; background-image:url(/images/in-back.png);  border:0px; color:#826844; line-height:34px;}
-.denglu-go-pt{width:186px; height:65px; margin: 0px auto; margin-top:9px;}
+.denglu-go-pt{width: 208px;height: 103px; margin: 0px auto;margin-top: -2px;}
 /*欢迎登录-结束*/
 /*头部的分隔符*/
 .header-split{height: 85px;    width: 1px;    float: left;    line-height: 85px;    margin-right: 17px; margin-left: 17px;    color: #fcd071;}
