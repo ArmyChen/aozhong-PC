@@ -11,7 +11,7 @@ body{
 .news-box{width:100%; height:226px; background-color:#332221;}
 .news-title{width: 1008px;height: 83px; margin: 0px auto; background-image:url(../images/title2.png);background-size: 1010px;background-repeat: no-repeat;margin-top: 156px;}
 .title-txt{width:182px; height:34px; display: none }
-.news-back{width: 989px;height: 756px; background-image:url(../images/personal-back.png);background-size: 1041px 702px;      background-repeat: no-repeat;margin:0px auto;}
+.news-back{width: 989px;min-height: 756px; background-image:url(../images/personal-back.png);background-size: 1041px 702px;      background-repeat: no-repeat;margin:0px auto;}
 /*新闻1开始*/
 .news-1{width:927px; height:30px; color:#8b6f66; border-bottom:1px dashed; margin:0px auto; padding-top:4px;}
 .news-kong{width:927px; height:15px;}
@@ -27,7 +27,7 @@ body{
 /*新闻3结束*/
 .Page{width:927px; height:26px; margin:0px auto; margin-top:75px; color:#917065; font-size:12px; text-align:center;}
 /*新闻详细页-开始*/
-.new-detailde-box{width: 980px;height: 756px; background-image:url(../images/personal-back.png);background-size: 976px 702px;      background-repeat: no-repeat;margin:0px auto;}
+.new-detailde-box{width: 980px;/* min-height: 756px; */background-image:url(../images/personal-back.png);background-size: 976px 100%;background-repeat: no-repeat;margin:0px auto;height: auto;overflow: auto;}
 .new-bottom{width:968px; height:38px; margin : 0px auto;}
 .new-detailde-txt{width:910px; height:auto; margin:0px auto; padding-top:20px; font-size:14px;}
 .new-detailde-title{width:910px; height:20px; font-size:16px; text-align:center; color:#ccb5aa;font-family: "Microsoft YaHei"!important;}
@@ -37,3 +37,4 @@ body{
 .Customer-service-txt{width:910px; height:auto;}
 /*客服中心-结束*/
 
+.new-bottom{display: none}

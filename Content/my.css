@@ -195,14 +195,27 @@
             width: 850px;
             margin-left: 70px;
             height: 160px;
+            eight: 400px;
+            height:auto;
+            min-height:500px;
             margin-top: 20px;
             clear: both;
             color: #f1e1b6;
             text-align: left;
+            eight: 400px;
+            height:auto;
+            min-height:500px;
+            height: auto;
         }
         .full1-1 {
             width: 100px;
             float: left;
+            eight: 400px;
+            eight: 400px;
+            height:auto;
+            min-height:500px;
+            height:auto;
+            min-height:500px;
         }
         .full1-2 {
             width: 700px;
@@ -211,8 +224,12 @@
             color: #f8a04b;
             margin-top: 10px;
             font-size: 18px;
+            eight: 400px;
+            height:auto;
+            min-height:500px;
             font-family: "微软雅黑";
             font-weight: bold;
+            margin-bottom: 30px;
         }
         .full5 {
             width: 850px;
