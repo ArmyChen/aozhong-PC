@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <title>澳众国际-注册成功</title>
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=0.66,minimum-scale=0.66,maximum-scale=1,user-scalable=yes">
+     <link href="/content/style.css" rel="stylesheet" type="text/css" media="all" />
+
+    <style>
+        body {
+	background: #1B2932;
+	margin: 0px;
+	padding: 0px;
+	background-color: #000000;
+        }
+
+        li {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        img {
+            vertical-align: bottom;
+        }
+
+        a:link {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        .input-1 {
+            width: 270px;
+            height: 27px;
+        }
+
+        .shuru-1 {
+            width: 90px;
+            height: 27px;
+            line-height: 27px;
+            font-size: 13px;
+            color: #666;
+            text-align: right;
+            float: left;
+        }
+
+        .shuru-2 {
+            width: 270px;
+            height: 27px;
+            float: left;
+        }
+		li{list-sytle:none;}
+		img{border:none:}
+        .success{
+          
+    color: wheat;
+    text-align: center;
+    font-size: 20pt;
+    font-family: "微软雅黑";
+    border-radius: 8px;
+    border: 1px solid;
+    margin: 20%;
+    height: 80px;
+    line-height: 80px;
+
+        }
+    </style>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <SCRIPT language=javascript>
+        var refer=document.referrer;
+        //判断来源，如果不是来自注册，那么跳转到注册页面不计入统计
+        if(refer.indexOf("Register") < 0){
+          location.href = '/Register/Index';
+        }else{
+            var secs=3;//3秒
+            for(i=1;i<=secs;i++) 
+            {
+                 window.setTimeout("update(" + i + ")", i * 1000);
+            } 
+            function update(num) 
+            { 
+               $(".success").html("恭喜您，注册成功.." +(secs - num + 1) );
+
+               if(num == secs) 
+                   location.href = '/UserCenter/Center';
+            }
+        }
+     </SCRIPT>
+   
+</head>
+<body style="zoom: 1;">
+<div class="nav-back">
+    <div class="nav-center">
+        <div class="nav-down"><a href="/"><img src="/images/new/nav_03.png" /></a></div>
+
+        <div class="nav-down"><a href="/UserCenter/Center"><img src="/images/new/nav_04.png" /></a> </div>
+
+        <div class="nav-down"><a href="/DownLoad/dl"><img src="/images/new/nav_05.png" /></a> </div>
+
+      
+        <div class="nav-down"><a href="/Agreement"><img src="/images/new/nav_06.png" /></a> </div>
+
+        <div class="nav-down"><a href="/ActivityCenter"><img src="/images/new/nav_07.png" /></a></div>
+
+        <div class="nav-down"><a href="/Spread"><img src="/images/new/nav_08.png" /></a></div>
+    </div>
+</div>
+<div class="logo"><img src="/images/new/logo.png" width="400px"></div>
+    
+<script>
+    $(function(){
+        var width = $("body").width() / 2  - $(".logo").width()/2;
+
+        $(".logo").attr("style","left:"+width + "px !important");
+    })
+</script>
+<p class="success">恭喜您，注册成功..</p>
+
+<div id="cntvlive2-is-installed"></div>
+
+<!--底部-开始-->
+    <div class="bottm-box">
+       
+        <div class="bottm-back">
+            <br/>
+             <div class="bottm-title">
+            <div class="bottm-nav">
+                <a href="/"><img src="/images/new/bottomnav_03.png"/></a>｜
+                <a href="/Agreement"><img src="/images/new/bottomnav_05.png"/></a>｜
+                <a href="/ActivityCenter"><img src="/images/new/bottomnav_07.png"/></a>｜
+                <a href="/CustomerService"><img src="/images/new/bottomnav_09.png"/></a>｜
+                <a href="/Spread"><img src="/images/new/bottomnav_11.png"/></a>｜
+                <a href="/Contact"><img src="/images/new/bottomnav_13.png"/></a> </div>
+        </div>
+            <div class="bottm-zy"><img src="/images/new/bottomnav_22.png" /></div>
+<br/>
+
+
+</br> </div>
+        </div>
+    </div>
+
+    <!--底部-结束-->
+
+<!-- 这里放入统计代码 Start -->
+
+<!-- 这里放入统计代码 End-->
+</body>
+</html>
